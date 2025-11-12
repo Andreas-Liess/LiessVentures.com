@@ -283,3 +283,46 @@ footer a:hover {
         font-size: 16px;
     }
 }
+
+
+
+.demo-section {
+    max-width: 1200px;
+    margin: 120px auto; /* Adds space between hero and footer */
+    padding: 0 20px;
+    display: grid;
+    /* Stacks boxes vertically on mobile by default */
+    grid-template-columns: 1fr; 
+    gap: 32px;
+}
+
+.demo-box-container {
+    /* Set a minimum height so they are visible */
+    min-height: 400px; 
+    
+    /* Placeholder styling */
+    background: linear-gradient(135deg, rgba(30, 30, 50, 0.6) 0%, rgba(20, 20, 40, 0.6) 100%);
+    border: 1px solid rgba(165, 142, 251, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    
+    /* For later, when you add content */
+    padding: 24px;
+    color: #cbd5e1;
+    transition: all 0.3s;
+}
+
+.demo-box-container:hover {
+    border-color: rgba(165, 142, 251, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(165, 142, 251, 0.1);
+}
+
+
+/* On tablets and desktops, create a 3-column layout */
+@media (min-width: 768px) {
+    .demo-section {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+}
