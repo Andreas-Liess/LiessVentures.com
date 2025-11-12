@@ -190,28 +190,6 @@ h1 {
     padding: 0 20px;
 }
 
-.hero-points ul {
-    list-style: none;
-    margin-bottom: 24px;
-}
-
-.hero-points li {
-    font-size: 18px;
-    color: #cbd5e1;
-    line-height: 1.6;
-    margin-bottom: 16px;
-    padding-left: 28px;
-    position: relative;
-}
-
-.hero-points li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: #a58efb;
-    font-weight: 700;
-}
-
 .hero-sub-tagline {
     font-size: 20px;
     font-weight: 600;
@@ -297,20 +275,16 @@ footer a:hover {
 }
 
 .demo-box-container {
-    /* Set a minimum height so they are visible */
     min-height: 400px; 
-    
-    /* Placeholder styling */
     background: linear-gradient(135deg, rgba(30, 30, 50, 0.6) 0%, rgba(20, 20, 40, 0.6) 100%);
-    border: 1px solid rgba(165, 142, 251, 0.2);
+    border: none; /* Changed from 1px solid */
     border-radius: 16px;
     backdrop-filter: blur(10px);
-    
-    /* For later, when you add content */
-    padding: 24px;
     color: #cbd5e1;
     transition: all 0.3s;
+    width: 100%; /* Ensures iframe fills container */
 }
+
 
 .demo-box-container:hover {
     border-color: rgba(165, 142, 251, 0.5);
@@ -318,11 +292,3 @@ footer a:hover {
     box-shadow: 0 20px 40px rgba(165, 142, 251, 0.1);
 }
 
-
-/* On tablets and desktops, create a 3-column layout */
-@media (min-width: 768px) {
-    .demo-section {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
-    }
-}

@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Orb: AI Network Intelligence</title>
+    <!-- Corrected path based on your tree structure -->
     <link rel="stylesheet" href="css/theorb.css">
 </head>
+
 <body>
     <header>
         <div class="logo">◆ The Orb</div>
         <nav>
             <a href="#">Features</a>
             <a href="#">Security</a>
+            <!-- Note: This button has no JS functionality yet -->
             <button class="btn-nav">Request Access</button>
         </nav>
     </header>
@@ -27,33 +31,64 @@
         <h1>The Orb</h1>
         <p class="tagline">Your network. In focus.</p>
         <p class="subtext">See everything. Know everyone.</p>
-        
+
+        <!-- 
+          =================================================
+          MOVED DEMO BOX SECTION
+          =================================================
+          This section is now *inside* the hero,
+          before the sub-tagline and CTA button.
+          It's styled by .demo-section rules in theorb.css
+        -->
+        <section class="demo-section">
+
+            <!-- Item 1 -->
+            <div class="demo-item">
+                <iframe src="components/demo-box-1/index.html" class="demo-box-container" id="demo-box-1"
+                    title="Demo Box 1"></iframe>
+                <p class="demo-text">You know 100 brilliant souls you'd love to reach, yet 100 birthdays, 100 stories,
+                    100 New Year's cards slip through your fingers.</p>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="demo-item">
+                <iframe src="components/demo-box-2/index.html" class="demo-box-container" id="demo-box-2"
+                    title="Demo Box 2"></iframe>
+                <p class="demo-text">You send 1,000 messages to move the world — and forget who still hasn't done their
+                    part.</p>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="demo-item">
+                <iframe src="components/demo-box-3/index.html" class="demo-box-container" id="demo-box-3"
+                    title="Demo Box 3"></iframe>
+                <p class="demo-text">You drown in oceans of email — buried in noise.</p>
+            </div>
+
+        </section>
+
         <div class="hero-points">
-            <ul>
-                <li>You know 100 brilliant souls you'd love to reach, yet 100 birthdays, 100 stories, 100 New Year's cards slip through your fingers.</li>
-                <li>You send 1,000 messages to move the world — and forget who still hasn't done their part.</li>
-                <li>You drown in oceans of email — buried in noise.</li>
-            </ul>
+            <!-- 
+                The <ul> list has been removed from here 
+                and its content moved to the demo-section.
+            -->
             <p class="hero-sub-tagline">Warm heart. Cold precision.</p>
         </div>
-        
+
+        <!-- Note: This button has no JS functionality yet -->
         <button class="btn-primary">Request Early Access</button>
     </section>
 
-    <section class="demo-section">
-        <div id="demo-box-1" class="demo-box-container">
-            <!-- Demo Box 1 will be loaded here -->
-        </div>
-        <div id="demo-box-2" class="demo-box-container">
-            <!-- Demo Box 2 will be loaded here -->
-        </div>
-        <div id="demo-box-3" class="demo-box-container">
-            <!-- Demo Box 3 will be loaded here -->
-        </div>
-    </section>
+    <!-- 
+      The duplicated demo-section that was here has been removed 
+      as it is now inside the hero section.
+    -->
 
     <footer>
-        <p>© 2025 Liess Ventures. EU DataPrivacy Encrypted European Servers | <a href="#">Privacy</a> | <a href="#">Terms</a></p>
+        <p>© 2025 Liess Ventures. EU DataPrivacy Encrypted European Servers | <a href="#">Privacy</a> | <a
+                href="#">Terms</a></p>
     </footer>
+    <script src="js/theorb.js"></script>
 </body>
+
 </html>

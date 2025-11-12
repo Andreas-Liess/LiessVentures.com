@@ -1,0 +1,176 @@
+/* * CSS for Demo Box 1
+ * This file styles *only* the content inside this component.
+ */
+.demo-box-content {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    padding: 8px; /* Give a little space from the container's edge */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Base style for all log entries */
+.log-entry {
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cbd5e1; /* Default text color */
+    opacity: 0; /* Hidden by default, JS will fade them in */
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Style for the labels, e.g., [User] */
+.log-label {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+/* Different colors for labels */
+.user-query .log-label,
+.user-query {
+    color: #a58efb; /* Theme purple */
+}
+
+.agent-thinking .log-label {
+    color: #64748b; /* Muted gray */
+}
+
+.tool-call .log-label {
+    color: #f59e0b; /* Amber */
+}
+
+.tool-result .log-label {
+    color: #10b981; /* Green */
+}
+
+.final-report .log-label {
+    color: #a58efb; /* Theme purple */
+    font-size: 16px;
+}
+
+/* Styling for <pre> blocks used for tool outputs */
+pre {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 13px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(165, 142, 251, 0.1);
+    border-radius: 6px;
+    padding: 12px;
+    white-space: pre-wrap; /* Ensures text wraps */
+    word-break: break-all;
+    color: #94a3b8;
+}
+
+/* Blinking cursor animation for typing */
+.typing::after {
+    content: '█';
+    animation: blink 1s step-end infinite;
+    color: #a58efb;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* User query box */
+.user-query {
+    background: rgba(165, 142, 251, 0.05);
+    border: 1px solid rgba(165, 142, 251, 0.2);
+    border-radius: 8px;
+    padding: 16px;
+    font-weight: 500;
+}
+
+/* Log list (for the scrolling log part) */
+.log-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Allows this to take up space */
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.log-list .log-entry {
+    font-size: 13px;
+    padding-left: 12px;
+    border-left: 2px solid rgba(165, 142, 251, 0.1);
+    margin-bottom: 12px;
+}
+
+/* Final Report styling */
+.final-report {
+    background: linear-gradient(135deg, rgba(30, 30, 50, 0.9) 0%, rgba(20, 20, 40, 0.9) 100%);
+    border: 1px solid rgba(165, 142, 251, 0.3);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 16px;
+}
+
+.final-report .report-content {
+    display: none; /* Hidden until JS reveals it */
+}
+
+.final-report h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.final-report p,
+.final-report ul {
+    font-size: 15px;
+    color: #cbd5e1;
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.final-report strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+.final-report ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.final-report li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 8px;
+}
+
+.final-report li::before {
+    content: '•';
+    color: #a58efb;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 700;
+}
+
+.email-draft {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(165, 142, 251, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+}
+
+.email-draft p {
+    margin-bottom: 12px;
+}
+
+.email-draft p:last-child {
+    margin-bottom: 0;
+}
