@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', serif;
+    background-color: #FFFFFF;
+    color: #252120;
+    line-height: 1.6;
+}
+
+.header-bar {
+    background-color: #154337;
+    color: #FFFFFF;
+    padding: 2rem 4rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-bar .logo {
+    height: 5rem;
+    width: auto;
+}
+
+.header-bar h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.hero {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    font-weight: 400;
+    color: #000000;
+    letter-spacing: 0.05em;
+}
+
+.ventures-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+}
+
+.venture-item {
+    max-width: 600px;
+    text-align: center;
+    padding: 3rem;
+    background-color: #FFFFFF;
+    border: 1px solid #D1CABA;
+}
+
+.venture-item h3 {
+    font-size: 2rem;
+    font-weight: 400;
+    color: #154337;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.venture-item p {
+    color: #252120;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.btn-primary {
+    background-color: #154337;
+    color: #FFFFFF;
+    border: none;
+    padding: 1rem 3rem;
+    font-family: 'Times New Roman', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #252120;
+}
