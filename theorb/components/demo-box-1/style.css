@@ -1,4 +1,4 @@
-/* * CSS for Demo Box 1
+/* CSS for Demo Box 1
  * This file styles *only* the content inside this component.
  */
 .demo-box-content {
@@ -38,15 +38,15 @@
     color: #a58efb; /* Theme purple */
 }
 
-.agent-thinking .log-label {
-    color: #64748b; /* Muted gray */
+.thinking .log-label {
+    color: #cbd5e1; /* Lighter gray for thinking */
 }
 
-.tool-call .log-label {
+.toolCall .log-label {
     color: #f59e0b; /* Amber */
 }
 
-.tool-result .log-label {
+.toolResult .log-label {
     color: #10b981; /* Green */
 }
 
@@ -66,6 +66,25 @@ pre {
     white-space: pre-wrap; /* Ensures text wraps */
     word-break: break-all;
     color: #94a3b8;
+}
+
+/* Distinct styling for tool calls and results */
+.toolCall pre {
+    background: rgba(245, 158, 11, 0.05);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-left: 3px solid #f59e0b;
+}
+
+.toolResult pre {
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-left: 3px solid #10b981;
+}
+
+.thinking pre {
+    background: rgba(100, 116, 139, 0.05);
+    border: 1px solid rgba(100, 116, 139, 0.2);
+    border-left: 3px solid #64748b;
 }
 
 /* Blinking cursor animation for typing */
@@ -89,13 +108,40 @@ pre {
     font-weight: 500;
 }
 
+.user-query p {
+    margin: 0;
+    color: #cbd5e1;
+}
+
 /* Log list (for the scrolling log part) */
 .log-list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 16px 0;
     flex-grow: 1; /* Allows this to take up space */
+    overflow-y: auto; /* Enable scrolling */
+    overflow-x: hidden;
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar styling */
+.log-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.log-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.log-list::-webkit-scrollbar-thumb {
+    background: rgba(165, 142, 251, 0.3);
+    border-radius: 4px;
+}
+
+.log-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(165, 142, 251, 0.5);
 }
 
 .log-list .log-entry {
@@ -103,6 +149,13 @@ pre {
     padding-left: 12px;
     border-left: 2px solid rgba(165, 142, 251, 0.1);
     margin-bottom: 12px;
+}
+
+/* Remove border-left for tool calls and results since they have their own borders */
+.log-list .toolCall,
+.log-list .toolResult {
+    border-left: none;
+    padding-left: 0;
 }
 
 /* Final Report styling */
