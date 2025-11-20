@@ -6,38 +6,97 @@
 
 body {
     font-family: 'Times New Roman', serif;
-    background-color: #FFFFFF;
+    background-color: #F8F6F3;
     color: #252120;
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
+/* --- Header & Hamburger --- */
 .header-bar {
     background-color: #154337;
     color: #FFFFFF;
-    padding: 2rem 4rem;
+    padding: 1.5rem 4rem;
     position: sticky;
     top: 0;
     z-index: 100;
+    display: flex;
+    justify-content: space-between; /* Spreads logo and burger */
+    align-items: center;
+}
+
+.brand {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
 .header-bar .logo {
-    height: 5rem;
+    height: 4rem;
     width: auto;
 }
 
 .header-bar h1 {
     font-size: 2rem;
     font-weight: 400;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
 }
 
+/* Hamburger Button */
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 101;
+}
+
+.hamburger span {
+    display: block;
+    width: 30px;
+    height: 2px;
+    background-color: #FFFFFF;
+    transition: 0.3s;
+}
+
+/* Navigation Menu (Hidden by default on mobile logic, or absolute) */
+.nav-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #154337;
+    padding: 1rem 2rem;
+    text-align: right;
+    width: 200px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.nav-menu.active {
+    display: block;
+}
+
+.nav-menu a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    display: block;
+}
+
+/* --- Main Content --- */
 main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 4rem 2rem;
+    width: 100%;
+    flex: 1;
 }
 
 .hero {
@@ -48,8 +107,14 @@ main {
 .hero h2 {
     font-size: 3rem;
     font-weight: 400;
-    color: #000000;
+    color: #154337;
     letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #252120;
 }
 
 .ventures-list {
@@ -59,12 +124,23 @@ main {
     align-items: center;
 }
 
+/* --- Venture Item (With "Spice") --- */
 .venture-item {
-    max-width: 600px;
-    text-align: center;
+    max-width: 800px;
+    text-align: left;
     padding: 3rem;
     background-color: #FFFFFF;
-    border: 1px solid #D1CABA;
+    border: 2px solid #D1CABA;
+    /* Transition for the hover effect */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.venture-item:hover {
+    /* Lifts the card up */
+    transform: translateY(-5px);
+    /* Adds a soft glow/shadow */
+    box-shadow: 0 10px 25px rgba(21, 67, 55, 0.15);
+    border-color: #154337;
 }
 
 .venture-item h3 {
@@ -79,6 +155,7 @@ main {
     color: #252120;
     margin-bottom: 2rem;
     font-size: 1.1rem;
+    line-height: 1.8;
 }
 
 .btn-primary {
@@ -89,10 +166,47 @@ main {
     font-family: 'Times New Roman', serif;
     font-size: 1rem;
     cursor: pointer;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #252120;
+    background-color: #1a5c42;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid #D1CABA;
+    margin-top: auto;
+    background-color: #F8F6F3;
+}
+
+footer p {
+    margin-bottom: 1rem;
+}
+
+footer .footer-links a {
+    color: #154337;
+    text-decoration: none;
+    margin: 0 1rem;
+    transition: color 0.3s ease;
+}
+
+footer .footer-links a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .header-bar {
+        padding: 1rem 2rem;
+    }
+    .header-bar h1 {
+        font-size: 1.2rem;
+    }
+    .venture-item {
+        padding: 2rem;
+    }
 }

@@ -4,112 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Orb: AI Network Intelligence</title>
-    <!-- Corrected path based on your tree structure -->
+    <title>SeeingStone: AI Network Intelligence</title>
     <link rel="stylesheet" href="css/theorb.css">
-    <style>
-        /* Make demo boxes bigger */
-        .demo-box-container {
-            width: 100%;
-            height: 600px; /* Increased from default */
-            min-height: 600px;
-            border: 1px solid rgba(165, 142, 251, 0.3);
-            border-radius: 12px;
-            background: linear-gradient(135deg, rgba(30, 30, 50, 0.9) 0%, rgba(20, 20, 40, 0.9) 100%);
-        }
-
-        .demo-item {
-            margin-bottom: 48px;
-        }
-
-        /* Ensure demo section has enough space */
-        .demo-section {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 32px 16px;
-        }
-    </style>
 </head>
 
 <body>
+
     <header>
-        <div class="logo">◆ The Orb</div>
+        <div class="logo">
+            <div class="orb mini">
+                <div class="rune"></div>
+                <div class="rune"></div>
+                <div class="rune"></div>
+            </div>
+            <span>SeeingStone</span>
+        </div>
         <nav>
-            <a href="#">Features</a>
-            <a href="#">Security</a>
-            <!-- Note: This button has no JS functionality yet -->
-            <button class="btn-nav">Request Access</button>
-        </nav>
+            <div class="menu-container">
+                <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-dropdown" id="nav-dropdown">
+                    <a href="#">Features</a>
+                    <a href="#">Security</a>
+                </div>
+            </div>
+            </nav>
     </header>
 
-    <section class="hero">
-        <div class="orb-container">
-            <div class="orb">
-                <div class="rune"></div>
-                <div class="rune"></div>
-                <div class="rune"></div>
-            </div>
-        </div>
-        <h1>The Orb</h1>
-        <p class="tagline">Your network. In focus.</p>
-        <p class="subtext">See everything. Know everyone.</p>
+    <main>
+        <section class="hero">
+            
+            <div class="hero-split-container">
+                <div class="hero-left">
+                    <h1 class="headline-primary">
+                        <span class="highlight">SeeingStone</span> <br>
+                        Unites your data — extracting key insights.
+                    </h1>
+                    
+                    <p class="headline-secondary">
+                        Blending Context & Automation keeping all relationships alive.<br>
+                        100% private on encrypted EU servers.
+                    </p>
+                </div>
 
-        <!-- 
-          =================================================
-          DEMO BOX SECTION
-          =================================================
-          This section is now *inside* the hero,
-          before the sub-tagline and CTA button.
-          It's styled by .demo-section rules in theorb.css
-        -->
-        <section class="demo-section">
-
-            <!-- Item 1 -->
-            <div class="demo-item">
-                <iframe src="components/demo-box-1/index.html" class="demo-box-container" id="demo-box-1"
-                    title="Demo Box 1"></iframe>
-                <p class="demo-text">You know 100 brilliant souls you'd love to reach, yet 100 birthdays, 100 stories,
-                    100 New Year's cards slip through your fingers.</p>
+                <div class="hero-right">
+                    <div class="cta-card">
+                        <h3>Premium Features</h3>
+                        <p class="promise-text">Promise: No spam</p>
+                        <button class="btn-primary full-width">Early Access</button>
+                    </div>
+                </div>
             </div>
 
-            <!-- Item 2 - ADDED -->
-            <div class="demo-item">
-                <iframe src="components/demo-box-2/index.html" class="demo-box-container" id="demo-box-2"
-                    title="Demo Box 2"></iframe>
-                <p class="demo-text">Your network spans thousands — yet you can't see who connects to whom, or how one introduction could unlock everything.</p>
-            </div>
+            <section class="demo-section">
+                <div class="demo-item">
+                    <iframe src="components/demo-box-1/index.html" class="demo-box-container" id="demo-box-1" title="Demo Box 1"></iframe>
+                    <p class="demo-text">You know 100 brilliant souls you'd love to reach, yet 100 birthdays, 100 stories, 100 New Year's cards slip through your fingers.</p>
+                </div>
 
-            <!-- Item 3 -->
-            <div class="demo-item">
-                <iframe src="components/demo-box-3/index.html" class="demo-box-container" id="demo-box-3"
-                    title="Demo Box 3"></iframe>
-                <p class="demo-text">You drown in oceans of email — buried in noise.</p>
-            </div>
+                <div class="demo-item">
+                    <iframe src="components/demo-box-2/index.html" class="demo-box-container" id="demo-box-2" title="Demo Box 2"></iframe>
+                    <p class="demo-text">Your network spans thousands — yet you can't see who connects to whom, or how one introduction could unlock everything.</p>
+                </div>
+
+                <div class="demo-item">
+                    <iframe src="components/demo-box-3/index.html" class="demo-box-container" id="demo-box-3" title="Demo Box 3"></iframe>
+                    <p class="demo-text">You drown in oceans of email — buried in noise.</p>
+                </div>
+            </section>
+            <div>SeeingStone is a private network intelligence hub that extracts clear signal from the noise across every document, message, and service you own. It maps your relationship graph and visualizes conversation threads across all accounts. It combines AI insights with deterministic automation to manage recurring outreach—like birthdays, New Years, and personal dates—ensuring no contact slips through the cracks. Your data is fully integrated yet strictly isolated on encrypted EU servers.</div>
 
         </section>
-
-        <div class="hero-points">
-            <!-- 
-                The <ul> list has been removed from here 
-                and its content moved to the demo-section.
-            -->
-            <p class="hero-sub-tagline">Warm heart. Cold precision.</p>
-        </div>
-
-        <!-- Note: This button has no JS functionality yet -->
-        <button class="btn-primary">Request Early Access</button>
-    </section>
-
-    <!-- 
-      The duplicated demo-section that was here has been removed 
-      as it is now inside the hero section.
-    -->
+    </main>
 
     <footer>
-        <p>© 2025 Liess Ventures. EU DataPrivacy Encrypted European Servers | <a href="#">Privacy</a> | <a
-                href="#">Terms</a></p>
+        <p>© 2025 Liess Ventures. EU DataPrivacy Encrypted European Servers | <a href="#">Privacy</a> | <a href="#">Terms</a></p>
     </footer>
+
     <script src="js/theorb.js"></script>
 </body>
 

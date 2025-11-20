@@ -9,24 +9,46 @@
 <body>
     <header>
         <div class="header-bar">
-            <img src="assets/images/Fox1 (1).svg" alt="Liess Ventures Logo" class="logo">
-            <h1>Liess</h1>
+            <div class="brand">
+                <img src="assets/images/Fox1 (1).svg" alt="Liess Ventures Logo" class="logo">
+                <h1>Liess Ventures</h1>
+            </div>
+            
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav id="nav-menu" class="nav-menu">
+                <a href="mailto:contact@liess.ventures">Contact</a>
+            </nav>
         </div>
     </header>
 
     <main>
         <section class="hero">
             <h2>Ventures</h2>
+            <p>Ventures in development</p>
         </section>
 
         <section class="ventures-list">
             <div class="venture-item">
-                <h3>The Orb</h3>
-                <p>Discover the possibilities</p>
-                <button class="btn-primary" onclick="navigateToOrb()">Explore The Orb</button>
+                <h3>SeeingStone</h3>
+                <p>SeeingStone is a private network intelligence hub that extracts clear signal from the noise across every document, message, and service you own. It maps your relationship graph and visualizes conversation threads across all accounts. It combines AI insights with deterministic automation to manage recurring outreach—like birthdays, New Years, and personal dates—ensuring no contact slips through the cracks. Your data is fully integrated yet strictly isolated on encrypted EU servers.</p>
+                <button class="btn-primary" onclick="navigateToOrb()">Explore SeeingStone</button>
             </div>
         </section>
     </main>
+
+    <footer>
+        <p>Liess Ventures © 2025</p>
+        <div class="footer-links">
+            <a href="mailto:contact@liess.ventures">Contact</a>
+            <a href="https://www.instagram.com/______andreas___/" target="_blank">Instagram</a>
+            <a href="https://de.linkedin.com/in/andreas-liess-61261b249" target="_blank">LinkedIn</a>
+        </div>
+    </footer>
 
     <script src="js/main.js"></script>
 </body>

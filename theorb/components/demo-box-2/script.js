@@ -104,8 +104,10 @@ srel3: "Shared insights and coordinated family activities with Grace Thompson.",
         }
     });
     const cy = cytoscape({
-        container: document.getElementById('cy'),
-        elements: {nodes, edges},
+            container: document.getElementById('cy'),
+            minZoom: 0.5,
+            maxZoom: 3,
+            elements: {nodes, edges},
         style: [
             {
                 selector: 'node',

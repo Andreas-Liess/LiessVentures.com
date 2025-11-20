@@ -88,7 +88,7 @@ const script = [
             title: "Your Path to John Doe",
             intro: "You asked for a way to connect with John Doe about Project X. My analysis shows you don't need an introduction—you're already in his inner circle, but the connections have been invisible to you until now.",
             body: "<h3>Here is the path I've uncovered:</h3><ol><li><strong>Your Strongest Bridge: Jane Doe (The Unread Message)</strong><ul><li><strong>Who she is:</strong> A key mutual contact you're CC'd on emails with.</li><li><strong>The Hidden Connection:</strong> In 2022, you sent her a Telegram message. She replied enthusiastically: \"Love your take on AI ethics—let’s grab coffee? When are you free?\"</li><li><strong>The Breakthrough:</strong> You never saw this. That warm, unanswered invitation is your primary and most powerful way in. She is your direct, personal link.</li></ul></li><li><strong>Your Silent Champion: Alex Jakarta (The Forwarded Deck)</strong><ul><li><strong>Who he is:</strong> The person who forwarded your pitch deck.</li><li><strong>The Hidden Connection:</strong> Three months ago, Alex sent your own deck (\"Conscience as Code\") directly to John Doe.</li><li><strong>The Breakthrough:</strong> He endorsed it, telling John it was \"worth a look—ethics angle could de-risk Project X.\" This means John Doe is already primed; he's seen your work and your specific vision, recommended by a trusted contact.</li></ul></li><li><strong>Your Shared Context: John Doe (The Digital Proximity)</strong><ul><li><strong>Who he is:</strong> Your target.</li><li><strong>The Hidden Connection:</strong> You are already a member of two of the same private Telegram groups as him (\"AI Founders EU\" and \"Project X Early Access\"), and in both, he is an admin. You also have access to his team's \"Q3 Roadmap,\" which confirms his current priority is \"Project X - Phase 2.\"</li><li><strong>The Breakthrough:</strong> You aren't an outsider. You're in the same rooms, and you know exactly what he's working on right now.</li></ul></li></ol><h3>Recommendation:</h3><p>Your path isn't a cold outreach. It's a <strong>warm revival</strong>.</p><p>The best strategy is to reply to Jane Doe's two-year-old message. You can reference your shared interest in AI ethics (her reason for the coffee invite) and your own \"Conscience as Code\" deck (which Alex already sent to John), and connect it directly to John's \"Project X - Phase 2.\"</p><p>You're not asking for an introduction; you're simply connecting the dots that are already there.</p>",
-            draft: "<strong>Drafted Message (via Telegram to Jane)</strong><div class=\"email-draft\" style=\"font-family: Arial, sans-serif; padding: 12px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;\"><p>Hi Jane,</p><p>I can't believe it's been two years, but I was just reviewing my messages and saw I never replied to your incredibly kind offer to grab coffee back in 2022. My apologies – things got hectic, but I'd still love to take you up on that!</p><p>My reason for reaching out now is twofold: I saw that John Doe (who I see you're connected to) is leading 'Project X - Phase 2'. My work on 'Conscience as Code' (which Alex Jakarta actually forwarded to him a while back) aligns perfectly with that.</p><p>Would you be open to a virtual coffee and, if it feels right, looping John in? Would love to explore collaboration.</p><p>Best,<br>Lea</p></div>"
+            draft: "<strong>Drafted Message (via Telegram to Jane)</strong><div class=\"email-draft\" style=\"font-family: Arial, sans-serif; padding: 12px; border: 1px solid #ddd; border-radius: 8px; background: rgba(165, 142, 251, 0.2);\"><p>Hi Jane,</p><p>I can't believe it's been two years, but I was just reviewing my messages and saw I never replied to your incredibly kind offer to grab coffee back in 2022. My apologies – things got hectic, but I'd still love to take you up on that!</p><p>My reason for reaching out now is twofold: I saw that John Doe (who I see you're connected to) is leading 'Project X - Phase 2'. My work on 'Conscience as Code' (which Alex Jakarta actually forwarded to him a while back) aligns perfectly with that.</p><p>Would you be open to a virtual coffee and, if it feels right, looping John in? Would love to explore collaboration.</p><p>Best,<br>Lea</p></div>"
         }
     ];
 
@@ -188,19 +188,19 @@ const script = [
                     
                     // Type out the user message slowly
                     await typeText(userContent, item.content, 50);
-                    await delay(1500); // Pause after user query
+                    await delay(900); // Pause after user query
                     break;
                 case "thinking":
                     await addLogEntry(item);
-                    await delay(1000); // Pause after thinking
+                    await delay(400); // Pause after thinking
                     break;
                 case "toolCall":
                     await addLogEntry(item);
-                    await delay(800); // Short pause for tool call
+                    await delay(200); // Short pause for tool call
                     break;
                 case "toolResult":
                     await addLogEntry(item);
-                    await delay(1200); // Pause to read results
+                    await delay(450); // Pause to read results
                     break;
                 case "final":
                     finalReportBox.style.opacity = 1;
@@ -239,9 +239,7 @@ const script = [
             }
         }
         
-        // Wait 20 seconds before restarting the demo
-        await delay(20000);
-        runDemo();
+
     };
 
     // Start the demo!
