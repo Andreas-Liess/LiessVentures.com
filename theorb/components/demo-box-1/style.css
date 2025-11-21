@@ -3,10 +3,11 @@
  */
 .demo-box-content {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-    padding: 8px; /* Give a little space from the container's edge */
+    padding: 8px;
     height: 100%;
     display: flex;
     flex-direction: column;
+    background: #FFFFFF;
 }
 
 /* Base style for all log entries */
@@ -14,8 +15,8 @@
     margin-bottom: 16px;
     font-size: 14px;
     line-height: 1.6;
-    color: #cbd5e1; /* Default text color */
-    opacity: 0; /* Hidden by default, JS will fade them in */
+    color: #333333;
+    opacity: 0;
     animation: fadeIn 0.5s forwards;
 }
 
@@ -35,23 +36,23 @@
 /* Different colors for labels */
 .user-query .log-label,
 .user-query {
-    color: #a58efb; /* Theme purple */
+    color: #FF6600;
 }
 
 .thinking .log-label {
-    color: #cbd5e1; /* Lighter gray for thinking */
+    color: #666666;
 }
 
 .toolCall .log-label {
-    color: #f59e0b; /* Amber */
+    color: #0066CC;
 }
 
 .toolResult .log-label {
-    color: #10b981; /* Green */
+    color: #00A86B;
 }
 
 .final-report .log-label {
-    color: #a58efb; /* Theme purple */
+    color: #FF6600;
     font-size: 16px;
 }
 
@@ -59,39 +60,39 @@
 pre {
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
     font-size: 13px;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(165, 142, 251, 0.1);
+    background: #F5F5F5;
+    border: 1px solid #E0E0E0;
     border-radius: 6px;
     padding: 12px;
-    white-space: pre-wrap; /* Ensures text wraps */
+    white-space: pre-wrap;
     word-break: break-all;
-    color: #94a3b8;
+    color: #333333;
 }
 
 /* Distinct styling for tool calls and results */
 .toolCall pre {
-    background: rgba(245, 158, 11, 0.05);
-    border: 1px solid rgba(245, 158, 11, 0.2);
-    border-left: 3px solid #f59e0b;
+    background: #E6F2FF;
+    border: 1px solid #99CCFF;
+    border-left: 3px solid #0066CC;
 }
 
 .toolResult pre {
-    background: rgba(16, 185, 129, 0.05);
-    border: 1px solid rgba(16, 185, 129, 0.2);
-    border-left: 3px solid #10b981;
+    background: #E6F9F0;
+    border: 1px solid #80D4AA;
+    border-left: 3px solid #00A86B;
 }
 
 .thinking pre {
-    background: rgba(100, 116, 139, 0.05);
-    border: 1px solid rgba(100, 116, 139, 0.2);
-    border-left: 3px solid #64748b;
+    background: #F5F5F5;
+    border: 1px solid #CCCCCC;
+    border-left: 3px solid #666666;
 }
 
 /* Blinking cursor animation for typing */
 .typing::after {
     content: '█';
     animation: blink 1s step-end infinite;
-    color: #a58efb;
+    color: #FF6600;
     margin-left: 2px;
 }
 
@@ -101,8 +102,8 @@ pre {
 
 /* User query box */
 .user-query {
-    background: rgba(165, 142, 251, 0.05);
-    border: 1px solid rgba(165, 142, 251, 0.2);
+    background: #FFF5ED;
+    border: 1px solid #FFCC99;
     border-radius: 8px;
     padding: 16px;
     font-weight: 500;
@@ -110,7 +111,7 @@ pre {
 
 .user-query p {
     margin: 0;
-    color: #cbd5e1;
+    color: #1a1a1a;
 }
 
 /* Log list (for the scrolling log part) */
@@ -118,8 +119,8 @@ pre {
     list-style: none;
     padding: 0;
     margin: 16px 0;
-    flex-grow: 1; /* Allows this to take up space */
-    overflow-y: auto; /* Enable scrolling */
+    flex-grow: 1;
+    overflow-y: auto;
     overflow-x: hidden;
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
     scroll-behavior: smooth;
@@ -131,23 +132,23 @@ pre {
 }
 
 .log-list::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
+    background: #F5F5F5;
     border-radius: 4px;
 }
 
 .log-list::-webkit-scrollbar-thumb {
-    background: rgba(165, 142, 251, 0.3);
+    background: #CCCCCC;
     border-radius: 4px;
 }
 
 .log-list::-webkit-scrollbar-thumb:hover {
-    background: rgba(165, 142, 251, 0.5);
+    background: #999999;
 }
 
 .log-list .log-entry {
     font-size: 13px;
     padding-left: 12px;
-    border-left: 2px solid rgba(165, 142, 251, 0.1);
+    border-left: 2px solid #E0E0E0;
     margin-bottom: 12px;
 }
 
@@ -160,34 +161,35 @@ pre {
 
 /* Final Report styling */
 .final-report {
-    background: linear-gradient(135deg, rgba(30, 30, 50, 0.9) 0%, rgba(20, 20, 40, 0.9) 100%);
-    border: 1px solid rgba(165, 142, 251, 0.3);
+    background: #FFFFFF;
+    border: 2px solid #E0E0E0;
     border-radius: 12px;
     padding: 24px;
     margin-top: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .final-report .report-content {
-    display: none; /* Hidden until JS reveals it */
+    display: none;
 }
 
 .final-report h3 {
     font-size: 20px;
     font-weight: 700;
-    color: #fff;
+    color: #1a1a1a;
     margin-bottom: 12px;
 }
 
 .final-report p,
 .final-report ul {
     font-size: 15px;
-    color: #cbd5e1;
+    color: #333333;
     margin-bottom: 16px;
     line-height: 1.6;
 }
 
 .final-report strong {
-    color: #fff;
+    color: #1a1a1a;
     font-weight: 600;
 }
 
@@ -204,7 +206,7 @@ pre {
 
 .final-report li::before {
     content: '•';
-    color: #a58efb;
+    color: #FF6600;
     position: absolute;
     left: 0;
     top: 0;
@@ -212,8 +214,8 @@ pre {
 }
 
 .email-draft {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(165, 142, 251, 0.1);
+    background: #F5F5F5;
+    border: 1px solid #E0E0E0;
     border-radius: 8px;
     padding: 16px;
     font-family: 'Segoe UI', sans-serif;

@@ -14,34 +14,34 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 1rem;
     line-height: 1.5;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-    color: #cbd5e1;
+    background: #FFFFFF;
+    color: #1a1a1a;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
 
 /* ----------------- Typography Scale ----------------- */
-h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.2; font-weight: 700; color: #fff; margin-bottom: 1rem; }
-h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.25; font-weight: 600; color: #fff; margin-bottom: 1rem; }
-h3 { font-size: clamp(1.75rem, 3vw, 2.25rem); line-height: 1.3; font-weight: 600; color: #fff; margin-bottom: 0.75rem; }
-h4 { font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.35; font-weight: 500; color: #cbd5e1; margin-bottom: 0.5rem; }
-h5 { font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.4; font-weight: 500; color: #cbd5e1; margin-bottom: 0.5rem; }
-h6 { font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.4; font-weight: 400; color: #94a3b8; margin-bottom: 0.5rem; }
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.2; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; }
+h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.25; font-weight: 600; color: #1a1a1a; margin-bottom: 1rem; }
+h3 { font-size: clamp(1.75rem, 3vw, 2.25rem); line-height: 1.3; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; }
+h4 { font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.35; font-weight: 500; color: #333333; margin-bottom: 0.5rem; }
+h5 { font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.4; font-weight: 500; color: #333333; margin-bottom: 0.5rem; }
+h6 { font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.4; font-weight: 400; color: #666666; margin-bottom: 0.5rem; }
 
-p { font-size: 1rem; line-height: 1.5; color: #cbd5e1; margin-bottom: 1rem; }
+p { font-size: 1rem; line-height: 1.5; color: #333333; margin-bottom: 1rem; }
 
 /* ----------------- Header ----------------- */
 header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(10, 10, 10, 0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(165, 142, 251, 0.1);
+    background: #FFFFFF;
+    border-bottom: 2px solid #E0E0E0;
     padding: 1rem 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .logo {
@@ -50,13 +50,12 @@ header {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    color: #1a1a1a;
 }
 
 .logo span {
-    background: linear-gradient(135deg, #a58efb 0%, #7c3aed 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #FF6600;
+    font-weight: 800;
 }
 
 nav {
@@ -72,7 +71,7 @@ nav {
     width: 2.5rem;
     height: 2.5rem;
     background: transparent;
-    border: 1px solid rgba(165, 142, 251, 0.3);
+    border: 2px solid #E0E0E0;
     border-radius: 0.375rem;
     cursor: pointer;
     display: flex;
@@ -87,13 +86,13 @@ nav {
 .hamburger span {
     width: 1.25rem;
     height: 0.125rem;
-    background: #a58efb;
+    background: #FF6600;
     transition: all 0.3s;
 }
 
 .hamburger:hover {
-    background: rgba(165, 142, 251, 0.1);
-    border-color: #a58efb;
+    background: #FFF5ED;
+    border-color: #FF6600;
 }
 
 .hamburger.active span:nth-child(1) {
@@ -108,8 +107,8 @@ nav {
     position: absolute;
     top: 3rem;
     right: 0;
-    background: rgba(10, 10, 10, 0.95);
-    border: 1px solid rgba(165, 142, 251, 0.2);
+    background: #FFFFFF;
+    border: 2px solid #E0E0E0;
     border-radius: 0.5rem;
     padding: 0.5rem 0;
     min-width: 10rem;
@@ -117,8 +116,7 @@ nav {
     visibility: hidden;
     transform: translateY(-0.625rem);
     transition: all 0.3s ease;
-    backdrop-filter: blur(16px);
-    box-shadow: 0 0.625rem 1.875rem rgba(0,0,0,0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .nav-dropdown.active {
@@ -130,15 +128,16 @@ nav {
 .nav-dropdown a {
     display: block;
     padding: 0.75rem 1.5rem;
-    color: #cbd5e1;
+    color: #333333;
     text-decoration: none;
     font-size: 0.875rem;
     transition: all 0.2s;
+    font-weight: 500;
 }
 
 .nav-dropdown a:hover, .nav-dropdown a:focus-visible {
-    background: rgba(165, 142, 251, 0.1);
-    color: #a58efb;
+    background: #FFF5ED;
+    color: #FF6600;
     outline: none;
 }
 
@@ -146,8 +145,8 @@ nav {
 .btn-nav {
     padding: 0.625rem 1.25rem;
     background: transparent;
-    border: 1.5px solid #a58efb;
-    color: #a58efb;
+    border: 2px solid #FF6600;
+    color: #FF6600;
     border-radius: 0.375rem;
     cursor: pointer;
     font-size: 0.875rem;
@@ -156,30 +155,31 @@ nav {
 }
 
 .btn-nav:hover, .btn-nav:focus-visible {
-    background: #a58efb;
-    color: #0a0a0a;
-    box-shadow: 0 0 1.25rem rgba(165, 142, 251, 0.5);
+    background: #FF6600;
+    color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(255, 102, 0, 0.3);
     outline: none;
 }
 
 .btn-primary {
     padding: 1rem 2.5rem;
-    background: linear-gradient(135deg, #a58efb 0%, #7c3aed 100%);
-    color: #0a0a0a;
+    background: #FF6600;
+    color: #FFFFFF;
     border: none;
     border-radius: 0.5rem;
     font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 0.5rem 1.5rem rgba(165, 142, 251, 0.3);
+    box-shadow: 0 2px 8px rgba(255, 102, 0, 0.2);
 }
 
 .btn-primary.full-width { width: 100%; }
 
 .btn-primary:hover, .btn-primary:focus-visible {
-    transform: translateY(-0.125rem);
-    box-shadow: 0 0.75rem 2.5rem rgba(165, 142, 251, 0.5);
+    background: #FF8533;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
     outline: none;
 }
 
@@ -187,6 +187,7 @@ nav {
 .hero {
     min-height: 100vh;
     padding: clamp(2rem, 5vw, 6rem) 1rem;
+    background: #FAFAFA;
 }
 
 .hero-split-container {
@@ -204,16 +205,16 @@ nav {
     font-size: clamp(2rem, 5vw, 3rem);
     line-height: 1.25;
     font-weight: 700;
-    color: #fff;
+    color: #1a1a1a;
     margin-bottom: 1.5rem;
 }
 
-.highlight { font-weight: 800; color: #a58efb; }
-.highlight2 { font-weight: 800; color: #cec1fd; }
+.highlight { font-weight: 800; color: #FF6600; }
+.highlight2 { font-weight: 800; color: #0066CC; }
 
 .headline-secondary {
     font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: #e2e8f0;
+    color: #333333;
     margin-bottom: 2rem;
     line-height: 1.5;
 }
@@ -222,50 +223,51 @@ nav {
 .hero-right { display: flex; justify-content: flex-end; }
 
 .cta-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(165,142,251,0.2);
+    background: #FFFFFF;
+    border: 2px solid #E0E0E0;
     padding: 2rem;
     border-radius: 1rem;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 1.25rem 2.5rem rgba(0,0,0,0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     width: 100%;
 }
 
-.cta-card h3 { font-size: 1.25rem; color: #fff; margin-bottom: 0.75rem; font-weight: 600; }
-.promise-text { font-size: 0.8125rem; color: #94a3b8; margin-bottom: 1.5rem; font-style: italic; }
+.cta-card h3 { font-size: 1.25rem; color: #1a1a1a; margin-bottom: 0.75rem; font-weight: 600; }
+.promise-text { font-size: 0.8125rem; color: #666666; margin-bottom: 1.5rem; font-style: italic; }
 
-/* ----------------- Mini Orb ----------------- */
+/* ----------------- Mini Orb (Corporate Icon) ----------------- */
 .orb.mini {
     width: 2rem;
     height: 2rem;
-    border-radius: 50%;
-    border: 1.5px solid #a58efb;
-    background: radial-gradient(circle at 30% 30%, rgba(165,142,251,0.5), transparent 70%);
-    box-shadow: 0 0 0.625rem rgba(165,142,251,0.4), inset 0 0 0.375rem rgba(165,142,251,0.3);
+    border-radius: 0.25rem;
+    border: 2px solid #FF6600;
+    background: linear-gradient(135deg, #FF6600 0%, #FF8533 100%);
+    box-shadow: 0 2px 6px rgba(255, 102, 0, 0.2);
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .orb.mini .rune {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0.125rem;
-    height: 0.125rem;
-    background: #a58efb;
+    width: 4px;
+    height: 4px;
+    background: #FFFFFF;
     border-radius: 50%;
-    margin-top: -0.0625rem;
-    margin-left: -0.0625rem;
-    animation: orbit-mini 8s linear infinite;
-    will-change: transform;
 }
 
-.orb.mini .rune:nth-child(1) { animation-delay: 0s; }
-.orb.mini .rune:nth-child(2) { animation-delay: -2.67s; }
-.orb.mini .rune:nth-child(3) { animation-delay: -5.34s; }
-
-@keyframes orbit-mini {
-    0% { transform: rotate(0deg) translateX(1rem); }
-    100% { transform: rotate(360deg) translateX(1rem); }
+.orb.mini .rune:nth-child(1) { 
+    top: 25%; 
+    left: 50%; 
+    transform: translateX(-50%);
+}
+.orb.mini .rune:nth-child(2) { 
+    bottom: 25%; 
+    left: 25%; 
+}
+.orb.mini .rune:nth-child(3) { 
+    bottom: 25%; 
+    right: 25%; 
 }
 
 /* ----------------- Demo Section ----------------- */
@@ -282,30 +284,32 @@ nav {
 .demo-box-container {
     width: 100%;
     min-height: 37.5rem;
-    border: 1px solid rgba(165,142,251,0.3);
+    border: 2px solid #E0E0E0;
     border-radius: 0.75rem;
-    background: linear-gradient(135deg, rgba(30,30,50,0.9) 0%, rgba(20,20,40,0.9) 100%);
-    backdrop-filter: blur(10px);
+    background: #FFFFFF;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
-.demo-text { margin-top: 1rem; font-size: 1.125rem; color: #94a3b8; }
+.demo-text { margin-top: 1rem; font-size: 1.125rem; color: #666666; }
 
 /* ----------------- Footer ----------------- */
 footer {
-    border-top: 1px solid rgba(165,142,251,0.1);
+    border-top: 2px solid #E0E0E0;
     padding: 2.5rem;
     text-align: center;
-    color: #64748b;
+    color: #666666;
     font-size: 0.875rem;
+    background: #FAFAFA;
 }
 
 footer a {
-    color: #a58efb;
+    color: #FF6600;
     text-decoration: none;
     transition: color 0.3s;
+    font-weight: 500;
 }
 
-footer a:hover, footer a:focus-visible { color: #cbd5e1; outline: none; }
+footer a:hover, footer a:focus-visible { color: #FF8533; outline: none; }
 
 /* ----------------- Mobile / Responsive ----------------- */
 @media (max-width: 900px) {
