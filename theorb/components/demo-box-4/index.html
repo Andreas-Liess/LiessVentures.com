@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeeingStone - Networking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="network-panel">
+    <div class="cluster-group">
+        <div class="cluster-header">
+            <div class="cluster-name">📂 Audi Alumni <span class="cluster-count">12</span></div>
+            <div class="cluster-controls">Protocol: Active</div>
+        </div>
+
+        <div class="entity-list">
+            <div class="entity-card" id="card-lars">
+                <div class="entity-preview" onclick="toggleCard('card-lars')">
+                    <div class="entity-info">
+                        <div class="avatar" style="background:#E0E0E0; color:#444">LW</div>
+                        <div class="entity-meta">
+                            <h4>Lars Weber</h4>
+                            <span>Former Project Lead @ Audi (Ingolstadt)</span>
+                        </div>
+                    </div>
+                    <div class="next-action-badge urgent">🎂 Birthday: Oct 1</div>
+                </div>
+
+                <div class="entity-details">
+                    <div class="details-grid">
+                        <div class="intel-col">
+                            <div class="intel-block">
+                                <h5>Intelligence Summary</h5>
+                                <div class="intel-text">
+                                    Lars managed your rotation in 2022. Currently Head of EV Strategy at VW Group.
+                                </div>
+                                <div class="data-points">
+                                    <div class="data-tag"><span class="icon">📍</span> Munich, DE</div>
+                                    <div class="data-tag"><span class="icon">🚙</span> Interest: Classic 911s</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-col">
+                            <div class="intel-block">
+                                <h5>Contact Channels</h5>
+                                <button class="btn-contact">✈️ Telegram</button>
+                                <button class="btn-contact">✉️ Personal Email</button>
+                            </div>
+
+                            <div class="intel-block" style="margin-top:10px;">
+                                <h5>Auto-Outreach Protocol</h5>
+                                
+                                <div class="protocol-item">
+                                    <div class="protocol-header">
+                                        <label class="proto-label">
+                                            <input type="checkbox" checked onchange="toggleRule(this, 'ctrl-lars-bday')">
+                                            Birthday
+                                        </label>
+                                    </div>
+                                    <div id="ctrl-lars-bday" class="protocol-controls">
+                                        <select class="channel-select">
+                                            <option>✈️ Telegram</option>
+                                            <option>✉️ Personal Email</option>
+                                        </select>
+                                        <div class="safety-switch" onclick="toggleMode(this)">
+                                            <div class="safety-track">
+                                                <div class="safety-knob"></div>
+                                            </div>
+                                            <span class="safety-label">Self-Review</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="protocol-item">
+                                    <div class="protocol-header">
+                                        <label class="proto-label">
+                                            <input type="checkbox" checked onchange="toggleRule(this, 'ctrl-lars-nye')">
+                                            New Years
+                                        </label>
+                                    </div>
+                                    <div id="ctrl-lars-nye" class="protocol-controls">
+                                        <select class="channel-select">
+                                            <option>✈️ Telegram</option>
+                                            <option>✉️ Personal Email</option>
+                                        </select>
+                                        <div class="safety-switch" onclick="toggleMode(this)">
+                                            <div class="safety-track risky">
+                                                <div class="safety-knob"></div>
+                                            </div>
+                                            <span class="safety-label risky">Auto</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="entity-card" id="card-amina">
+                <div class="entity-preview" onclick="toggleCard('card-amina')">
+                    <div class="entity-info">
+                        <div class="avatar" style="background:#E1BEE7; color:#8E24AA">AE</div>
+                        <div class="entity-meta">
+                            <h4>Amina El-Fayed</h4>
+                            <span>Senior UX Designer @ Audi</span>
+                        </div>
+                    </div>
+                    <div class="next-action-badge">📅 Catch-up: Q1 2025</div>
+                </div>
+                
+                <div class="entity-details">
+                    <div class="details-grid">
+                        <div class="intel-col">
+                            <div class="intel-block">
+                                <h5>Intelligence Summary</h5>
+                                <div class="intel-text">
+                                    Amina runs the HMI design chapter. Critical for UI/UX talent sourcing.
+                                </div>
+                                <div class="data-points">
+                                    <div class="data-tag"><span class="icon">📍</span> Ingolstadt, DE</div>
+                                    <div class="data-tag"><span class="icon">🎨</span> Interest: Generative Art</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-col">
+                            <div class="intel-block">
+                                <h5>Contact Channels</h5>
+                                <button class="btn-contact">✉️ Email</button>
+                            </div>
+                            
+                            <div class="intel-block" style="margin-top:10px;">
+                                <h5>Auto-Outreach Protocol</h5>
+                                <div class="protocol-item">
+                                    <div class="protocol-header">
+                                        <label class="proto-label">
+                                            <input type="checkbox" checked onchange="toggleRule(this, 'ctrl-amina-nye')">
+                                            New Years
+                                        </label>
+                                    </div>
+                                    <div id="ctrl-amina-nye" class="protocol-controls">
+                                        <select class="channel-select">
+                                            <option>✉️ Email</option>
+                                        </select>
+                                        <div class="safety-switch" onclick="toggleMode(this)">
+                                            <div class="safety-track risky">
+                                                <div class="safety-knob"></div>
+                                            </div>
+                                            <span class="safety-label risky">Auto</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cluster-group">
+        <div class="cluster-header">
+            <div class="cluster-name">📂 Family <span class="cluster-count">4</span></div>
+            <div class="cluster-controls">Protocol: Authentic (No Auto)</div>
+        </div>
+        
+        <div class="entity-list">
+            <div class="entity-card" id="card-wei">
+                <div class="entity-preview" onclick="toggleCard('card-wei')">
+                    <div class="entity-info">
+                        <div class="avatar" style="background:#FFF9C4; color:#FBC02D">WC</div>
+                        <div class="entity-meta">
+                            <h4>Wei Chen</h4>
+                            <span>Cousin / Software Engineer</span>
+                        </div>
+                    </div>
+                    <div class="next-action-badge special">🧧 Lunar New Year: Feb 10</div>
+                </div>
+
+                <div class="entity-details">
+                    <div class="details-grid">
+                        <div class="intel-col">
+                            <div class="intel-block">
+                                <h5>Intelligence Summary</h5>
+                                <div class="intel-text">
+                                    Works at Anthropic. Good sounding board for technical ideas.
+                                </div>
+                                <div class="data-points">
+                                    <div class="data-tag"><span class="icon">📍</span> San Francisco, CA</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-col">
+                            <div class="intel-block">
+                                <h5>Contact Channels</h5>
+                                <button class="btn-contact">✈️ Telegram</button>
+                            </div>
+                            
+                            <div class="intel-block" style="margin-top:10px;">
+                                <h5>Auto-Outreach Protocol</h5>
+                                <div class="protocol-item">
+                                    <div class="protocol-header">
+                                        <label class="proto-label">
+                                            <input type="checkbox" checked onchange="toggleRule(this, 'ctrl-wei-lny')">
+                                            Special: Lunar New Year
+                                        </label>
+                                    </div>
+                                    <div id="ctrl-wei-lny" class="protocol-controls">
+                                        <select class="channel-select">
+                                            <option>✈️ Telegram</option>
+                                        </select>
+                                        <div class="safety-switch hard-lock">
+                                            <div class="safety-track">
+                                                <div class="safety-knob"></div>
+                                            </div>
+                                            <span class="safety-label">Self-Review (Req)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="entity-card" id="card-fatima">
+                <div class="entity-preview" onclick="toggleCard('card-fatima')">
+                    <div class="entity-info">
+                        <div class="avatar" style="background:#E0F2F1; color:#00695C">FA</div>
+                        <div class="entity-meta">
+                            <h4>Fatima Al-Hassan</h4>
+                            <span>Sister</span>
+                        </div>
+                    </div>
+                    <div class="next-action-badge urgent">🎂 Birthday: Tomorrow</div>
+                </div>
+
+                <div class="entity-details">
+                    <div class="details-grid">
+                        <div class="intel-col">
+                            <div class="intel-block">
+                                <h5>Intelligence Summary</h5>
+                                <div class="intel-text">
+                                    Currently based in Dubai. Remember to ask about her new architecture project.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-col">
+                            <div class="intel-block">
+                                <h5>Contact Channels</h5>
+                                <button class="btn-contact">📱 WhatsApp</button>
+                            </div>
+
+                            <div class="intel-block" style="margin-top:10px;">
+                                <h5>Auto-Outreach Protocol</h5>
+                                <div class="protocol-item">
+                                    <div class="protocol-header">
+                                        <label class="proto-label">
+                                            <input type="checkbox" checked onchange="toggleRule(this, 'ctrl-fatima-bday')">
+                                            Birthday
+                                        </label>
+                                    </div>
+                                    <div id="ctrl-fatima-bday" class="protocol-controls">
+                                        <select class="channel-select">
+                                            <option>📱 WhatsApp</option>
+                                        </select>
+                                        <div class="safety-switch hard-lock">
+                                            <div class="safety-track">
+                                                <div class="safety-knob"></div>
+                                            </div>
+                                            <span class="safety-label">Self-Review (Req)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cluster-group">
+        <div class="cluster-header">
+            <div class="cluster-name">📂 Seed Investors <span class="cluster-count">8</span></div>
+            <div class="cluster-controls">Protocol: High Touch</div>
+        </div>
+        
+        <div class="entity-list">
+            <div class="entity-card" id="card-kwame">
+                <div class="entity-preview" onclick="toggleCard('card-kwame')">
+                    <div class="entity-info">
+                        <div class="avatar" style="background:#C8E6C9; color:#2E7D32">KM</div>
+                        <div class="entity-meta">
+                            <h4>Kwame Mensah</h4>
+                            <span>Partner @ ROI Ventures</span>
+                        </div>
+                    </div>
+                    <div class="next-action-badge special">🚀 IPO Date: Nov 30</div>
+                </div>
+
+                <div class="entity-details">
+                    <div class="details-grid">
+                        <div class="intel-col">
+                            <div class="intel-block">
+                                <h5>Intelligence Summary</h5>
+                                <div class="intel-text">
+                                    Lead investor. Focuses on Emerging Markets & Fintech.
+                                    <strong>Do not send long emails.</strong>
+                                </div>
+                                <div class="data-points">
+                                    <div class="data-tag"><span class="icon">📍</span> London / Accra</div>
+                                    <div class="data-tag"><span class="icon">🎙️</span> Podcast: Africa Tech</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-col">
+                            <div class="intel-block">
+                                <h5>Contact Channels</h5>
+                                <button class="btn-contact">✉️ Email</button>
+                            </div>
+                            
+                            <div class="intel-block" style="margin-top:10px;">
+                                <h5>Auto-Outreach Protocol</h5>
+                                
+                                <div class="protocol-item">
+                                    <div class="protocol-header">
+                                        <label class="proto-label">
+                                            <input type="checkbox" checked onchange="toggleRule(this, 'ctrl-kwame-ipo')">
+                                            Special: IPO Date
+                                        </label>
+                                    </div>
+                                    <div id="ctrl-kwame-ipo" class="protocol-controls">
+                                        <select class="channel-select">
+                                            <option>✉️ Email</option>
+                                        </select>
+                                        <div class="safety-switch hard-lock">
+                                            <div class="safety-track">
+                                                <div class="safety-knob"></div>
+                                            </div>
+                                            <span class="safety-label">Self-Review (Req)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="protocol-item">
+                                    <div class="protocol-header">
+                                        <label class="proto-label">
+                                            <input type="checkbox" checked onchange="toggleRule(this, 'ctrl-kwame-nye')">
+                                            New Years
+                                        </label>
+                                    </div>
+                                    <div id="ctrl-kwame-nye" class="protocol-controls">
+                                        <select class="channel-select">
+                                            <option>✉️ Email</option>
+                                        </select>
+                                        <div class="safety-switch" onclick="toggleMode(this)">
+                                            <div class="safety-track risky">
+                                                <div class="safety-knob"></div>
+                                            </div>
+                                            <span class="safety-label risky">Auto</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cluster-group">
+        <div class="cluster-header">
+            <div class="cluster-name">📂 Y Combinator W25 <span class="cluster-count">140</span></div>
+            <div class="cluster-controls">Protocol: Peer Group</div>
+        </div>
+         <div class="entity-list">
+             <div class="entity-card">
+                  <div class="entity-preview">
+                    <div class="entity-info">
+                        <div class="avatar" style="background:#FFD600; color:#000">YC</div>
+                        <div class="entity-meta">
+                            <h4>Batch Updates</h4>
+                            <span>Protocol applied to 140 peers</span>
+                        </div>
+                    </div>
+                    <div class="next-action-badge">📅 Demo Day: April</div>
+                </div>
+             </div>
+         </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeeingStone - Thread Intelligence</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard-panel">
+        <div class="thread-list">
+
+            <!-- 1. URGENT / STALLED -->
+            <div class="thread-card status-red">
+                <div class="card-meta-row">
+                    <span class="source-tag">✉️ EMAIL | finance@liessventures.com</span>
+                    <span class="badge bg-red">⛔ STALLED (14 DAYS)</span>
+                </div>
+                
+                <div class="thread-subject">Subject: Missing Form 1099-B / Tax Compliance</div>
+                
+                <div class="stakeholders">
+                    STAKEHOLDERS: Support Team <span class="email-addr">&lt;support@finance-inc.com&gt;</span>
+                </div>
+
+                <div class="state-box">
+                    <span class="state-label">Current State Analysis:</span>
+                    You requested an update regarding the missing tax forms on Nov 1st. 
+                    The support team opened a ticket (#9921) but has been silent for 2 weeks.
+                    <strong>Deadline approaching (Dec 1).</strong>
+                </div>
+
+                <div class="action-bar">
+                    <button class="btn btn-primary" onclick="handleAction('Drafting urgent follow-up...')">⚡ Auto-Draft "Urgent" Follow-up</button>
+                </div>
+            </div>
+
+            <!-- 2. PENDING / WAITING -->
+            <div class="thread-card status-yellow">
+                <div class="card-meta-row">
+                    <span class="source-tag">✉️ EMAIL | you@work.com</span>
+                    <span class="badge bg-yellow">⚠️ AWAITING INPUT (JANE)</span>
+                </div>
+                
+                <div class="thread-subject">Subject: Q4 Partnership Agreement - v3 Draft</div>
+                
+                <div class="stakeholders">
+                    STAKEHOLDERS: John Doe <span class="email-addr">&lt;john@partner.com&gt;</span>, Jane Roe <span class="email-addr">&lt;jane@legal.com&gt;</span>
+                </div>
+
+                <div class="state-box">
+                    <span class="state-label">Current State Analysis:</span>
+                    John has approved the equity split in Section 3. 
+                    <strong>Currently waiting on Jane (Legal)</strong> to redline the liability clause. 
+                    Last activity: 24h ago. No immediate pressure.
+                </div>
+
+                <div class="action-bar">
+                    <button class="btn">View Draft v3</button>
+                    <button class="btn">Nudge Jane</button>
+                </div>
+            </div>
+
+            <!-- 3. SUCCESS / GREEN -->
+            <div class="thread-card status-green">
+                <div class="card-meta-row">
+                    <span class="source-tag">✈️ TELEGRAM | Private Chat</span>
+                    <span class="badge bg-green">✅ CONTRACT SIGNED</span>
+                </div>
+                
+                <div class="thread-subject">Chat: Project X Deployment</div>
+                
+                <div class="stakeholders">
+                    STAKEHOLDERS: Alex Jakarta <span class="email-addr">@alex_dev</span>
+                </div>
+
+                <div class="state-box">
+                    <span class="state-label">Current State Analysis:</span>
+                    Success. Alex confirmed the contract is signed and the deposit has been received.
+                    Kickoff call scheduled for Monday.
+                </div>
+
+                <div class="action-bar">
+                    <button class="btn">Archive Thread</button>
+                    <button class="btn">Add "Kickoff" to Calendar</button>
+                </div>
+            </div>
+
+            <!-- 4. ROUTINE / GREEN -->
+            <div class="thread-card status-green">
+                <div class="card-meta-row">
+                    <span class="source-tag">✉️ EMAIL | alerts@server-logs.io</span>
+                    <span class="badge bg-green">🟢 SYSTEM NORMAL</span>
+                </div>
+                
+                <div class="thread-subject">Subject: Weekly Server Health Report</div>
+                
+                <div class="stakeholders">
+                    STAKEHOLDERS: Automated System
+                </div>
+
+                <div class="state-box">
+                    <span class="state-label">Current State Analysis:</span>
+                    Routine update. Uptime 99.9%. No errors detected in the last 7 days.
+                    Storage capacity at 45%.
+                </div>
+
+                <div class="action-bar">
+                    <button class="btn">Dismiss</button>
+                </div>
+            </div>
+
+            <!-- 5. ACTION REQUIRED / YELLOW -->
+            <div class="thread-card status-yellow">
+                <div class="card-meta-row">
+                    <span class="source-tag">👔 LINKEDIN | Messages</span>
+                    <span class="badge bg-yellow">⚡ ACTION REQUIRED</span>
+                </div>
+                
+                <div class="thread-subject">Thread: Intro to Seed Investors</div>
+                
+                <div class="stakeholders">
+                    STAKEHOLDERS: Sarah VC <span class="email-addr">@sarah_ventures</span>
+                </div>
+
+                <div class="state-box">
+                    <span class="state-label">Current State Analysis:</span>
+                    Sarah replied to your pitch deck. She is interested and asked for availability next Tuesday or Wednesday for a 15min coffee chat.
+                    <strong>Status: You need to reply.</strong>
+                </div>
+
+                <div class="action-bar">
+                    <button class="btn btn-primary">Generate "Availability" Reply</button>
+                </div>
+            </div>
+
+        </div>

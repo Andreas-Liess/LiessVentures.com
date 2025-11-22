@@ -224,9 +224,9 @@ nav {
 
 .cta-card {
     background: #FFFFFF;
-    border: 2px solid #E0E0E0;
+    border: 1px solid #E5E5E5;
     padding: 2rem;
-    border-radius: 1rem;
+    border-radius: 0.125rem;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     width: 100%;
 }
@@ -281,11 +281,26 @@ nav {
     text-align: center;
 }
 
+.demo-item {
+    position: relative;
+}
+
+.demo-label {
+    font-family: 'Space Mono', monospace;
+    color: #FF6600;
+    font-size: 13px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: -10px;
+    z-index: 10;
+    width: 100%;
+}
+
 .demo-box-container {
     width: 100%;
     min-height: 37.5rem;
-    border: 2px solid #E0E0E0;
-    border-radius: 0.75rem;
+    border: 1px solid #E5E5E5;
+    border-radius: 0.1225rem;
     background: #FFFFFF;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
