@@ -234,41 +234,8 @@ nav {
 .cta-card h3 { font-size: 1.25rem; color: #1a1a1a; margin-bottom: 0.75rem; font-weight: 600; }
 .promise-text { font-size: 0.8125rem; color: #666666; margin-bottom: 1.5rem; font-style: italic; }
 
-/* ----------------- Mini Orb (Corporate Icon) ----------------- */
-.orb.mini {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 0.25rem;
-    border: 2px solid #FF6600;
-    background: linear-gradient(135deg, #FF6600 0%, #FF8533 100%);
-    box-shadow: 0 2px 6px rgba(255, 102, 0, 0.2);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.orb.mini .rune {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #FFFFFF;
-    border-radius: 50%;
-}
 
-.orb.mini .rune:nth-child(1) { 
-    top: 25%; 
-    left: 50%; 
-    transform: translateX(-50%);
-}
-.orb.mini .rune:nth-child(2) { 
-    bottom: 25%; 
-    left: 25%; 
-}
-.orb.mini .rune:nth-child(3) { 
-    bottom: 25%; 
-    right: 25%; 
-}
 
 /* ----------------- Demo Section ----------------- */
 .demo-section {

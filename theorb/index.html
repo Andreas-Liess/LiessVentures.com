@@ -13,11 +13,29 @@
 
     <header>
         <div class="logo">
-            <div class="orb mini">
-                <div class="rune"></div>
-                <div class="rune"></div>
-                <div class="rune"></div>
-            </div>
+            <svg width="75" height="75" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <color id="seeing-orange" value="#FF6600" />
+                    <color id="corp-blue" value="#0057B8" />
+                    <color id="data-green" value="#00A862" />
+                </defs>
+
+                <g id="SeeingStone_Logo_Clean">
+                    <circle cx="100" cy="100" r="25" fill="#FF6600" />
+
+                    <path d="M 100, 65 A 35,35 0 1,1 65,100" fill="none" stroke="#0057B8" stroke-width="10"
+                        stroke-linecap="round">
+                        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 100"
+                            to="360 100 100" dur="18s" repeatCount="indefinite" />
+                    </path>
+
+                    <path d="M 100, 145 A 45,45 0 1,1 145,100" fill="none" stroke="#00A862" stroke-width="10"
+                        stroke-linecap="round">
+                        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 100"
+                            to="-360 100 100" dur="18s" repeatCount="indefinite" />
+                    </path>
+                </g>
+            </svg>
             <span>SeeingStone</span>
         </div>
         <nav>
@@ -26,14 +44,14 @@
 
     <main>
         <section class="hero">
-            
+
             <div class="hero-split-container">
                 <div class="hero-left">
                     <h1 class="headline-primary">
                         <span class="highlight">SeeingStone</span> <br>
                         Weaving Email, Contacts & Co. into one AI-enabled network.
                     </h1>
-                    
+
                     <p class="headline-secondary">
                         Your data remains strictly private, isolated, and encrypted on European servers. <br>
                         Intelligence without surveillance.
@@ -44,34 +62,47 @@
                     <div class="cta-card">
                         <h3>Premium features for early adopters</h3>
                         <p class="promise-text">No spam</p>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScQQhkDqiSSsq7R3jdKaroPv3yjtNrgHmHv7g_XhIZo81YDUQ/viewform?usp=header" target="_blank" class="btn-primary full-width">Request Secure Access</a>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScQQhkDqiSSsq7R3jdKaroPv3yjtNrgHmHv7g_XhIZo81YDUQ/viewform?usp=header"
+                            target="_blank" class="btn-primary full-width">Request Secure Access</a>
                     </div>
                 </div>
             </div>
 
             <section class="demo-section">
                 <br>
-                <div class="demo-label">:: SEARCH & RETRIEVAL // AI AGENT ACCESSES ALL DATA CATALOGED LIKE A LIBRARY TO RESEARCH ANYTHING YOU LIKE</div>
+                <div class="demo-label">:: SEARCH & RETRIEVAL // AI AGENT ACCESSES ALL DATA CATALOGED LIKE A LIBRARY TO
+                    RESEARCH ANYTHING YOU LIKE</div>
                 <div class="demo-item">
-                    <iframe src="components/demo-box-1/index.html" class="demo-box-container" id="demo-box-1" title="Demo Box 1"></iframe>
+                    <iframe src="components/demo-box-1/index.html" class="demo-box-container" id="demo-box-1"
+                        title="Demo Box 1"></iframe>
                 </div>
                 <br>
-                <div class="demo-label">:: NETWORK TOPOLOGY // MAPS ALL CONNECTIONS BETWEEN EACH PERSON IN YOUR NETWORK; TRY CLICKING A NODE</div>
+                <div class="demo-label">:: NETWORK TOPOLOGY // MAPS ALL CONNECTIONS BETWEEN EACH PERSON IN YOUR NETWORK;
+                    TRY CLICKING A NODE</div>
                 <div class="demo-item">
-                    <iframe src="components/demo-box-2/index.html" class="demo-box-container" id="demo-box-2" title="Demo Box 2"></iframe>
+                    <iframe src="components/demo-box-2/index.html" class="demo-box-container" id="demo-box-2"
+                        title="Demo Box 2"></iframe>
                 </div>
                 <br>
-                <div class="demo-label">:: THREAD INTELLIGENCE // ALL COMMUNICATION FILTERED BY NOISE AND WHAT ACTION YOU NEED TO TAKE</div>
+                <div class="demo-label">:: THREAD INTELLIGENCE // ALL COMMUNICATION FILTERED BY NOISE AND WHAT ACTION
+                    YOU NEED TO TAKE</div>
                 <div class="demo-item">
-                    <iframe src="components/demo-box-3/index.html" class="demo-box-container" id="demo-box-3" title="Demo Box 3"></iframe>
+                    <iframe src="components/demo-box-3/index.html" class="demo-box-container" id="demo-box-3"
+                        title="Demo Box 3"></iframe>
                 </div>
                 <br>
-                <div class="demo-label">:: PROTOCOL MANAGER // ALL THE PEOPLE YOU CAN CONNECT; NEVER LOSE TOUCH WITH FORMER COLLEAGUES</div>
+                <div class="demo-label">:: PROTOCOL MANAGER // ALL THE PEOPLE YOU CAN CONNECT; NEVER LOSE TOUCH WITH
+                    FORMER COLLEAGUES</div>
                 <div class="demo-item">
-                    <iframe src="components/demo-box-4/index.html" class="demo-box-container" id="demo-box-4" title="Demo Box 4"></iframe>
-                </div>                
+                    <iframe src="components/demo-box-4/index.html" class="demo-box-container" id="demo-box-4"
+                        title="Demo Box 4"></iframe>
+                </div>
             </section>
-            <div>SeeingStone is a private network intelligence hub that extracts clear signal from the noise across every document, message, and service you own. It maps your relationship graph and visualizes conversation threads across all accounts. It combines AI insights with deterministic automation to manage recurring outreach—like birthdays, New Years, and personal dates—ensuring no contact slips through the cracks. Your data is fully integrated yet strictly isolated on encrypted EU servers.</div>
+            <div>SeeingStone is a private network intelligence hub that extracts clear signal from the noise across
+                every document, message, and service you own. It maps your relationship graph and visualizes
+                conversation threads across all accounts. It combines AI insights with deterministic automation to
+                manage recurring outreach—like birthdays, New Years, and personal dates—ensuring no contact slips
+                through the cracks. Your data is fully integrated yet strictly isolated on encrypted EU servers.</div>
 
         </section>
     </main>
