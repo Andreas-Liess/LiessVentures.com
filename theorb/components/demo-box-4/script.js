@@ -1,43 +1,45 @@
-function toggleCard(id) {
-    const card = document.getElementById(id);
-    document.querySelectorAll('.entity-card').forEach(c => {
-        if(c.id !== id) c.classList.remove('expanded');
-    });
+function toggleCard(headerElement) {
+    const card = headerElement.closest('.entity-card');
     card.classList.toggle('expanded');
 }
 
-// Enables/Disables the sub-controls based on the checkbox
-function toggleRule(checkbox, controlId) {
-    const controlDiv = document.getElementById(controlId);
-    if (checkbox.checked) {
-        controlDiv.classList.remove('disabled');
-    } else {
-        controlDiv.classList.add('disabled');
-    }
-}
-
-// Toggles between Safe (Green) and Risky (Orange/Auto)
-function toggleMode(switchEl) {
-    // AUTHENTICITY CHECK: Prevent Auto Mode if hard-locked
-    if(switchEl.classList.contains('hard-lock')) {
-        alert("Safety Protocol: Special Events require manual review.");
-        return;
-    }
-
-    const wrapper = switchEl.closest('.safety-switch');
-    const track = wrapper.querySelector('.safety-track');
-    const label = wrapper.querySelector('.safety-label');
-
-    // Toggle State
-    track.classList.toggle('risky');
+function toggleSwitch(switchEl) {
+    event.stopPropagation();
     
-    if (track.classList.contains('risky')) {
-        // Auto Mode (Orange)
-        label.innerText = "Auto";
-        label.classList.add('risky');
+    const rowControls = switchEl.closest('.row-controls');
+    if (rowControls.parentElement.querySelector('.check-wrapper input').checked === false) return;
+
+    if (switchEl.classList.contains('manual')) {
+        switchEl.classList.remove('manual');
+        switchEl.classList.add('auto');
+        switchEl.querySelector('.state-label').innerText = "Auto";
     } else {
-        // Self-Review Mode (Green)
-        label.innerText = "Self-Review";
-        label.classList.remove('risky');
+        switchEl.classList.remove('auto');
+        switchEl.classList.add('manual');
+        switchEl.querySelector('.state-label').innerText = "Review";
     }
 }
+
+function toggleRow(checkbox) {
+    event.stopPropagation();
+    const row = checkbox.closest('.protocol-row');
+    const controls = row.querySelector('.row-controls');
+    const select = row.querySelector('select');
+    const input = row.querySelector('.context-input');
+    
+    if (checkbox.checked) {
+        controls.classList.remove('disabled');
+        select.disabled = false;
+        input.disabled = false;
+        input.style.opacity = "1";
+    } else {
+        controls.classList.add('disabled');
+        select.disabled = true;
+        input.disabled = true;
+        input.style.opacity = "0.5";
+    }
+}
+
+document.querySelectorAll('button, input, select').forEach(el => {
+    el.addEventListener('click', (e) => e.stopPropagation());
+});

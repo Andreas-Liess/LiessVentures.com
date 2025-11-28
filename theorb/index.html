@@ -5,46 +5,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SeeingStone: AI Network Intelligence</title>
-    <link rel="stylesheet" href="css/theorb.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/home.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <header>
-        <div class="logo">
-            <svg width="75" height="75" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <color id="seeing-orange" value="#FF6600" />
-                    <color id="corp-blue" value="#0057B8" />
-                    <color id="data-green" value="#00A862" />
-                </defs>
-
-                <g id="SeeingStone_Logo_Clean">
+        <a href="index.html" class="logo">
+            <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <g id="SeeingStone_Logo">
                     <circle cx="100" cy="100" r="25" fill="#FF6600" />
-
                     <path d="M 100, 65 A 35,35 0 1,1 65,100" fill="none" stroke="#0057B8" stroke-width="10"
                         stroke-linecap="round">
                         <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 100"
-                            to="360 100 100" dur="18s" repeatCount="indefinite" />
+                            to="360 100 100" dur="8s" repeatCount="indefinite" />
                     </path>
-
                     <path d="M 100, 145 A 45,45 0 1,1 145,100" fill="none" stroke="#00A862" stroke-width="10"
                         stroke-linecap="round">
                         <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 100"
-                            to="-360 100 100" dur="18s" repeatCount="indefinite" />
+                            to="-360 100 100" dur="8s" repeatCount="indefinite" />
                     </path>
                 </g>
             </svg>
             <span>SeeingStone</span>
-        </div>
+        </a>
         <nav>
+            <a href="pages/signup/index.html" class="btn-nav">Sign Up</a>
+            <div class="menu-container">
+                <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-dropdown" id="nav-dropdown">
+                    <a href="index.html">Home</a>
+                    <a href="pages/features/index.html">Features</a>
+                    <a href="pages/security/index.html">Security</a>
+                </div>
+            </div>
         </nav>
     </header>
 
     <main>
         <section class="hero">
-
             <div class="hero-split-container">
                 <div class="hero-left">
                     <h1 class="headline-primary">
@@ -59,51 +64,24 @@
                 </div>
 
                 <div class="hero-right">
-                    <div class="cta-card">
-                        <h3>Premium features for early adopters</h3>
-                        <p class="promise-text">No spam</p>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScQQhkDqiSSsq7R3jdKaroPv3yjtNrgHmHv7g_XhIZo81YDUQ/viewform?usp=header"
-                            target="_blank" class="btn-primary full-width">Request Secure Access</a>
+                    <div class="primary-actions-grid">
+                        <a href="pages/features/index.html" class="btn-hero-large feature-btn">
+                            Explore Features
+                        </a>
+                        <a href="pages/security/index.html" class="btn-hero-large security-btn">
+                            View Security
+                        </a>
+                    </div>
+
+                    <div class="founder-note-container">
+                        <p class="founder-text">
+                            "Uncompromising security is expensive. We need leverage to fund it. 
+                            <strong>Your sign-up proves to investors that privacy is a viable business model.</strong>"
+                        </p>
+                        <a href="pages/signup/index.html" class="btn-text-link">Request Secure Access →</a>
                     </div>
                 </div>
             </div>
-
-            <section class="demo-section">
-                <br>
-                <div class="demo-label">:: SEARCH & RETRIEVAL // AI AGENT ACCESSES ALL DATA CATALOGED LIKE A LIBRARY TO
-                    RESEARCH ANYTHING YOU LIKE</div>
-                <div class="demo-item">
-                    <iframe src="components/demo-box-1/index.html" class="demo-box-container" id="demo-box-1"
-                        title="Demo Box 1"></iframe>
-                </div>
-                <br>
-                <div class="demo-label">:: NETWORK TOPOLOGY // MAPS ALL CONNECTIONS BETWEEN EACH PERSON IN YOUR NETWORK;
-                    TRY CLICKING A NODE</div>
-                <div class="demo-item">
-                    <iframe src="components/demo-box-2/index.html" class="demo-box-container" id="demo-box-2"
-                        title="Demo Box 2"></iframe>
-                </div>
-                <br>
-                <div class="demo-label">:: THREAD INTELLIGENCE // ALL COMMUNICATION FILTERED BY NOISE AND WHAT ACTION
-                    YOU NEED TO TAKE</div>
-                <div class="demo-item">
-                    <iframe src="components/demo-box-3/index.html" class="demo-box-container" id="demo-box-3"
-                        title="Demo Box 3"></iframe>
-                </div>
-                <br>
-                <div class="demo-label">:: PROTOCOL MANAGER // ALL THE PEOPLE YOU CAN CONNECT; NEVER LOSE TOUCH WITH
-                    FORMER COLLEAGUES</div>
-                <div class="demo-item">
-                    <iframe src="components/demo-box-4/index.html" class="demo-box-container" id="demo-box-4"
-                        title="Demo Box 4"></iframe>
-                </div>
-            </section>
-            <div>SeeingStone is a private network intelligence hub that extracts clear signal from the noise across
-                every document, message, and service you own. It maps your relationship graph and visualizes
-                conversation threads across all accounts. It combines AI insights with deterministic automation to
-                manage recurring outreach—like birthdays, New Years, and personal dates—ensuring no contact slips
-                through the cracks. Your data is fully integrated yet strictly isolated on encrypted EU servers.</div>
-
         </section>
     </main>
 
@@ -111,7 +89,7 @@
         <p>© 2025 Liess Ventures. EU DataPrivacy Encrypted European Servers</p>
     </footer>
 
-    <script src="js/theorb.js"></script>
+    <script src="js/navigation.js"></script>
 </body>
 
 </html>

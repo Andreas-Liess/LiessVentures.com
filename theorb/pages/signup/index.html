@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - SeeingStone</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="css/signup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="signup-page">
+
+    <header>
+        <a href="../../index.html" class="logo">
+            <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <g id="SeeingStone_Logo">
+                    <circle cx="100" cy="100" r="25" fill="#FF6600" />
+                    <path d="M 100, 65 A 35,35 0 1,1 65,100" fill="none" stroke="#0057B8" stroke-width="10"
+                        stroke-linecap="round">
+                        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 100"
+                            to="360 100 100" dur="8s" repeatCount="indefinite" />
+                    </path>
+                    <path d="M 100, 145 A 45,45 0 1,1 145,100" fill="none" stroke="#00A862" stroke-width="10"
+                        stroke-linecap="round">
+                        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 100"
+                            to="-360 100 100" dur="8s" repeatCount="indefinite" />
+                    </path>
+                </g>
+            </svg>
+            <span>SeeingStone</span>
+        </a>
+        <nav>
+            <div class="menu-container">
+                <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-dropdown" id="nav-dropdown">
+                    <a href="../../index.html">Home</a>
+                    <a href="../features/index.html">Features</a>
+                    <a href="../security/index.html">Security</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="signup-section">
+            <div class="signup-container">
+                <div class="signup-header">
+                    <h1><span class="highlight">Request Secure Access</span></h1>
+                    <p>Join our early access program for premium features</p>
+                </div>
+
+                <!-- 
+                    =============================================
+                    BUILD YOUR CUSTOM SIGNUP FORM HERE
+                    
+                    Current placeholder links to Google Forms.
+                    Replace this entire section with your custom form.
+                    =============================================
+                -->
+                
+                <form class="signup-form" id="signup-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company">Company (Optional)</label>
+                        <input type="text" id="company" name="company" placeholder="Your company">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Why are you interested? (Optional)</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your use case..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Request Access</button>
+                    
+                    <div class="form-message" id="form-message"></div>
+                </form>
+                
+                <p class="form-terms">
+                    By signing up, you agree to our privacy-first approach. <br>
+                    No spam, ever.
+                </p>
+
+                <div class="signup-alternative">
+                    <p>Prefer the classic form?</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScQQhkDqiSSsq7R3jdKaroPv3yjtNrgHmHv7g_XhIZo81YDUQ/viewform?usp=header" 
+                       target="_blank" rel="noopener noreferrer">
+                        Use Google Forms →
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Liess Ventures. EU DataPrivacy Encrypted European Servers</p>

@@ -1,0 +1,174 @@
+/* =============================================
+   HOME.CSS - Home/Landing page specific styles
+   ============================================= */
+
+/* ----------------- Hero Section ----------------- */
+.hero {
+    min-height: calc(100vh - 80px);
+    padding: clamp(3rem, 8vw, 6rem) 1.5rem;
+    background: #FAFAFA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-split-container {
+    max-width: 75rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: center; /* Vertically center the text with the buttons */
+    text-align: left;
+    width: 100%;
+}
+
+/* Left Column */
+.hero-left {
+    max-width: 40rem;
+}
+
+.headline-primary {
+    font-size: clamp(2.5rem, 5vw, 4rem); /* Slightly larger impact */
+    line-height: 1.1;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+}
+
+.headline-secondary {
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    color: #4a4a4a;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    max-width: 90%;
+}
+
+/* Right Column (Action Area) */
+.hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 30rem; /* Constrain width so buttons don't get absurdly wide */
+    margin-left: auto; /* Push to the right in desktop view */
+}
+
+/* ----------------- BIG BUTTONS ----------------- */
+.primary-actions-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    margin-bottom: 2.5rem;
+}
+
+.btn-hero-large {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1.5rem 2rem; /* Massive padding for clickability */
+    font-size: 1.25rem;   /* Large, readable text */
+    font-weight: 700;
+    border-radius: 0.75rem;
+    text-align: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    text-decoration: none;
+    line-height: 1.2;
+}
+
+/* Feature Button (Blue) */
+.feature-btn {
+    background: #FFFFFF;
+    color: #0057B8;
+    border: 3px solid #0057B8;
+}
+
+.feature-btn:hover {
+    background: #0057B8;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 87, 184, 0.2);
+}
+
+/* Security Button (Green) */
+.security-btn {
+    background: #FFFFFF;
+    color: #00A862;
+    border: 3px solid #00A862;
+}
+
+.security-btn:hover {
+    background: #00A862;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 168, 98, 0.2);
+}
+
+/* ----------------- FOUNDER NOTE ----------------- */
+.founder-note-container {
+    border-top: 1px solid #E0E0E0; /* visual separation */
+    padding-top: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.founder-text {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.founder-text strong {
+    font-weight: 600;
+    color: #333;
+}
+
+.btn-text-link {
+    color: #FF6600;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.2s;
+}
+
+.btn-text-link:hover {
+    text-decoration: underline;
+    gap: 0.75rem; /* subtle arrow movement */
+}
+
+/* ----------------- Mobile / Responsive ----------------- */
+@media (max-width: 900px) {
+    .hero-split-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: left; /* Keep left align on mobile for modern feel, or center if preferred */
+    }
+    
+    .hero-right {
+        margin-left: 0;
+        max-width: 100%;
+    }
+
+    .headline-secondary {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 3rem 1.5rem;
+    }
+    
+    .btn-hero-large {
+        padding: 1.25rem;
+        font-size: 1.1rem;
+    }
+}
