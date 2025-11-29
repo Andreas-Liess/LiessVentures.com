@@ -1,5 +1,5 @@
 function navigateToOrb() {
-    window.location.href = 'theorb/index.html';
+    window.location.href = 'seeingstone/index.html';
 }
 
 function toggleMenu() {
