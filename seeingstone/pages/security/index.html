@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security - SeeingStone</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="css/security.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="security-page">
+    <header>
+        <a href="../../index.html" class="logo">
+            <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <g id="SeeingStone_Logo">
+                    <circle cx="100" cy="100" r="25" fill="#FF6600" />
+                    <path d="M 100, 65 A 35,35 0 1,1 65,100" fill="none" stroke="#0057B8" stroke-width="10"
+                        stroke-linecap="round">
+                        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 100"
+                            to="360 100 100" dur="8s" repeatCount="indefinite" />
+                    </path>
+                    <path d="M 100, 145 A 45,45 0 1,1 145,100" fill="none" stroke="#00A862" stroke-width="10"
+                        stroke-linecap="round">
+                        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 100"
+                            to="-360 100 100" dur="8s" repeatCount="indefinite" />
+                    </path>
+                </g>
+            </svg>
+            <span>SeeingStone</span>
+        </a>
+        <nav>
+            <a href="../signup/index.html" class="btn-nav">Sign Up</a>
+            <div class="menu-container">
+                <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-dropdown" id="nav-dropdown">
+                    <a href="../../index.html">Home</a>
+                    <a href="../features/index.html">Features</a>
+                    <a href="index.html" class="active">Security</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 1. MANDATE SECTION -->
+        <section class="mandate-section">
+            <div class="mandate-wrapper">
+                <span class="mandate-label">The Founder's Note</span>
+                <p class="mandate-text">
+                    I am building SeeingStone to manage my own network.
+                    <br><br>
+                    Most startups ship fast and fix security later. We reject that.
+                    <br><br>
+                    Uncompromising security is expensive. We need leverage to fund it. Your sign-up proves to investors that privacy is a viable business model.
+                </p>
+                <div class="signature">
+                    — The Founder
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ZEN GRID SECTION -->
+        <section class="zen-grid-section">
+            <p class="section-intro">Tap the tiles to see the architecture.</p>
+            
+            <div class="zen-grid">
+                
+                <!-- Card 1: Sales -->
+                <div class="zen-card" tabindex="0">
+                    <div class="zen-card-inner">
+                        <div class="face face-front">
+                            <h3>Do you sell<br>my data?</h3>
+                            <p class="short-answer">No. We sell <strong>subscriptions</strong>.</p>
+                            <span class="tap-hint">Tap to verify</span>
+                        </div>
+                        <div class="face face-back">
+                            <h4>The Contract</h4>
+                            <p class="tech-text">
+                                Our revenue comes 100% from user subscriptions. We are <strong>legally bound</strong> by our Data Processing Agreement (DPA) never to sell or trade your graph.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Access/Spying -->
+                <div class="zen-card" tabindex="0">
+                    <div class="zen-card-inner">
+                        <div class="face face-front">
+                            <h3>Who can read<br>my data?</h3>
+                            <p class="short-answer">No one. It is <strong>encrypted</strong>.</p>
+                            <span class="tap-hint">Tap to verify</span>
+                        </div>
+                        <div class="face face-back">
+                            <h4>The Tech</h4>
+                            <p class="tech-text">
+                                <strong>AES-256</strong> encryption protects against both hackers and employees. Without the keys (stored in HSM), the database contains only unreadable noise.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Sovereignty (US/EU) -->
+                <div class="zen-card" tabindex="0">
+                    <div class="zen-card-inner">
+                        <div class="face face-front">
+                            <h3>Is this a wrapper<br>for US Tech?</h3>
+                            <p class="short-answer">No. <strong>Self-hosted</strong> in the EU.</p>
+                            <span class="tap-hint">Tap to verify</span>
+                        </div>
+                        <div class="face face-back">
+                            <h4>The Infra</h4>
+                            <p class="tech-text">
+                                We do not use US APIs (like OpenAI). We run independent infrastructure on European servers. No matter where you use the product (USA, Asia), your data stays strictly in the EU.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: AI Training -->
+                <div class="zen-card" tabindex="0">
+                    <div class="zen-card-inner">
+                        <div class="face face-front">
+                            <h3>Is AI training<br>on my life?</h3>
+                            <p class="short-answer">Never. <strong>Isolated</strong> EU Models.</p>
+                            <span class="tap-hint">Tap to verify</span>
+                        </div>
+                        <div class="face face-back">
+                            <h4>The Logic</h4>
+                            <p class="tech-text">
+                                We run local models that cannot learn from you. Your data is processed in <strong>ephemeral memory</strong> (RAM) and wiped instantly. It never leaves our European cloud.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Deletion -->
+                <div class="zen-card" tabindex="0">
+                    <div class="zen-card-inner">
+                        <div class="face face-front">
+                            <h3>Can I TRUELY permanently<br>delete everything?</h3>
+                            <p class="short-answer">Yes. Including <strong>all logs</strong>.</p>
+                            <span class="tap-hint">Tap to verify</span>
+                        </div>
+                        <div class="face face-back">
+                            <h4>The Code</h4>
+                            <p class="tech-text">
+                                Deletion triggers <strong>Cryptographic Shredding</strong>. We destroy the specific decryption keys for your account. This renders all data, including backups, mathematically unrecoverable.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: CTA Card -->
+                <div class="zen-card cta-card">
+                    <div class="face face-front cta-face">
+                        <h3 class="cta-title">Join the<br>Coalition</h3>
+                        <p class="short-answer">Secure your <strong>Premium</strong> access.</p>
+                        <a href="../signup/index.html" class="cta-link">Sign Up &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Liess Ventures. EU DataPrivacy Encrypted European Servers</p>
+    </footer>
+
+    <script src="../../js/navigation.js"></script>
+    <script src="js/security.js"></script>
+</body>
+</html>

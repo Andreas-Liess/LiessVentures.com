@@ -1,0 +1,54 @@
+.demo-box-content {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+}
+
+#cy {
+    flex-grow: 1;
+    width: 100%;
+    background: #FAFAFA;
+}
+
+#info-panel {
+    background: #FFFFFF;
+    border-top: 2px solid #E0E0E0;
+    padding: 16px;
+    min-height: 80px;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 12px;
+    color: #333333;
+    line-height: 1.6;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.detail-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.detail-type {
+    color: #FF6600;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.connection-item {
+    padding: 4px 0 4px 8px;
+    border-left: 2px solid #E0E0E0;
+    margin-bottom: 4px;
+}
+
+.connection-label {
+    color: #0066CC;
+    font-weight: 600;
+}
+
+.connection-target {
+    color: #333333;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Box 1</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* This removes the default body margin from the iframe */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: transparent; /* Ensures parent background shows through */
+        }
+    </style>
+    
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="demo-box-content">
+        <div class="log-entry user-query" id="user-query-box">
+        </div>
+        <ul class="log-list" id="log-list">
+        </ul>
+        <div class="log-entry final-report" id="final-report-box">
+        </div>
+    </div>
+</body>
+</html>

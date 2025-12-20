@@ -1,0 +1,274 @@
+/* =============================================
+   SECURITY PAGE - ZEN ARCHITECTURE STYLES
+   ============================================= */
+
+:root {
+    --color-primary: #FF6600; 
+    --color-text-primary: #111111;
+    --color-text-secondary: #555555;
+    --color-bg-primary: #FFFFFF;
+    --color-bg-secondary: #FAFAFA;
+    --color-border: #EAEAEA;
+    
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-family-mono: 'Space Mono', monospace;
+    
+    --spacing-lg: 2rem;
+    --spacing-xl: 4rem;
+    --transition-spring: cubic-bezier(0.23, 1, 0.32, 1); /* Quick, snappy flip */
+}
+
+/* Override body background for security page */
+body.security-page {
+    background: var(--color-bg-secondary);
+    overflow-x: hidden;
+}
+
+/* Remove default main padding if common.css adds it */
+body.security-page main {
+    padding: 0;
+}
+
+/* =============================================
+   1. MANDATE SECTION (The "Why")
+   ============================================= */
+.mandate-section {
+    background: #000;
+    color: #fff;
+    padding: var(--spacing-xl) 1.5rem;
+    border-bottom: 4px solid var(--color-primary);
+}
+
+.mandate-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.mandate-label {
+    font-family: var(--font-family-mono);
+    font-size: 0.75rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.mandate-text {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    color: #fff;
+}
+
+.signature {
+    font-size: 1.25rem; 
+    font-weight: 400; 
+    color: #999;
+    border-left: 2px solid var(--color-primary);
+    padding-left: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* =============================================
+   2. ZEN GRID SECTION
+   ============================================= */
+.zen-grid-section {
+    padding: var(--spacing-xl) 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-intro {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+}
+
+/* The Grid Layout */
+.zen-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile First: 1 column */
+    gap: 1.5rem;
+}
+
+/* =============================================
+   3. SQUARE CARD ARCHITECTURE (Fixed Flip)
+   ============================================= */
+.zen-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1; /* FORCES SQUARE SHAPE */
+    perspective: 1500px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.zen-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s var(--transition-spring);
+    transform-style: preserve-3d;
+}
+
+/* Flip Logic */
+.zen-card.is-flipped .zen-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Faces (Shared Styles) */
+.face {
+    position: absolute;
+    inset: 0;
+    /* CRITICAL FIX: Ensures browser hides the back side of the element */
+    -webkit-backface-visibility: hidden; 
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    /* Ensure faces are opaque */
+    background-color: #fff; 
+}
+
+/* =============================================
+   FRONT FACE
+   ============================================= */
+.face-front {
+    transform: rotateY(0deg);
+    z-index: 2;
+}
+
+.face-front h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    color: #000;
+}
+
+.short-answer {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.short-answer strong {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.tap-hint {
+    position: absolute;
+    bottom: 2rem;
+    font-family: var(--font-family-mono);
+    font-size: 0.7rem;
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: opacity 0.3s ease;
+}
+
+/* =============================================
+   BACK FACE
+   ============================================= */
+.face-back {
+    background-color: #111; /* Explicit opaque background */
+    color: #fff;
+    transform: rotateY(180deg);
+    border: none;
+    z-index: 1;
+}
+
+.face-back h4 {
+    font-family: var(--font-family-mono);
+    font-size: 0.75rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+}
+
+.tech-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #ccc;
+    font-weight: 300;
+}
+
+.tech-text strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* =============================================
+   CTA CARD (Special Card 6)
+   ============================================= */
+.zen-card.cta-card {
+    border: 2px dashed #ddd;
+    background: transparent;
+}
+
+.zen-card.cta-card .face-front.cta-face {
+    background: transparent;
+    border: none;
+}
+
+.cta-title {
+    color: var(--color-primary) !important;
+}
+
+.cta-link {
+    margin-top: 1rem;
+    color: #000;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 1rem;
+}
+
+.cta-link:hover {
+    color: var(--color-primary);
+}
+
+/* =============================================
+   RESPONSIVE MEDIA QUERIES
+   ============================================= */
+@media (min-width: 600px) {
+    .zen-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    .mandate-text { 
+        font-size: 1.5rem; 
+    }
+    .signature {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 900px) {
+    .zen-grid { 
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}
+
+/* =============================================
+   ACCESSIBILITY
+   ============================================= */
+.zen-card:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+}
+
+.zen-card:focus .tap-hint {
+    color: var(--color-primary);
+}
