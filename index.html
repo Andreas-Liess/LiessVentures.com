@@ -3,51 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liess Ventures</title>
-    <link rel="stylesheet" href="css/main.css">
+    <title>Liess Ventures | Building Foundations for the Obsessive</title>
+    <meta name="description" content="We support those who build what matters. Capital, community, and infrastructure for long-term builders.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/pages/home.css">
 </head>
-<body>
-    <header>
-        <div class="header-bar">
-            <div class="brand">
-                <img src="assets/images/Fox1 (1).svg" alt="Liess Ventures Logo" class="logo">
-                <h1>Liess Ventures</h1>
-            </div>
-            
-            <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
+<body class="antialiased">
+
+    <!-- Reading Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Cursor Glow Effect -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Scroll to Top Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator" onclick="scrollToTop()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="nav-home pr-5 md:pr-20">
+        <div class="nav-container flex flex-col items-center justify-center relative">
+
+            <!-- Mobile Toggle -->
+            <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle Navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
             </button>
 
-            <nav id="nav-menu" class="nav-menu">
-                <a href="mailto:contact@liess.ventures">Contact</a>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section class="hero">
-            <h2>Ventures</h2>
-            <p>Ventures in development</p>
-        </section>
-
-        <section class="ventures-list">
-            <div class="venture-item">
-                <h3>SeeingStone</h3>
-                <p>SeeingStone is a private network intelligence hub that extracts clear signal from the noise across every document, message, and service you own. It maps your relationship graph and visualizes conversation threads across all accounts. It combines AI insights with deterministic automation to manage recurring outreach—like birthdays, New Years, and personal dates—ensuring no contact slips through the cracks. Your data is fully integrated yet strictly isolated on encrypted EU servers.</p>
-                <button class="btn-primary" onclick="navigateToOrb()">Explore SeeingStone</button>
+            <div class="logo-container logo-entrance mb-8">
+                <a href="index.html" class="logo-box">
+                    <img src="assets/fox.svg" alt="Liess Ventures Fox" class="logo-fox">
+                </a>
             </div>
-        </section>
-    </main>
 
-    <footer>
-        <p>Liess Ventures © 2025</p>
-        <div class="footer-links">
-            <a href="mailto:contact@liess.ventures">Contact</a>
+            <div class="nav-links" id="navLinks">
+                <a href="vision.html" class="nav-link hover-link" data-i18n="nav.vision">Vision</a>
+                <a href="index.html" class="nav-link hover-link" data-i18n="nav.home">Home</a>
+                <a href="connect.html" class="nav-link hover-link" data-i18n="nav.connect">Connect</a>
+                
+                <button class="lang-trigger" id="languageTrigger">[ EN ]</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-section grid-align pr-5 md:pr-20">
+        <div class="max-w-4xl">
+            <h1 class="hero-headline reveal delay-200" data-reveal>
+                <span class="hero-text" data-i18n="hero.prefix">We support those who</span><br>
+                <span class="italic text-forest reveal delay-400" data-reveal data-i18n="hero.suffix">build what matters</span>
+            </h1>
+            
+            <p class="hero-tagline reveal delay-600" data-reveal>
+                <span class="tracking-animate" data-i18n="hero.tagline.knowledge">Knowledge</span> // 
+                <span class="tracking-animate" data-i18n="hero.tagline.capital">Capital</span> // 
+                <span class="tracking-animate" data-i18n="hero.tagline.network">Network</span> // 
+                <span class="tracking-animate" data-i18n="hero.tagline.community">Community</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- ASSOCIATED VENTURES -->
+    <section class="ventures-section grid-align pr-5 md:pr-20">
+        
+        <div class="ventures-label reveal" data-reveal>
+            <span data-i18n="ventures.label">Associated Ventures</span>
+        </div>
+
+        <!-- SeeingStone -->
+        <article class="venture-card entry-item">
+            <div class="divider-animated reveal" data-reveal></div>
+            
+            <div class="venture-header">
+                <img src="assets/seeingstone.svg" alt="SeeingStone Logo" class="venture-logo reveal-left delay-100" data-reveal>
+                <h2 class="venture-name text-highlight reveal-left delay-200" data-reveal>SeeingStone</h2>
+            </div>
+            
+            <div class="venture-description reveal-fade delay-300" data-reveal>
+                <p data-i18n="ventures.seeingstone.desc1">You write an email. A new contact is created automatically. SeeingStone gathers context, remembers dates, and keeps relationships alive, while you shape the message yourself.</p>
+                <p data-i18n="ventures.seeingstone.desc2">SeeingStone uses algorithmic AI to map every connection across your emails, messages, and documents, revealing hidden connections, patterns, and opportunities.</p>
+                <p data-i18n="ventures.seeingstone.desc3">Need a collaborator, investor, or domain expert? Query your entire network and surface the right person—fully contextualized and already warm.</p>
+                <p data-i18n="ventures.seeingstone.desc4">Operate with the clarity of institutions. Never lose touch with people, context, or history, even across years.</p>
+            </div>
+            
+            <a href="https://seeingstone.org" target="_blank" rel="noopener noreferrer" class="venture-link hover-link reveal-right delay-400" data-reveal data-i18n="ventures.seeingstone.link">
+                Visit SeeingStone &nearr;
+            </a>
+        </article>
+
+        <!-- Velro -->
+        <article class="venture-card entry-item">
+            <div class="divider-animated reveal" data-reveal></div>
+            
+            <div class="venture-header">
+                <img src="assets/velro.png" alt="Velro Logo" class="venture-logo reveal-left delay-100" data-reveal>
+                <h2 class="venture-name text-highlight reveal-left delay-200" data-reveal>Velro</h2>
+            </div>
+            
+            <div class="venture-description reveal-fade delay-300" data-reveal>
+                <p data-i18n="ventures.velro.desc1">You're flying anyway. Someone else needs to send a package along the same route.</p>
+                <p data-i18n="ventures.velro.desc2">Velro matches travelers with senders, turning unused luggage space into a fast, trusted delivery channel.</p>
+                <p data-i18n="ventures.velro.desc3">Velro turns existing travel into a decentralized logistics network, already used by 500 people and growing.</p>
+            </div>
+            
+            <a href="https://velro.net" target="_blank" rel="noopener noreferrer" class="venture-link hover-link reveal-right delay-400" data-reveal data-i18n="ventures.velro.link">
+                Visit Velro &nearr;
+            </a>
+            
+            <div class="divider-animated reveal delay-500" data-reveal></div>
+        </article>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section pr-5 md:pr-20">
+        <div class="reveal delay-200" data-reveal>
+            <a href="connect.html" class="btn-signature" data-i18n="cta.apply">
+                Apply for Invitation
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-home grid-align pr-5 md:pr-20">
+        <div class="footer-content reveal delay-300" data-reveal>
+            <span data-i18n="footer.copyright">&copy; 2024 Liess Ventures</span>
         </div>
     </footer>
 
+    <!-- JS -->
+    <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
+
 </body>
 </html>
