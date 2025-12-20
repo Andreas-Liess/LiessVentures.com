@@ -1,0 +1,40 @@
+{
+    "nav": {
+        "vision": "Vision",
+        "home": "Startseite",
+        "materials": "Materialien",
+        "connect": "Verbinden"
+    },
+    "hero": {
+        "prefix": "Wir unterstützen jene, die",
+        "suffix": "Wichtiges erschaffen",
+        "tagline": {
+            "knowledge": "Wissen",
+            "capital": "Kapital",
+            "network": "Netzwerk",
+            "community": "Gemeinschaft"
+        }
+    },
+    "ventures": {
+        "label": "Verbundene Unternehmen",
+        "seeingstone": {
+            "desc1": "Sie schreiben eine E-Mail. Ein neuer Kontakt wird automatisch erstellt. SeeingStone sammelt Kontext, merkt sich Daten und hält Beziehungen lebendig.",
+            "desc2": "SeeingStone nutzt algorithmische KI, um jede Verbindung in Ihren E-Mails, Nachrichten und Dokumenten abzubilden und verborgene Muster aufzudecken.",
+            "desc3": "Brauchen Sie einen Partner, Investor oder Experten? Durchsuchen Sie Ihr gesamtes Netzwerk und finden Sie die richtige Person – kontextualisiert und warm.",
+            "desc4": "Agieren Sie mit der Klarheit von Institutionen. Verlieren Sie nie den Kontakt zu Menschen, Kontext oder Geschichte.",
+            "link": "Besuche SeeingStone ↗"
+        },
+        "velro": {
+            "desc1": "Sie fliegen sowieso. Jemand anderes muss ein Paket auf der gleichen Route versenden.",
+            "desc2": "Velro bringt Reisende mit Versendern zusammen und verwandelt ungenutzten Gepäckraum in einen schnellen, vertrauenswürdigen Lieferkanal.",
+            "desc3": "Velro verwandelt bestehende Reisen in ein dezentrales Logistiknetzwerk, das bereits von 500 Menschen genutzt wird.",
+            "link": "Besuche Velro ↗"
+        }
+    },
+    "cta": {
+        "apply": "Einladung Beantragen"
+    },
+    "footer": {
+        "copyright": "© 2024 Liess Ventures"
+    }
+}

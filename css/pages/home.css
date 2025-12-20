@@ -1,0 +1,233 @@
+/* ═══════════════════════════════════════════════════════════════
+   LIESS VENTURES - HOME PAGE STYLES
+   ═══════════════════════════════════════════════════════════════
+   
+   Version: 1.0
+   Last Updated: December 2024
+   
+   Requires: global.css
+   
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO SECTION
+   ═══════════════════════════════════════════════════════════════ */
+
+.hero-section {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-headline {
+    font-size: 2.25rem;
+    line-height: 1.1;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .hero-headline {
+        font-size: 3.75rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-headline {
+        font-size: 4.5rem;
+    }
+}
+
+.hero-tagline {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+}
+
+@media (min-width: 768px) {
+    .hero-tagline {
+        font-size: 0.875rem;
+    }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   VENTURES SECTION
+   ═══════════════════════════════════════════════════════════════ */
+
+.ventures-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.ventures-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--copper);
+    margin-bottom: 3rem;
+}
+
+/* Venture Card */
+.venture-card {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.venture-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .venture-header {
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+    }
+}
+
+.venture-logo {
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+    opacity: 0.8;
+    transition: opacity var(--duration-normal) var(--ease-smooth);
+}
+
+.venture-card:hover .venture-logo {
+    opacity: 1;
+}
+
+.venture-name {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    .venture-name {
+        font-size: 1.875rem;
+    }
+}
+
+.venture-description {
+    max-width: 48rem;
+}
+
+.venture-description p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 1rem;
+}
+
+.venture-description p:last-child {
+    margin-bottom: 0;
+}
+
+.venture-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--forest);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CTA SECTION
+   ═══════════════════════════════════════════════════════════════ */
+
+.cta-section {
+    padding: 10rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.btn-signature {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    background-color: transparent;
+    border: 1px solid rgba(5, 15, 11, 0.15);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+}
+
+.btn-signature::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--ink);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: -1;
+}
+
+.btn-signature:hover {
+    color: var(--paper);
+    border-color: var(--ink);
+    letter-spacing: 0.25em;
+    padding: 1.5rem 4.5rem;
+}
+
+.btn-signature:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.btn-signature:active {
+    transform: scale(0.98);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════ */
+
+.footer-home {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-top: 1px solid rgba(5, 15, 11, 0.1);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-copyright {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+}

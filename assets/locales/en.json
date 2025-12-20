@@ -1,0 +1,40 @@
+{
+    "nav": {
+        "vision": "Vision",
+        "home": "Home",
+        "materials": "Materials",
+        "connect": "Connect"
+    },
+    "hero": {
+        "prefix": "We support those who",
+        "suffix": "build what matters",
+        "tagline": {
+            "knowledge": "Knowledge",
+            "capital": "Capital",
+            "network": "Network",
+            "community": "Community"
+        }
+    },
+    "ventures": {
+        "label": "Associated Ventures",
+        "seeingstone": {
+            "desc1": "You write an email. A new contact is created automatically. SeeingStone gathers context, remembers dates, and keeps relationships alive, while you shape the message yourself.",
+            "desc2": "SeeingStone uses algorithmic AI to map every connection across your emails, messages, and documents, revealing hidden connections, patterns, and opportunities.",
+            "desc3": "Need a collaborator, investor, or domain expert? Query your entire network and surface the right person—fully contextualized and already warm.",
+            "desc4": "Operate with the clarity of institutions. Never lose touch with people, context, or history, even across years.",
+            "link": "Visit SeeingStone ↗"
+        },
+        "velro": {
+            "desc1": "You're flying anyway. Someone else needs to send a package along the same route.",
+            "desc2": "Velro matches travelers with senders, turning unused luggage space into a fast, trusted delivery channel.",
+            "desc3": "Velro turns existing travel into a decentralized logistics network, already used by 500 people and growing.",
+            "link": "Visit Velro ↗"
+        }
+    },
+    "cta": {
+        "apply": "Apply for Invitation"
+    },
+    "footer": {
+        "copyright": "© 2024 Liess Ventures"
+    }
+}

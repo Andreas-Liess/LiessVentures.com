@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect | Liess Ventures</title>
+    <meta name="description" content="Join the circle. A curated community for obsessive builders.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/pages/connect.css">
+</head>
+<body class="antialiased">
+
+    <!-- ═══════════════════════════════════════════════════════════
+         THE FIREPIT PAGE
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="firepit-page">
+
+        <!-- Back Link -->
+        <a href="home.html" class="back-link" data-i18n="connect.back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back
+        </a>
+
+        <!-- Ambient Firepit Glow -->
+        <div class="firepit-glow"></div>
+
+        <!-- Floating Embers -->
+        <div class="embers-container">
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="firepit-content">
+            <div class="firepit-inner">
+
+                <!-- Logo -->
+                <div class="firepit-logo">
+                    <a href="home.html" class="firepit-logo-mark">
+                        <img src="assets/fox.svg" alt="Liess Ventures Fox">
+                    </a>
+                </div>
+
+                <!-- Headline -->
+                <h1 class="firepit-headline" data-i18n="connect.headline">Leave a Thought</h1>
+                <p class="firepit-subheadline" data-i18n="connect.subheadline">
+                    What occupies your mind these days?<br>
+                    What are you building? Share your vision...
+                </p>
+
+                <!-- Form -->
+                <form class="firepit-form" id="firepitForm">
+                    
+                    <!-- Thought/Message -->
+                    <div class="form-group">
+                        <label for="thought" class="form-label" data-i18n="connect.form.thought_label">Your Thought</label>
+                        <textarea 
+                            id="thought" 
+                            name="thought" 
+                            class="form-textarea" 
+                            placeholder="A vision, an idea, something you're building..."
+                            data-i18n="connect.form.thought_placeholder"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <!-- Name & Email Row -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name" class="form-label" data-i18n="connect.form.name_label">Your Name</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                class="form-input" 
+                                placeholder="How should we call you?"
+                                data-i18n="connect.form.name_placeholder"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label" data-i18n="connect.form.email_label">Your Email</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-input" 
+                                placeholder="Where can we reach you?"
+                                data-i18n="connect.form.email_placeholder"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="form-submit-wrapper">
+                        <button type="submit" class="firepit-submit" id="submitBtn" data-i18n="connect.form.submit">
+                            Send Signal
+                        </button>
+                    </div>
+
+                </form>
+
+                <!-- Footer Promise -->
+                <footer class="firepit-footer">
+                    <p class="firepit-promise" data-i18n="connect.footer_promise">We'll be in touch.</p>
+                </footer>
+
+                <!-- Success Message (Hidden by default) -->
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                    </div>
+                    <h2 class="success-title" data-i18n="connect.success.title">Signal Sent</h2>
+                    <p class="success-text" data-i18n="connect.success.text">The fire carries your words. We'll be in touch soon.</p>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         JAVASCRIPT
+         ═══════════════════════════════════════════════════════════ -->
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // ═══════════════════════════════════════════════════════════
+        // FORM HANDLING
+        // ═══════════════════════════════════════════════════════════
+
+        const form = document.getElementById('firepitForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = {
+                thought: document.getElementById('thought').value.trim(),
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                timestamp: new Date().toISOString()
+            };
+
+            // Validate
+            if (!formData.thought || !formData.name || !formData.email) {
+                shakeButton();
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(formData.email)) {
+                shakeButton();
+                return;
+            }
+
+            // Show loading state
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = '';
+
+            try {
+                // Submit to API endpoint
+                const response = await fetch('/api/submit-form', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Submission failed');
+                }
+
+                // Success
+                showSuccess();
+
+            } catch (error) {
+                console.error('Submission error:', error);
+                submitBtn.classList.remove('loading');
+                submitBtn.textContent = 'Try Again';
+
+                // Reset button after delay
+                setTimeout(() => {
+                    submitBtn.textContent = 'Send Signal';
+                }, 2000);
+            }
+        });
+
+        function shakeButton() {
+            submitBtn.style.animation = 'shake 0.5s ease';
+            setTimeout(() => {
+                submitBtn.style.animation = '';
+            }, 500);
+        }
+
+        function showSuccess() {
+            // Hide form
+            form.style.opacity = '0';
+            form.style.transform = 'translateY(-20px)';
+            form.style.transition = 'all 0.5s ease';
+            
+            document.querySelector('.firepit-footer').style.opacity = '0';
+
+            setTimeout(() => {
+                form.style.display = 'none';
+                document.querySelector('.firepit-footer').style.display = 'none';
+                
+                // Show success message
+                successMessage.classList.add('visible');
+            }, 500);
+        }
+
+        // Add shake animation dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                20% { transform: translateX(-8px); }
+                40% { transform: translateX(8px); }
+                60% { transform: translateX(-8px); }
+                80% { transform: translateX(8px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+
+        // ═══════════════════════════════════════════════════════════
+        // EMBER RANDOMIZATION
+        // ═══════════════════════════════════════════════════════════
+
+        const embers = document.querySelectorAll('.ember');
+        
+        embers.forEach(ember => {
+            // Randomize size
+            const size = 2 + Math.random() * 3;
+            ember.style.width = size + 'px';
+            ember.style.height = size + 'px';
+            
+            // Randomize animation duration
+            const duration = 6 + Math.random() * 6;
+            ember.style.animationDuration = duration + 's';
+            
+            // Add slight horizontal drift variation
+            const drift = -30 + Math.random() * 60;
+            ember.style.setProperty('--drift', drift + 'px');
+        });
+
+
+        // ═══════════════════════════════════════════════════════════
+        // TEXTAREA AUTO-RESIZE
+        // ═══════════════════════════════════════════════════════════
+
+        const textarea = document.getElementById('thought');
+        
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 400) + 'px';
+        });
+
+
+        // ═══════════════════════════════════════════════════════════
+        // SUBTLE PARALLAX ON MOUSE MOVE
+        // ═══════════════════════════════════════════════════════════
+
+        const firepitGlow = document.querySelector('.firepit-glow');
+        
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            
+            firepitGlow.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+        });
+
+
+        // ═══════════════════════════════════════════════════════════
+        // FOCUS ANIMATIONS
+        // ═══════════════════════════════════════════════════════════
+
+        const inputs = document.querySelectorAll('.form-input, .form-textarea');
+        
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('focused');
+            });
+        });
+
+    </script>
+
+</body>
+</html>
