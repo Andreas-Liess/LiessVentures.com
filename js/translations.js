@@ -45,7 +45,7 @@ window.I18N_DATA = {
             "footer_promise": "We'll be in touch.",
             "success": {
                 "title": "Signal Sent",
-                "text": "The fire carries your words. We'll be in touch soon."
+                "text": "We'll be in touch soon."
             }
         }
     },
@@ -91,7 +91,7 @@ window.I18N_DATA = {
             "footer_promise": "Wir melden uns.",
             "success": {
                 "title": "Signal Gesendet",
-                "text": "Das Feuer trägt deine Worte weiter. Wir melden uns bald."
+                "text": "Wir melden uns bald."
             }
         }
     },
@@ -135,7 +135,7 @@ window.I18N_DATA = {
                 "submit": "Envoyer le signal"
             },
             "footer_promise": "Nous vous contacterons.",
-            "success": { "title": "Signal envoyé", "text": "Le feu porte vos paroles." }
+            "success": { "title": "Signal envoyé", "text": "Nous vous contacterons" }
         }
     },
     "es": {
@@ -178,7 +178,7 @@ window.I18N_DATA = {
                 "submit": "Enviar señal"
             },
             "footer_promise": "Estaremos en contacto.",
-            "success": { "title": "Señal enviada", "text": "El fuego lleva tus palabras." }
+            "success": { "title": "Señal enviada", "text": "Estaremos en contacto" }
         }
     },
     "ko": {
@@ -221,7 +221,7 @@ window.I18N_DATA = {
                 "submit": "신호 보내기"
             },
             "footer_promise": "곧 연락드리겠습니다.",
-            "success": { "title": "신호 전송됨", "text": "당신의 생각이 전달되었습니다." }
+            "success": { "title": "신호 전송됨", "text": "연락드리겠습니다" }
         }
     },
     "zh": {
@@ -264,7 +264,7 @@ window.I18N_DATA = {
                 "submit": "发送信号"
             },
             "footer_promise": "我们会联系你的。",
-            "success": { "title": "信号已发送", "text": "火焰传递着你的话语。" }
+            "success": { "title": "信号已发送", "text": "我们会联系您。" }
         }
     },
     "ar": {
@@ -307,7 +307,7 @@ window.I18N_DATA = {
                 "submit": "إرسال إشارة"
             },
             "footer_promise": "سنكون على تواصل.",
-            "success": { "title": "تم إرسال الإشارة", "text": "النار تحمل كلماتك." }
+            "success": { "title": "تم إرسال الإشارة", "text": "سنكون على تواصل." }
         }
     },
     "hi": {
@@ -350,7 +350,7 @@ window.I18N_DATA = {
                 "submit": "सिग्नल भेजें"
             },
             "footer_promise": "हम संपर्क में रहेंगे।",
-            "success": { "title": "सिग्नल भेज दिया गया", "text": "आपके शब्द पहुँच गए हैं।" }
+            "success": { "title": "सिग्नल भेज दिया गया", "text": "हम संपर्क में रहेंगे।" }
         }
     },
     "uk": {
@@ -393,7 +393,7 @@ window.I18N_DATA = {
                 "submit": "Надіслати сигнал"
             },
             "footer_promise": "Ми будемо на зв'язку.",
-            "success": { "title": "Сигнал надіслано", "text": "Ваші слова почуті." }
+            "success": { "title": "Сигнал надіслано", "text": "Ми будемо на зв'язку" }
         }
     }
 };

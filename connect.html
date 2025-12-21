@@ -143,6 +143,7 @@
          ═══════════════════════════════════════════════════════════ -->
     <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/analytics/analytics.js" type="module"></script>
     <script>
         // ═══════════════════════════════════════════════════════════
         // FORM HANDLING
@@ -160,7 +161,8 @@
                 thought: document.getElementById('thought').value.trim(),
                 name: document.getElementById('name').value.trim(),
                 email: document.getElementById('email').value.trim(),
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
+                analyticsData: window.lvAnalyticsData || null
             };
 
             // Validate

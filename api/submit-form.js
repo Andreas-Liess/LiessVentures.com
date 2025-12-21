@@ -4,7 +4,7 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { thought, name, email } = req.body;
+    const { thought, name, email, analyticsData } = req.body;
 
     // Validate required fields
     if (!thought || !name || !email) {
@@ -16,19 +16,26 @@ export default async function handler(req, res) {
     const GOOGLE_URL = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
 
     try {
+        // Prepare analytics data as JSON string
+        const analyticsJson = analyticsData ? JSON.stringify(analyticsData, null, 2) : '';
+
         // Send data to Google Forms
         await fetch(GOOGLE_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({
-                'entry.1495536293': thought,  // What is your thought?
-                'entry.192007185': name,       // What is your Name?
-                'entry.1316279483': email,     // What is your e-mail?
+                'entry.1495536293': thought,        // What is your thought? (includes meta block)
+                'entry.192007185': name,             // What is your Name?
+                'entry.1316279483': email,           // What is your e-mail?
+                'entry.1664885520': analyticsJson,   // Analytics Data (structured JSON)
             })
         });
 
         // Log to Vercel (for debugging)
         console.log(`✅ Form submitted: ${name} / ${email}`);
+        if (analyticsData) {
+            console.log(`📊 Intent: ${analyticsData.intentLevel}`);
+        }
 
         res.status(200).json({ success: true });
 

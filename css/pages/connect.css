@@ -65,9 +65,9 @@
     height: 100%;
     background: radial-gradient(
         ellipse at center,
-        rgba(184, 134, 11, 0.15) 0%,
-        rgba(184, 134, 11, 0.08) 25%,
-        rgba(184, 134, 11, 0.03) 50%,
+        rgba(238, 191, 105, 0.15) 0%,
+        rgba(238, 191, 105, 0.08) 25%,
+        rgba(238, 191, 105, 0.03) 50%,
         transparent 70%
     );
     animation: firePulse 4s ease-in-out infinite;
@@ -85,7 +85,7 @@
     background: radial-gradient(
         ellipse at center,
         rgba(255, 140, 50, 0.08) 0%,
-        rgba(184, 134, 11, 0.04) 40%,
+        rgba(238, 191, 105, 0.04) 40%,
         transparent 70%
     );
     animation: emberPulse 3s ease-in-out infinite;
@@ -232,10 +232,10 @@
 
 @keyframes logoGlow {
     0%, 100% {
-        box-shadow: 0 0 20px rgba(184, 134, 11, 0.3);
+        box-shadow: 0 0 20px rgba(238, 191, 105, 0.3);
     }
     50% {
-        box-shadow: 0 0 40px rgba(184, 134, 11, 0.5);
+        box-shadow: 0 0 40px rgba(238, 191, 105, 0.5);
     }
 }
 
@@ -309,7 +309,7 @@
     width: 100%;
     min-height: 160px;
     background: rgba(232, 230, 225, 0.03);
-    border: 1px solid rgba(184, 134, 11, 0.2);
+    border: 1px solid rgba(238, 191, 105, 0.2);
     border-radius: 4px;
     padding: 1rem;
     font-family: var(--font-serif);
@@ -324,7 +324,7 @@
     outline: none;
     border-color: var(--copper);
     background: rgba(232, 230, 225, 0.05);
-    box-shadow: 0 0 30px rgba(184, 134, 11, 0.1);
+    box-shadow: 0 0 30px rgba(238, 191, 105, 0.1);
 }
 
 .form-textarea::placeholder {
@@ -337,7 +337,7 @@
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid rgba(184, 134, 11, 0.3);
+    border-bottom: 1px solid rgba(238, 191, 105, 0.3);
     padding: 0.75rem 0;
     font-family: var(--font-serif);
     font-size: 1.125rem;
@@ -516,10 +516,10 @@
 
 @keyframes successPulse {
     0%, 100% {
-        box-shadow: 0 0 0 0 rgba(184, 134, 11, 0.4);
+        box-shadow: 0 0 0 0 rgba(238, 191, 105, 0.4);
     }
     50% {
-        box-shadow: 0 0 0 15px rgba(184, 134, 11, 0);
+        box-shadow: 0 0 0 15px rgba(238, 191, 105, 0);
     }
 }
 
