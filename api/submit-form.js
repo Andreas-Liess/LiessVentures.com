@@ -24,7 +24,7 @@ export default async function handler(req, res) {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({
-                'entry.1495536293': thought,        // What is your thought? (includes meta block)
+                'entry.1495536293': thought,        // What is your thought? (Clean user input)
                 'entry.192007185': name,             // What is your Name?
                 'entry.1316279483': email,           // What is your e-mail?
                 'entry.1664885520': analyticsJson,   // Analytics Data (structured JSON)

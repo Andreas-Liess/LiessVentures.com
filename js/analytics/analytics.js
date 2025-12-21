@@ -6,7 +6,6 @@ import { NavigationTracker } from './trackers/navigationTracker.js';
 import { EngagementTracker } from './trackers/engagementTracker.js';
 import { ContextTracker } from './trackers/contextTracker.js';
 import { Analyzer } from './analyzer.js';
-import { Formatter } from './formatter.js';
 
 class AnalyticsOrchestrator {
   constructor() {
@@ -64,19 +63,10 @@ class AnalyticsOrchestrator {
       // Derive intent
       const intent = Analyzer.deriveIntent(data);
 
-      // Format meta block
-      const metaBlock = Formatter.format(data, intent);
-
-      // Append to message
-      const textarea = document.getElementById('thought');
-      if (textarea && !textarea.value.includes('📊 INTERACTION METADATA')) {
-        textarea.value += metaBlock;
-      }
-
       // Store structured JSON data globally for form submission
       window.lvAnalyticsData = this.getStructuredData(data, intent);
 
-      console.log('✅ Analytics data appended');
+      console.log('✅ Analytics data processed');
     } catch (error) {
       console.error('Analytics submission handling failed:', error);
       // Don't block form submission on error
