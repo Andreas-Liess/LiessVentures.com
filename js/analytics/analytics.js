@@ -143,13 +143,25 @@ class AnalyticsOrchestrator {
 }
 
 // Auto-initialize when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
+function initializeAnalytics() {
+  try {
     const orchestrator = new AnalyticsOrchestrator();
     orchestrator.init();
-  });
+
+    // Expose globally for verification
+    window.lvAnalyticsReady = true;
+  } catch (error) {
+    console.error('❌ Analytics initialization failed:', error);
+    window.lvAnalyticsReady = false;
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeAnalytics);
 } else {
   // DOM already loaded
-  const orchestrator = new AnalyticsOrchestrator();
-  orchestrator.init();
+  initializeAnalytics();
 }
+
+// Debug export
+console.log('📦 Analytics module loaded');

@@ -156,6 +156,9 @@
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
+            // Wait a moment for analytics to process (if loaded)
+            await new Promise(resolve => setTimeout(resolve, 100));
+
             // Get form data
             const formData = {
                 thought: document.getElementById('thought').value.trim(),
@@ -164,6 +167,9 @@
                 timestamp: new Date().toISOString(),
                 analyticsData: window.lvAnalyticsData || null
             };
+
+            // Log for debugging
+            console.log('📊 Analytics data:', window.lvAnalyticsData ? 'Available' : 'Not available');
 
             // Validate
             if (!formData.thought || !formData.name || !formData.email) {
