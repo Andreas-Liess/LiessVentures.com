@@ -4,7 +4,7 @@
 
 window.I18N_DATA = {
     "en": {
-        "nav": { "vision": "Vision", "home": "Home", "materials": "Materials", "connect": "Connect" },
+        "nav": { "vision": "Vision", "home": "Home", "materials": "Materials", "connect": "Sign Up" },
         "hero": {
             "prefix": "We support those who",
             "suffix": "build what matters",
@@ -50,7 +50,7 @@ window.I18N_DATA = {
         }
     },
     "de": {
-        "nav": { "vision": "Vision", "home": "Startseite", "materials": "Materialien", "connect": "Verbinden" },
+        "nav": { "vision": "Vision", "home": "Startseite", "materials": "Materialien", "connect": "Registrieren" },
         "hero": {
             "prefix": "Wir unterstützen jene, die",
             "suffix": "Wichtiges erschaffen",
@@ -96,7 +96,7 @@ window.I18N_DATA = {
         }
     },
     "fr": {
-        "nav": { "vision": "Vision", "home": "Accueil", "materials": "Matériaux", "connect": "Connecter" },
+        "nav": { "vision": "Vision", "home": "Accueil", "materials": "Matériaux", "connect": "S'inscrire" },
         "hero": {
             "prefix": "Nous soutenons ceux qui",
             "suffix": "construisent l'essentiel",
@@ -139,7 +139,7 @@ window.I18N_DATA = {
         }
     },
     "es": {
-        "nav": { "vision": "Visión", "home": "Inicio", "materials": "Materiales", "connect": "Conectar" },
+        "nav": { "vision": "Visión", "home": "Inicio", "materials": "Materiales", "connect": "Registrarse" },
         "hero": {
             "prefix": "Apoyamos a quienes",
             "suffix": "construyen lo que importa",
@@ -182,7 +182,7 @@ window.I18N_DATA = {
         }
     },
     "ko": {
-        "nav": { "vision": "비전", "home": "홈", "materials": "자료", "connect": "연결" },
+        "nav": { "vision": "비전", "home": "홈", "materials": "자료", "connect": "가입하기" },
         "hero": {
             "prefix": "우리는 중요한 것을",
             "suffix": "만드는 사람들을 지원합니다",
@@ -225,7 +225,7 @@ window.I18N_DATA = {
         }
     },
     "zh": {
-        "nav": { "vision": "愿景", "home": "首页", "materials": "材料", "connect": "联系" },
+        "nav": { "vision": "愿景", "home": "首页", "materials": "材料", "connect": "注册" },
         "hero": {
             "prefix": "我们支持那些",
             "suffix": "建造重要事物的人",
@@ -268,7 +268,7 @@ window.I18N_DATA = {
         }
     },
     "ar": {
-        "nav": { "vision": "الرؤية", "home": "الرئيسية", "materials": "المواد", "connect": "اتصال" },
+        "nav": { "vision": "الرؤية", "home": "الرئيسية", "materials": "المواد", "connect": "تسجيل" },
         "hero": {
             "prefix": "نحن ندعم أولئك الذين",
             "suffix": "يبنون ما يهم",
@@ -311,7 +311,7 @@ window.I18N_DATA = {
         }
     },
     "hi": {
-        "nav": { "vision": "दृष्टि", "home": "होम", "materials": "सामग्री", "connect": "जुड़ें" },
+        "nav": { "vision": "दृष्टि", "home": "होम", "materials": "सामग्री", "connect": "साइन अप" },
         "hero": {
             "prefix": "हम उनका समर्थन करते हैं जो",
             "suffix": "महत्वपूर्ण निर्माण करते हैं",
@@ -354,7 +354,7 @@ window.I18N_DATA = {
         }
     },
     "uk": {
-        "nav": { "vision": "Візія", "home": "Головна", "materials": "Матеріали", "connect": "Зв'язок" },
+        "nav": { "vision": "Візія", "home": "Головна", "materials": "Матеріали", "connect": "Реєстрація" },
         "hero": {
             "prefix": "Ми підтримуємо тих, хто",
             "suffix": "будує те, що важливо",
