@@ -1,0 +1,13 @@
+{
+  "name": "liess-ventures-thinktank",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx vercel dev"
+  },
+  "dependencies": {
+    "@vercel/kv": "^3.0.0",
+    "pdf-parse": "^1.1.1"
+  }
+}

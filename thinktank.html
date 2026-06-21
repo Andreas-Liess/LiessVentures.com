@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Think Tank | Liess Ventures</title>
+    <meta name="description" content="A multi-persona simulation workspace for hard questions.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/pages/thinktank.css">
+</head>
+<body class="antialiased thinktank-body">
+
+    <header class="thinktank-topbar">
+        <a href="index.html" class="thinktank-brand" aria-label="Liess Ventures home">
+            <span class="thinktank-logo">
+                <img src="assets/fox.svg" alt="Liess Ventures Fox">
+            </span>
+            <span>Liess Ventures</span>
+        </a>
+
+        <nav class="thinktank-nav" aria-label="Primary">
+            <a href="vision.html">Vision</a>
+            <a href="index.html">Home</a>
+            <a href="connect.html">Connect</a>
+        </nav>
+    </header>
+
+    <main class="thinktank-shell">
+        <section class="setup-column" aria-label="Session setup">
+            <div class="module-heading">
+                <span class="module-kicker">Think Tank</span>
+                <h1>Simulated Council</h1>
+            </div>
+
+            <form class="session-form" id="sessionForm">
+                <label class="field-label" for="problemInput">Problem</label>
+                <textarea id="problemInput" class="problem-input" rows="9" required></textarea>
+                <div class="privacy-note" role="note">
+                    <strong>Privacy boundary: anonymous, not private.</strong>
+                    <p>This simulation runs through third-party AI infrastructure. The provider does not know who you are and cannot link your input to your identity, but the content may be stored or processed. Your inputs may be archived, to improve internal workflows.</p>
+                    <p>Write openly, BUT leave out names, addresses, contact details, or anything that could identify a real person.</p>
+                </div>
+
+                <div class="setup-grid">
+                    <label class="file-picker" for="pdfInput">
+                        <input id="pdfInput" type="file" accept="application/pdf">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <path d="M14 2v6h6"/>
+                        </svg>
+                        <span id="fileLabel">PDF</span>
+                    </label>
+
+                    <label class="number-field" for="maxMeetingsInput">
+                        <span>Meetings</span>
+                        <input id="maxMeetingsInput" type="number" min="1" max="4" value="3">
+                    </label>
+                </div>
+
+                <button class="primary-action" type="submit" id="createSessionBtn">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 12h14"/>
+                        <path d="m12 5 7 7-7 7"/>
+                    </svg>
+                    <span>Start Simulation</span>
+                </button>
+            </form>
+
+            <p class="status-line" id="statusLine">Idle</p>
+
+            <div class="persona-list" id="personaList" aria-live="polite"></div>
+        </section>
+
+        <section class="conversation-column" aria-label="Public discussion">
+            <div class="conversation-toolbar">
+                <div class="scene-meta">
+                    <span id="sceneStatus">No Session</span>
+                    <strong id="roundStatus">0 / 0</strong>
+                </div>
+
+                <div class="toolbar-actions">
+                    <button class="icon-button labeled" type="button" id="startBtn" disabled>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="m8 5 11 7-11 7z"/>
+                        </svg>
+                        <span>Start</span>
+                    </button>
+                    <button class="icon-button labeled" type="button" id="skipBtn" disabled>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="m5 4 10 8-10 8z"/>
+                            <path d="M19 5v14"/>
+                        </svg>
+                        <span>Skip</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-log" id="chatLog" aria-live="polite"></div>
+
+            <form class="comment-form" id="commentForm">
+                <label class="field-label" for="commentInput">Anonymous Advisor</label>
+                <div class="comment-row">
+                    <textarea id="commentInput" rows="2" placeholder="Write your own opinion here..."></textarea>
+                    <button class="icon-button send-button" type="submit" aria-label="Insert comment">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M22 2 11 13"/>
+                            <path d="m22 2-7 20-4-9-9-4z"/>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <aside class="insight-column" aria-label="Session outputs">
+            <div class="insight-tabs" role="tablist">
+                <button type="button" class="active" data-panel="manifestPanel">Manifest</button>
+                <button type="button" data-panel="privatePanel">Between Meetings</button>
+            </div>
+
+            <section class="insight-panel active" id="manifestPanel">
+                <div class="manifest-list" id="manifestList"></div>
+                <button class="secondary-action fallback-action" type="button" id="nextSessionBtn" hidden>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 12h14"/>
+                        <path d="m12 5 7 7-7 7"/>
+                    </svg>
+                    <span>Continue Anyway</span>
+                </button>
+            </section>
+
+            <section class="insight-panel" id="privatePanel">
+                <div class="private-tabs" id="privateTabs"></div>
+                <p class="between-status" id="betweenStatus">Internal agent scenes will appear between meetings.</p>
+                <div class="private-scene" id="privateScene"></div>
+            </section>
+        </aside>
+    </main>
+
+    <script src="js/thinktank.js"></script>
+</body>
+</html>

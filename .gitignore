@@ -1,0 +1,7 @@
+node_modules/
+.vercel/
+.env
+.env.*
+api/nvidea_api.txt
+api/nvidia_api.txt
+*.log
