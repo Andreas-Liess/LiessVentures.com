@@ -23,6 +23,7 @@ import {
 export default async function handler(req, res) {
     if (req.method !== 'POST') return methodNotAllowed(res);
 
+    let stage = 'input';
     const body = getJsonBody(req);
     const originalProblem = String(body.problem || body.originalProblem || '').trim();
     const pdfContext = body.pdfContext ? String(body.pdfContext).trim() : null;
@@ -59,6 +60,7 @@ export default async function handler(req, res) {
             pdfContext || ''
         ].join('\n');
 
+        stage = 'nvidia_persona_generation';
         // z-ai/glm-5.1 is used here because persona creation needs broad judgement and structured writing, but not the longest context model.
         const modelText = await callNvidia({
             model: THINKTANK_MODELS.personas,
@@ -67,10 +69,11 @@ export default async function handler(req, res) {
                 { role: 'user', content: userPrompt }
             ],
             temperature: 0.72,
-            maxTokens: 4200,
+            maxTokens: 2800,
             responseFormat: { type: 'json_object' }
         });
 
+        stage = 'parse_personas';
         const parsed = parseModelJson(modelText);
         const rawPersonas = Array.isArray(parsed.personas) ? parsed.personas.slice(0, 5) : [];
         if (rawPersonas.length < 3) {
@@ -121,6 +124,7 @@ export default async function handler(req, res) {
             manifests: []
         };
 
+        stage = 'kv_write';
         await Promise.all([
             ...personas.map((persona) => writeJson(persona.personaId, persona)),
             writeSession(session)
@@ -135,7 +139,10 @@ export default async function handler(req, res) {
         });
     } catch (error) {
         console.error('create-session failed:', error);
-        return jsonError(res, 500, 'Failed to create Think Tank session');
+        return jsonError(res, 500, 'Failed to create Think Tank session', {
+            stage,
+            reason: error?.message || 'Unknown error'
+        });
     }
 }
 

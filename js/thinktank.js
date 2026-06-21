@@ -666,7 +666,9 @@
         const text = await response.text();
         const data = text ? JSON.parse(text) : {};
         if (!response.ok) {
-            throw new Error(data.error || `Request failed: ${response.status}`);
+            const stage = data.details?.stage ? ` (${data.details.stage})` : '';
+            const reason = data.details?.reason ? `: ${data.details.reason}` : '';
+            throw new Error(`${data.error || `Request failed: ${response.status}`}${stage}${reason}`);
         }
         return data;
     }

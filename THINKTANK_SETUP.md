@@ -15,6 +15,13 @@ Create and connect a Vercel KV database in the Vercel dashboard:
 Vercel will provide the required `KV_REST_API_URL`, `KV_REST_API_TOKEN`, and
 related variables automatically.
 
+The code also supports the newer Upstash Redis variable names:
+
+```text
+UPSTASH_REDIS_REST_URL=...
+UPSTASH_REDIS_REST_TOKEN=...
+```
+
 Note: current npm output marks `@vercel/kv` as deprecated and points new storage
 setups toward Vercel Marketplace Redis/Upstash. This implementation keeps
 `@vercel/kv` because the requested architecture names Vercel KV explicitly, and
@@ -98,6 +105,24 @@ npm run dev
 ```
 
 The static page is available at `/thinktank.html`.
+
+## Health Check
+
+After deploying, open:
+
+```text
+/api/thinktank-health
+```
+
+This checks whether Redis/KV credentials are present and writable without
+exposing secret values. For a deeper check that also calls NVIDIA, open:
+
+```text
+/api/thinktank-health?deep=1
+```
+
+If `/api/create-session` fails, its JSON response includes a safe `details.stage`
+field such as `nvidia_persona_generation`, `parse_personas`, or `kv_write`.
 
 ## Meeting Cadence
 
