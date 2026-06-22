@@ -1,5 +1,16 @@
 (() => {
     const RECOVERY_DELAYS_MS = [1200, 2500, 5000, 10000, 20000];
+    const REQUEST_TIMEOUTS_MS = {
+        '/api/thinktank/orchestrate-turn': 45000,
+        '/api/thinktank/generate-message': 150000,
+        '/api/thinktank/end-scene': 150000,
+        '/api/thinktank/generate-between-meeting-scene': 90000,
+        '/api/thinktank/start-next-session': 45000,
+        '/api/thinktank/insert-comment': 45000,
+        '/api/thinktank/get-session': 45000,
+        '/api/thinktank/create-session': 150000,
+        '/api/thinktank/extract-pdf': 90000
+    };
 
     const state = {
         session: null,
@@ -11,6 +22,7 @@
         autoRunning: false,
         inFlight: false,
         injectingAdvisor: false,
+        pipelineTimer: null,
         recoveryTimer: null,
         recoveryAttempts: 0
     };
@@ -122,7 +134,7 @@
             setStatus('Simulation started');
             state.inFlight = false;
             updateControls();
-            await runTurn();
+            queuePipelineContinuation();
         } catch (error) {
             console.error(error);
             setStatus(error.message || 'Session creation failed');
@@ -159,16 +171,16 @@
             setBusy(false);
         }
         if (shouldResume) {
-            await continuePipeline();
+            queuePipelineContinuation();
         } else if (shouldContinueBetweenMeetings) {
-            await continuePipeline();
+            queuePipelineContinuation();
         }
     }
 
     async function runTurn() {
         if (!state.session || state.inFlight) return;
         if (state.session.status !== 'discussing') {
-            await continuePipeline();
+            queuePipelineContinuation();
             return;
         }
         if (state.paused) {
@@ -179,7 +191,12 @@
         updateControls();
 
         try {
-            setStatus('Choosing speaker');
+            const scene = state.session.currentScene || {};
+            const nextMessageNumber = Math.min(
+                Number(scene.maxRounds || 0),
+                Number(scene.roundNumber || 0) + 1
+            );
+            setStatus(`Choosing speaker ${nextMessageNumber} / ${scene.maxRounds || '?'}`);
             const decision = await apiPost('/api/thinktank/orchestrate-turn', {
                 sessionId: state.session.sessionId
             });
@@ -190,7 +207,7 @@
                 updateControls();
                 const injected = await flushAdvisorQueueIfSafe();
                 if (injected) {
-                    await continuePipeline();
+                    queuePipelineContinuation();
                     return;
                 }
                 if (state.queuedAdvisorComments.length) {
@@ -206,7 +223,7 @@
                 updateControls();
                 const injected = await flushAdvisorQueueIfSafe();
                 if (injected) {
-                    await continuePipeline();
+                    queuePipelineContinuation();
                     return;
                 }
                 if (state.queuedAdvisorComments.length) {
@@ -250,7 +267,7 @@
 
             const injected = await flushAdvisorQueueIfSafe();
             if (injected) {
-                await continuePipeline();
+                queuePipelineContinuation();
                 return;
             }
             if (state.queuedAdvisorComments.length) {
@@ -272,7 +289,7 @@
             setStatus('Listening');
 
             if (state.autoRunning && !state.paused) {
-                await runTurn();
+                queuePipelineContinuation();
             }
         } catch (error) {
             console.error(error);
@@ -343,7 +360,7 @@
 
         const injected = await flushAdvisorQueueIfSafe();
         if (injected) {
-            await continuePipeline();
+            queuePipelineContinuation();
         } else if (state.queuedAdvisorComments.length) {
             schedulePipelineRecovery('Anonymous Advisor insertion');
         }
@@ -372,7 +389,7 @@
             setStatus('Next session ready');
             state.inFlight = false;
             updateControls();
-            await runTurn();
+            queuePipelineContinuation();
         } catch (error) {
             console.error(error);
             schedulePipelineRecovery('Next meeting flow', error);
@@ -687,6 +704,18 @@
         }
     }
 
+    function queuePipelineContinuation() {
+        if (state.pipelineTimer || state.recoveryTimer) return;
+        state.pipelineTimer = window.setTimeout(async () => {
+            state.pipelineTimer = null;
+            try {
+                await continuePipeline();
+            } catch (error) {
+                schedulePipelineRecovery('Pipeline flow', error);
+            }
+        }, 0);
+    }
+
     async function refreshSessionSnapshot() {
         if (!state.session?.sessionId) return;
         const data = await apiPost('/api/thinktank/get-session', {
@@ -705,6 +734,11 @@
         if (!state.session || state.recoveryTimer) return;
         if (error) console.error(`${label} interrupted:`, error);
 
+        if (state.pipelineTimer) {
+            window.clearTimeout(state.pipelineTimer);
+            state.pipelineTimer = null;
+        }
+
         const delay = RECOVERY_DELAYS_MS[Math.min(state.recoveryAttempts, RECOVERY_DELAYS_MS.length - 1)];
         state.recoveryAttempts += 1;
         state.inFlight = false;
@@ -718,7 +752,7 @@
             state.recoveryTimer = null;
             try {
                 await refreshSessionSnapshot();
-                await continuePipeline();
+                queuePipelineContinuation();
             } catch (recoveryError) {
                 schedulePipelineRecovery(label, recoveryError);
             }
@@ -816,11 +850,27 @@
     }
 
     async function apiPost(path, payload) {
-        const response = await fetch(path, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload || {})
-        });
+        const timeoutMs = REQUEST_TIMEOUTS_MS[path] || 90000;
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+        let response;
+
+        try {
+            response = await fetch(path, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload || {}),
+                signal: controller.signal
+            });
+        } catch (error) {
+            if (error?.name === 'AbortError') {
+                throw new Error(`Request timed out after ${Math.round(timeoutMs / 1000)}s: ${path}`);
+            }
+            throw error;
+        } finally {
+            window.clearTimeout(timeoutId);
+        }
+
         const text = await response.text();
         let data = {};
         if (text) {
