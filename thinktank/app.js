@@ -46,6 +46,7 @@
         if (init.done) return;
         init.done = true;
 
+        removeLegacyProgressionControls();
         els.sessionForm.addEventListener('submit', createSession);
         els.pdfInput.addEventListener('change', updateFileLabel);
         els.commentForm.addEventListener('submit', insertComment);
@@ -62,6 +63,19 @@
         } else {
             renderAll();
         }
+    }
+
+    function removeLegacyProgressionControls() {
+        ['startBtn', 'nextSessionBtn', 'skipBtn'].forEach((id) => {
+            document.getElementById(id)?.remove();
+        });
+
+        document.querySelectorAll('.toolbar-actions button, .manifest-list button, .fallback-action').forEach((button) => {
+            const label = String(button.textContent || '').trim().toLowerCase();
+            if (label === 'continue' || label === 'continue anyway' || label === 'skip' || label === 'manifest') {
+                button.remove();
+            }
+        });
     }
 
     async function createSession(event) {
@@ -185,6 +199,22 @@
                 }
                 await finishScene();
                 return;
+            }
+
+            if (state.queuedAdvisorComments.length) {
+                state.inFlight = false;
+                updateControls();
+                const injected = await flushAdvisorQueueIfSafe();
+                if (injected) {
+                    await continuePipeline();
+                    return;
+                }
+                if (state.queuedAdvisorComments.length) {
+                    schedulePipelineRecovery('Anonymous Advisor insertion');
+                    return;
+                }
+                state.inFlight = true;
+                updateControls();
             }
 
             const persona = findPersona(decision.nextSpeaker);
