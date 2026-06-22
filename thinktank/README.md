@@ -167,21 +167,26 @@ Each persona also stores `optionalFrameworks`, a deterministic 1-3 item shortlis
 from the local framework library. Frameworks are passed in user prompts only and
 are explicitly optional thinking aids, not system instructions.
 
-Between meetings, the browser automatically generates one internal scene per
-persona, then starts the next meeting. On the final meeting, the session ends
-after the manifest instead of continuing into another between-meetings cycle.
+Between meetings, the browser automatically generates one compact internal state
+update per persona, shows progress in the Between Meetings panel, then starts
+the next meeting. On the final meeting, the session ends after the manifest
+instead of continuing into another between-meetings cycle.
 
 ## Anonymous Advisor Input
 
 The Anonymous Advisor input is visible throughout the app. Pressing Enter submits
-the message; Shift+Enter inserts a newline. Submitting a message implicitly
-pauses automatic AI continuation. If an AI request is already in flight, the
-message is queued and inserted immediately after that request finishes.
+the message; Shift+Enter inserts a newline. Submitting a message briefly holds
+the internal turn loop, inserts the Advisor message into the public transcript,
+and then automatically resumes the discussion. If an AI request is already in
+flight, the message is queued and inserted immediately after that request
+finishes.
 
 Anonymous Advisor messages are stored in the public transcript with
 `speaker: "anonymous_advisor"` and do not increment the public persona message
 counter. The orchestrator and personas are instructed that Anonymous Advisor is
 an in-room participant, not a controller or system voice.
 
-After every completed AI persona message, the frontend waits 1000ms before
-triggering another automatic AI request.
+There are no manual public pause/play/proceed controls after startup. The
+browser drives the meeting forward until the scene ends, writes the manifest,
+runs between-meeting continuity when applicable, and starts the next meeting
+automatically until the configured meeting limit is reached.

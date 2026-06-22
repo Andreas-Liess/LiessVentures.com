@@ -5,7 +5,7 @@ export const THINKTANK_MODELS = {
     orchestrator: 'deepseek-ai/deepseek-v4-pro',
     speaker: 'moonshotai/kimi-k2.6',
     summarizer: 'nvidia/nemotron-3-ultra-550b-a55b',
-    privateScene: 'nvidia/nemotron-3-ultra-550b-a55b'
+    privateScene: 'z-ai/glm-5.1'
 };
 
 export const MAX_PUBLIC_TURNS_PER_MEETING = 8;

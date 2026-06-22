@@ -83,21 +83,7 @@
                     <strong id="roundStatus">0 / 0</strong>
                 </div>
 
-                <div class="toolbar-actions">
-                    <button class="icon-button labeled" type="button" id="startBtn" disabled>
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="m8 5 11 7-11 7z"/>
-                        </svg>
-                        <span>Start</span>
-                    </button>
-                    <button class="icon-button labeled" type="button" id="skipBtn" disabled>
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="m5 4 10 8-10 8z"/>
-                            <path d="M19 5v14"/>
-                        </svg>
-                        <span>Skip</span>
-                    </button>
-                </div>
+                <div class="toolbar-actions" aria-hidden="true"></div>
             </div>
 
             <div class="chat-log" id="chatLog" aria-live="polite"></div>
@@ -124,18 +110,21 @@
 
             <section class="insight-panel active" id="manifestPanel">
                 <div class="manifest-list" id="manifestList"></div>
-                <button class="secondary-action fallback-action" type="button" id="nextSessionBtn" hidden>
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M5 12h14"/>
-                        <path d="m12 5 7 7-7 7"/>
-                    </svg>
-                    <span>Continue Anyway</span>
-                </button>
             </section>
 
             <section class="insight-panel" id="privatePanel">
                 <div class="private-tabs" id="privateTabs"></div>
                 <p class="between-status" id="betweenStatus">Internal agent scenes will appear between meetings.</p>
+                <div class="between-progress" id="betweenProgress" hidden>
+                    <div class="between-progress-header">
+                        <span id="betweenProgressLabel">Preparing next meeting</span>
+                        <strong id="betweenProgressCount">0 / 0</strong>
+                    </div>
+                    <div class="between-progress-track" aria-hidden="true">
+                        <span id="betweenProgressBar"></span>
+                    </div>
+                    <p>Keep this tab open. The next meeting will start automatically.</p>
+                </div>
                 <div class="private-scene" id="privateScene"></div>
             </section>
         </aside>

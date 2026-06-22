@@ -31,15 +31,34 @@ export function buildBetweenMeetingsUserPrompt({
         targetPersona: {
             name: persona.name,
             role: persona.role,
-            biography: persona.biography,
+            biography: clip(persona.biography, 700),
             currentEmotionalState: persona.currentEmotionalState,
-            privateLifeTranscript: persona.privateLifeTranscript || [],
-            lastSpokenContributions: persona.lastSpokenContributions || [],
+            recentPrivateLifeTranscript: recentEntries(persona.privateLifeTranscript, 2).map((entry) => ({
+                sessionNumber: entry.sessionNumber,
+                scene: clip(entry.scene, 500),
+                categories: entry.categories || null
+            })),
+            recentSpokenContributions: recentEntries(persona.lastSpokenContributions, 3).map((entry) => clip(entry, 450)),
             optionalFrameworks: persona.optionalFrameworks || []
         },
         sessionNumber,
-        latestManifest: latestManifest || null,
+        latestManifest: latestManifest ? {
+            consensus: clip(latestManifest.consensus, 500),
+            openQuestions: clip(latestManifest.openQuestions, 500),
+            recommendation: clip(latestManifest.recommendation, 500),
+            fullText: clip(latestManifest.fullText, 900)
+        } : null,
         otherPersonas,
         alreadyUsedPrivateSceneCategoriesThisInterval: existingCategories
     }, null, 2);
+}
+
+function recentEntries(value, count) {
+    return Array.isArray(value) ? value.slice(Math.max(0, value.length - count)) : [];
+}
+
+function clip(value, maxLength) {
+    const text = String(value || '').trim();
+    if (text.length <= maxLength) return text;
+    return `${text.slice(0, Math.max(0, maxLength - 1)).trim()}...`;
 }

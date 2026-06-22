@@ -66,20 +66,16 @@ export default async function handler(req, res) {
             existingCategories
         });
 
-        // nvidia/nemotron-3-ultra-550b-a55b is used here because between-meetings scenes need character-depth reasoning and creative continuity; only final content is saved.
+        // z-ai/glm-5.1 is used here because between-meetings scenes are compact state updates, not deep reasoning artifacts.
         const modelText = await callNvidia({
             model: THINKTANK_MODELS.privateScene,
             messages: [
                 { role: 'system', content: systemPrompt },
                 { role: 'user', content: userPrompt }
             ],
-            temperature: 0.86,
-            maxTokens: 3600,
-            responseFormat: { type: 'json_object' },
-            extraBody: {
-                chat_template_kwargs: { enable_thinking: true },
-                reasoning_budget: 8192
-            }
+            temperature: 0.62,
+            maxTokens: 900,
+            responseFormat: { type: 'json_object' }
         });
 
         const parsed = parseModelJson(modelText);

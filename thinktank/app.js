@@ -1,4 +1,6 @@
 (() => {
+    const RECOVERY_DELAYS_MS = [1200, 2500, 5000, 10000, 20000];
+
     const state = {
         session: null,
         personas: [],
@@ -8,7 +10,9 @@
         paused: true,
         autoRunning: false,
         inFlight: false,
-        injectingAdvisor: false
+        injectingAdvisor: false,
+        recoveryTimer: null,
+        recoveryAttempts: 0
     };
 
     const els = {
@@ -22,15 +26,16 @@
         personaList: document.getElementById('personaList'),
         sceneStatus: document.getElementById('sceneStatus'),
         roundStatus: document.getElementById('roundStatus'),
-        startBtn: document.getElementById('startBtn'),
-        skipBtn: document.getElementById('skipBtn'),
         chatLog: document.getElementById('chatLog'),
         commentForm: document.getElementById('commentForm'),
         commentInput: document.getElementById('commentInput'),
         manifestList: document.getElementById('manifestList'),
-        nextSessionBtn: document.getElementById('nextSessionBtn'),
         privateTabs: document.getElementById('privateTabs'),
         betweenStatus: document.getElementById('betweenStatus'),
+        betweenProgress: document.getElementById('betweenProgress'),
+        betweenProgressLabel: document.getElementById('betweenProgressLabel'),
+        betweenProgressCount: document.getElementById('betweenProgressCount'),
+        betweenProgressBar: document.getElementById('betweenProgressBar'),
         privateScene: document.getElementById('privateScene')
     };
 
@@ -43,11 +48,8 @@
 
         els.sessionForm.addEventListener('submit', createSession);
         els.pdfInput.addEventListener('change', updateFileLabel);
-        els.startBtn.addEventListener('click', startAutoRun);
-        els.skipBtn.addEventListener('click', () => finishScene(true));
         els.commentForm.addEventListener('submit', insertComment);
         els.commentInput.addEventListener('keydown', handleAdvisorKeydown);
-        els.nextSessionBtn.addEventListener('click', startNextSession);
 
         document.querySelectorAll('.insight-tabs button').forEach((button) => {
             button.addEventListener('click', () => switchInsightPanel(button.dataset.panel));
@@ -65,7 +67,7 @@
     async function createSession(event) {
         event.preventDefault();
         const problem = els.problemInput.value.trim();
-        if (!problem || state.inFlight) return;
+        if (!problem || state.inFlight || isPipelineActive()) return;
 
         setBusy(true, 'Creating personas');
 
@@ -98,6 +100,7 @@
             state.selectedPrivatePersonaId = state.personas[0]?.personaId || null;
             state.paused = false;
             state.autoRunning = true;
+            markPipelineProgress();
 
             localStorage.setItem('thinktankSessionId', data.sessionId);
             updateSessionUrl(data.sessionId);
@@ -116,18 +119,23 @@
 
     async function loadSession(sessionId) {
         setBusy(true, 'Loading session');
+        let shouldResume = false;
+        let shouldContinueBetweenMeetings = false;
         try {
             const data = await apiPost('/api/thinktank/get-session', { sessionId });
             state.session = data.session;
             state.personas = data.personas || [];
             state.selectedPrivatePersonaId = state.personas[0]?.personaId || null;
-            state.paused = true;
-            state.autoRunning = false;
+            shouldResume = state.session.status === 'discussing';
+            shouldContinueBetweenMeetings = isBetweenMeetingsContinuationAvailable();
+            state.paused = !shouldResume;
+            state.autoRunning = shouldResume;
+            markPipelineProgress();
             els.problemInput.value = state.session.originalProblem || '';
             localStorage.setItem('thinktankSessionId', state.session.sessionId);
             updateSessionUrl(state.session.sessionId);
             renderAll();
-            setStatus('Session loaded');
+            setStatus(shouldResume || shouldContinueBetweenMeetings ? 'Session loaded, continuing' : 'Session loaded');
         } catch (error) {
             console.error(error);
             localStorage.removeItem('thinktankSessionId');
@@ -136,29 +144,23 @@
         } finally {
             setBusy(false);
         }
-    }
-
-    async function startAutoRun() {
-        if (!state.session || state.inFlight) return;
-        if (state.session.status === 'scene_ended' || state.session.status === 'done') return;
-        state.paused = false;
-        state.autoRunning = true;
-        const injected = await flushAdvisorQueueIfSafe();
-        if (state.queuedAdvisorComments.length) {
-            state.paused = true;
-            state.autoRunning = false;
-            updateControls();
-            return;
+        if (shouldResume) {
+            await continuePipeline();
+        } else if (shouldContinueBetweenMeetings) {
+            await continuePipeline();
         }
-        if (injected) {
-            await resumeAutoRun();
-            return;
-        }
-        await runTurn();
     }
 
     async function runTurn() {
-        if (!state.session || state.inFlight || state.paused) return;
+        if (!state.session || state.inFlight) return;
+        if (state.session.status !== 'discussing') {
+            await continuePipeline();
+            return;
+        }
+        if (state.paused) {
+            state.paused = false;
+            state.autoRunning = true;
+        }
         state.inFlight = true;
         updateControls();
 
@@ -167,17 +169,21 @@
             const decision = await apiPost('/api/thinktank/orchestrate-turn', {
                 sessionId: state.session.sessionId
             });
+            markPipelineProgress();
 
             if (decision.endScene) {
                 state.inFlight = false;
                 updateControls();
                 const injected = await flushAdvisorQueueIfSafe();
                 if (injected) {
-                    await resumeAutoRun();
+                    await continuePipeline();
                     return;
                 }
-                if (state.queuedAdvisorComments.length) return;
-                await finishScene(false);
+                if (state.queuedAdvisorComments.length) {
+                    schedulePipelineRecovery('Anonymous Advisor insertion');
+                    return;
+                }
+                await finishScene();
                 return;
             }
 
@@ -196,6 +202,7 @@
                 regieHinweis: decision.regieHinweis,
                 isFinalTurn: decision.isFinalTurn
             });
+            markPipelineProgress();
 
             fillPendingMessage(pendingEl, message.content);
             state.session.currentScene.transcript.push({
@@ -213,54 +220,52 @@
 
             const injected = await flushAdvisorQueueIfSafe();
             if (injected) {
-                await resumeAutoRun();
+                await continuePipeline();
                 return;
             }
-            if (state.queuedAdvisorComments.length) return;
+            if (state.queuedAdvisorComments.length) {
+                schedulePipelineRecovery('Anonymous Advisor insertion');
+                return;
+            }
 
             if (message.roundNumber >= message.maxRounds) {
-                if (!state.paused) {
-                    await finishScene(false);
-                } else {
-                    setStatus('Paused at message limit');
-                }
+                await finishScene();
                 return;
             }
 
             if (state.paused || !state.autoRunning) {
-                setStatus('Paused');
-                return;
+                state.paused = false;
+                state.autoRunning = true;
+                updateControls();
             }
 
             setStatus('Listening');
 
             if (state.autoRunning && !state.paused) {
-                runTurn();
+                await runTurn();
             }
         } catch (error) {
             console.error(error);
-            state.autoRunning = false;
-            state.paused = true;
-            setStatus(error.message || 'Turn failed');
+            schedulePipelineRecovery('Turn flow', error);
         } finally {
             state.inFlight = false;
             updateControls();
         }
     }
 
-    async function finishScene(fromSkip) {
-        if (!state.session || state.inFlight && fromSkip) return;
+    async function finishScene() {
+        if (!state.session) return;
         state.autoRunning = false;
         state.paused = true;
         state.inFlight = true;
         updateControls();
 
         try {
-            setStatus(fromSkip ? 'Skipping to manifest' : 'Writing manifest');
+            setStatus('Writing manifest');
             const data = await apiPost('/api/thinktank/end-scene', {
-                sessionId: state.session.sessionId,
-                skipped: Boolean(fromSkip)
+                sessionId: state.session.sessionId
             });
+            markPipelineProgress();
 
             state.session.status = data.status;
             state.session.manifests = state.session.manifests || [];
@@ -270,7 +275,7 @@
             await runBetweenMeetingsIfNeeded();
         } catch (error) {
             console.error(error);
-            setStatus(error.message || 'Scene ending failed');
+            schedulePipelineRecovery('Manifest flow', error);
         } finally {
             state.inFlight = false;
             updateControls();
@@ -308,7 +313,9 @@
 
         const injected = await flushAdvisorQueueIfSafe();
         if (injected) {
-            await resumeAutoRun();
+            await continuePipeline();
+        } else if (state.queuedAdvisorComments.length) {
+            schedulePipelineRecovery('Anonymous Advisor insertion');
         }
     }
 
@@ -322,6 +329,7 @@
             const data = await apiPost('/api/thinktank/start-next-session', {
                 sessionId: state.session.sessionId
             });
+            markPipelineProgress();
 
             state.session.sessionNumber = data.sessionNumber;
             state.session.maxSessions = data.maxSessions || state.session.maxSessions || 3;
@@ -337,11 +345,23 @@
             await runTurn();
         } catch (error) {
             console.error(error);
-            setStatus(error.message || 'Next session failed');
+            schedulePipelineRecovery('Next meeting flow', error);
         } finally {
             state.inFlight = false;
             updateControls();
         }
+    }
+
+    function isBetweenMeetingsContinuationAvailable() {
+        return state.session
+            && (state.session.status === 'scene_ended' || state.session.status === 'private_scene')
+            && Number(state.session.sessionNumber || 1) < Number(state.session.maxSessions || 1);
+    }
+
+    function isPipelineActive() {
+        return state.session
+            && state.session.status !== 'done'
+            && (state.autoRunning || state.betweenMeetingsRunning || state.inFlight || state.recoveryTimer);
     }
 
     function renderAll() {
@@ -445,17 +465,13 @@
                 els.manifestList.appendChild(article);
             });
         }
-
-        const canContinue = state.session
-            && (state.session.status === 'scene_ended' || state.session.status === 'private_scene')
-            && Number(state.session.sessionNumber || 1) < Number(state.session.maxSessions || 1);
-        els.nextSessionBtn.hidden = !canContinue || state.autoRunning || state.betweenMeetingsRunning;
     }
 
     function renderPrivatePanel() {
         els.privateTabs.innerHTML = '';
         if (!state.personas.length) {
             els.privateScene.innerHTML = '<p class="empty-state">No personas yet.</p>';
+            updateBetweenProgress(false);
             return;
         }
 
@@ -492,13 +508,20 @@
             }
         }
 
+        if (!state.betweenMeetingsRunning) {
+            updateBetweenProgress(false);
+        }
+
         if (!selected) {
             els.privateScene.innerHTML = '<p class="empty-state">No persona selected.</p>';
             return;
         }
 
         if (!latestEntry) {
-            els.privateScene.innerHTML = `<p class="empty-state">${canGenerate ? 'Waiting for the next internal scene.' : 'Available after the meeting ends.'}</p>`;
+            const message = state.betweenMeetingsRunning
+                ? `Preparing ${escapeHtml(selected.name)}. The next public meeting will start automatically.`
+                : (canGenerate ? 'Waiting for the next internal scene.' : 'Available after the meeting ends.');
+            els.privateScene.innerHTML = `<p class="empty-state">${message}</p>`;
             return;
         }
 
@@ -509,15 +532,25 @@
         `;
     }
 
+    function updateBetweenProgress(active, current = 0, total = 0, label = 'Preparing next meeting') {
+        if (!els.betweenProgress) return;
+        els.betweenProgress.hidden = !active;
+        if (!active) return;
+
+        const safeTotal = Math.max(0, Number(total) || 0);
+        const safeCurrent = Math.max(0, Math.min(safeTotal, Number(current) || 0));
+        const percent = safeTotal ? Math.round((safeCurrent / safeTotal) * 100) : 0;
+        els.betweenProgressLabel.textContent = label;
+        els.betweenProgressCount.textContent = `${safeCurrent} / ${safeTotal}`;
+        els.betweenProgressBar.style.width = `${percent}%`;
+    }
+
     function updateControls() {
         const hasSession = Boolean(state.session);
         const ended = state.session && (state.session.status === 'scene_ended' || state.session.status === 'private_scene' || state.session.status === 'done');
-        els.startBtn.disabled = !hasSession || state.inFlight || ended;
-        els.skipBtn.disabled = !hasSession || state.inFlight || ended;
-        els.createSessionBtn.disabled = state.inFlight;
+        els.createSessionBtn.disabled = state.inFlight || isPipelineActive();
         els.commentForm.hidden = false;
         els.commentInput.disabled = !hasSession || ended;
-        els.startBtn.querySelector('span').textContent = state.session?.currentScene?.transcript?.length ? 'Continue' : 'Start';
         renderMeta();
         renderPrivatePanel();
     }
@@ -577,6 +610,7 @@
                 appendMessage(data.entry, false);
             }
 
+            markPipelineProgress();
             setStatus('Anonymous Advisor inserted');
             return true;
         } catch (error) {
@@ -589,34 +623,116 @@
         }
     }
 
-    async function resumeAutoRun() {
-        if (!state.session || state.inFlight || state.injectingAdvisor) return;
-        state.paused = false;
-        state.autoRunning = true;
-        updateControls();
-        await runTurn();
+    async function continuePipeline() {
+        if (!state.session || state.inFlight || state.injectingAdvisor || state.recoveryTimer) return;
+
+        if (state.queuedAdvisorComments.length) {
+            const injected = await flushAdvisorQueueIfSafe();
+            if (!injected) {
+                schedulePipelineRecovery('Anonymous Advisor insertion');
+                return;
+            }
+        }
+
+        if (state.session.status === 'discussing') {
+            state.paused = false;
+            state.autoRunning = true;
+            updateControls();
+            await runTurn();
+            return;
+        }
+
+        if (state.session.status === 'scene_ended' || state.session.status === 'private_scene') {
+            await runBetweenMeetingsIfNeeded();
+            return;
+        }
+
+        if (state.session.status === 'done') {
+            markPipelineProgress();
+            state.paused = true;
+            state.autoRunning = false;
+            switchInsightPanel('manifestPanel');
+            setStatus('Simulation complete');
+            updateControls();
+        }
     }
 
-    function sleep(ms) {
-        return new Promise((resolve) => window.setTimeout(resolve, ms));
+    async function refreshSessionSnapshot() {
+        if (!state.session?.sessionId) return;
+        const data = await apiPost('/api/thinktank/get-session', {
+            sessionId: state.session.sessionId
+        });
+        state.session = data.session;
+        state.personas = data.personas || [];
+        state.selectedPrivatePersonaId = state.personas
+            .some((persona) => persona.personaId === state.selectedPrivatePersonaId)
+            ? state.selectedPrivatePersonaId
+            : state.personas[0]?.personaId || null;
+        renderAll();
+    }
+
+    function schedulePipelineRecovery(label, error) {
+        if (!state.session || state.recoveryTimer) return;
+        if (error) console.error(`${label} interrupted:`, error);
+
+        const delay = RECOVERY_DELAYS_MS[Math.min(state.recoveryAttempts, RECOVERY_DELAYS_MS.length - 1)];
+        state.recoveryAttempts += 1;
+        state.inFlight = false;
+        state.injectingAdvisor = false;
+        state.paused = false;
+        state.autoRunning = true;
+        setStatus(`${label} interrupted; retrying automatically`);
+        updateControls();
+
+        state.recoveryTimer = window.setTimeout(async () => {
+            state.recoveryTimer = null;
+            try {
+                await refreshSessionSnapshot();
+                await continuePipeline();
+            } catch (recoveryError) {
+                schedulePipelineRecovery(label, recoveryError);
+            }
+        }, delay);
+    }
+
+    function markPipelineProgress() {
+        if (state.recoveryTimer) {
+            window.clearTimeout(state.recoveryTimer);
+            state.recoveryTimer = null;
+        }
+        state.recoveryAttempts = 0;
     }
 
     async function runBetweenMeetingsIfNeeded() {
         if (!state.session || state.betweenMeetingsRunning) return;
         if (state.session.status === 'done') {
+            markPipelineProgress();
             switchInsightPanel('manifestPanel');
             setStatus('Simulation complete');
             return;
         }
 
         const canContinue = Number(state.session.sessionNumber || 1) < Number(state.session.maxSessions || 1);
-        if (!canContinue) return;
+        if (!canContinue) {
+            markPipelineProgress();
+            state.session.status = 'done';
+            state.paused = true;
+            state.autoRunning = false;
+            switchInsightPanel('manifestPanel');
+            renderMeta();
+            setStatus('Simulation complete');
+            return;
+        }
 
         state.betweenMeetingsRunning = true;
         state.inFlight = true;
         state.paused = true;
         state.autoRunning = false;
         switchInsightPanel('privatePanel');
+        const pendingPersonas = state.personas.filter((persona) => !latestPrivateEntry(persona));
+        const totalPrivateScenes = pendingPersonas.length;
+        let completedPrivateScenes = state.personas.length - totalPrivateScenes;
+        updateBetweenProgress(true, completedPrivateScenes, state.personas.length, 'Preparing next meeting');
         updateControls();
 
         try {
@@ -624,9 +740,10 @@
                 if (latestPrivateEntry(persona)) continue;
                 state.selectedPrivatePersonaId = persona.personaId;
                 renderPrivatePanel();
+                updateBetweenProgress(true, completedPrivateScenes, state.personas.length, `Processing ${persona.name}`);
                 setStatus(`Between meetings: ${persona.name}`);
                 if (els.betweenStatus) {
-                    els.betweenStatus.textContent = `Generating ${persona.name}...`;
+                    els.betweenStatus.textContent = `Preparing ${persona.name}'s compact state update. This can take a moment; the next meeting will start automatically.`;
                 }
 
                 const data = await apiPost('/api/thinktank/generate-between-meeting-scene', {
@@ -645,19 +762,19 @@
                 state.session.status = 'private_scene';
                 renderPersonas();
                 renderPrivatePanel();
-                await sleep(400);
+                completedPrivateScenes += 1;
+                updateBetweenProgress(true, completedPrivateScenes, state.personas.length, `${persona.name} ready`);
             }
 
             setStatus('Between meetings complete');
             if (els.betweenStatus) {
                 els.betweenStatus.textContent = 'Between-meeting scenes complete. Starting the next meeting...';
             }
+            updateBetweenProgress(true, state.personas.length, state.personas.length, 'Starting next meeting');
         } catch (error) {
             console.error(error);
-            state.paused = true;
-            state.autoRunning = false;
-            setStatus(error.message || 'Between-meeting scene generation failed');
-            return;
+            setStatus('Between-meeting scene failed; continuing');
+            updateBetweenProgress(true, completedPrivateScenes, state.personas.length, 'Continuing after private-scene delay');
         } finally {
             state.betweenMeetingsRunning = false;
             state.inFlight = false;
@@ -674,7 +791,14 @@
             body: JSON.stringify(payload || {})
         });
         const text = await response.text();
-        const data = text ? JSON.parse(text) : {};
+        let data = {};
+        if (text) {
+            try {
+                data = JSON.parse(text);
+            } catch {
+                data = { error: text.slice(0, 300) };
+            }
+        }
         if (!response.ok) {
             const stage = data.details?.stage ? ` (${data.details.stage})` : '';
             const reason = data.details?.reason ? `: ${data.details.reason}` : '';
