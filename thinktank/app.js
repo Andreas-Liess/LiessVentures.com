@@ -750,6 +750,7 @@
                     sessionId: state.session.sessionId,
                     personaId: persona.personaId
                 });
+                markPipelineProgress();
 
                 persona.currentEmotionalState = data.currentEmotionalState;
                 persona.privateLifeTranscript = persona.privateLifeTranscript || [];
