@@ -75,11 +75,11 @@
             if (pdfFile) {
                 setStatus('Extracting PDF');
                 const fileBase64 = await readFileAsDataUrl(pdfFile);
-                const extracted = await apiPost('/api/extract-pdf', { fileBase64, filename: pdfFile.name });
+                const extracted = await apiPost('/api/thinktank/extract-pdf', { fileBase64, filename: pdfFile.name });
                 pdfContext = extracted.text || null;
             }
 
-            const data = await apiPost('/api/create-session', {
+            const data = await apiPost('/api/thinktank/create-session', {
                 problem,
                 pdfContext,
                 maxSessions: Number(els.maxMeetingsInput.value || 3)
@@ -88,6 +88,7 @@
             state.session = {
                 sessionId: data.sessionId,
                 originalProblem: problem,
+                goalBrief: data.goalBrief || null,
                 maxSessions: data.maxSessions,
                 status: data.status,
                 currentScene: data.currentScene,
@@ -102,7 +103,6 @@
             updateSessionUrl(data.sessionId);
             renderAll();
             setStatus('Simulation started');
-            await sleep(1000);
             state.inFlight = false;
             updateControls();
             await runTurn();
@@ -117,7 +117,7 @@
     async function loadSession(sessionId) {
         setBusy(true, 'Loading session');
         try {
-            const data = await apiPost('/api/get-session', { sessionId });
+            const data = await apiPost('/api/thinktank/get-session', { sessionId });
             state.session = data.session;
             state.personas = data.personas || [];
             state.selectedPrivatePersonaId = state.personas[0]?.personaId || null;
@@ -151,7 +151,8 @@
             return;
         }
         if (injected) {
-            await sleep(1000);
+            await resumeAutoRun();
+            return;
         }
         await runTurn();
     }
@@ -163,7 +164,7 @@
 
         try {
             setStatus('Choosing speaker');
-            const decision = await apiPost('/api/orchestrate-turn', {
+            const decision = await apiPost('/api/thinktank/orchestrate-turn', {
                 sessionId: state.session.sessionId
             });
 
@@ -171,7 +172,10 @@
                 state.inFlight = false;
                 updateControls();
                 const injected = await flushAdvisorQueueIfSafe();
-                if (injected) return;
+                if (injected) {
+                    await resumeAutoRun();
+                    return;
+                }
                 if (state.queuedAdvisorComments.length) return;
                 await finishScene(false);
                 return;
@@ -185,7 +189,7 @@
             }, true);
 
             setStatus(persona ? `${persona.name} is speaking` : 'Generating message');
-            const message = await apiPost('/api/generate-message', {
+            const message = await apiPost('/api/thinktank/generate-message', {
                 sessionId: state.session.sessionId,
                 nextSpeaker: decision.nextSpeaker,
                 respondingTo: decision.respondingTo,
@@ -208,13 +212,10 @@
             updateControls();
 
             const injected = await flushAdvisorQueueIfSafe();
-            if (injected) return;
-            if (state.queuedAdvisorComments.length) return;
-
-            await sleep(1000);
-
-            const delayedInjection = await flushAdvisorQueueIfSafe();
-            if (delayedInjection) return;
+            if (injected) {
+                await resumeAutoRun();
+                return;
+            }
             if (state.queuedAdvisorComments.length) return;
 
             if (message.roundNumber >= message.maxRounds) {
@@ -256,7 +257,7 @@
 
         try {
             setStatus(fromSkip ? 'Skipping to manifest' : 'Writing manifest');
-            const data = await apiPost('/api/end-scene', {
+            const data = await apiPost('/api/thinktank/end-scene', {
                 sessionId: state.session.sessionId,
                 skipped: Boolean(fromSkip)
             });
@@ -305,7 +306,10 @@
             return;
         }
 
-        await flushAdvisorQueueIfSafe();
+        const injected = await flushAdvisorQueueIfSafe();
+        if (injected) {
+            await resumeAutoRun();
+        }
     }
 
     async function startNextSession() {
@@ -315,7 +319,7 @@
         updateControls();
         setStatus('Starting next session');
         try {
-            const data = await apiPost('/api/start-next-session', {
+            const data = await apiPost('/api/thinktank/start-next-session', {
                 sessionId: state.session.sessionId
             });
 
@@ -328,7 +332,6 @@
             state.autoRunning = true;
             renderAll();
             setStatus('Next session ready');
-            await sleep(1000);
             state.inFlight = false;
             updateControls();
             await runTurn();
@@ -565,7 +568,7 @@
         try {
             while (state.queuedAdvisorComments.length) {
                 const comment = state.queuedAdvisorComments[0];
-                const data = await apiPost('/api/insert-comment', {
+                const data = await apiPost('/api/thinktank/insert-comment', {
                     sessionId: state.session.sessionId,
                     comment
                 });
@@ -584,6 +587,14 @@
             state.injectingAdvisor = false;
             updateControls();
         }
+    }
+
+    async function resumeAutoRun() {
+        if (!state.session || state.inFlight || state.injectingAdvisor) return;
+        state.paused = false;
+        state.autoRunning = true;
+        updateControls();
+        await runTurn();
     }
 
     function sleep(ms) {
@@ -618,7 +629,7 @@
                     els.betweenStatus.textContent = `Generating ${persona.name}...`;
                 }
 
-                const data = await apiPost('/api/generate-private-scene', {
+                const data = await apiPost('/api/thinktank/generate-between-meeting-scene', {
                     sessionId: state.session.sessionId,
                     personaId: persona.personaId
                 });
@@ -641,7 +652,6 @@
             if (els.betweenStatus) {
                 els.betweenStatus.textContent = 'Between-meeting scenes complete. Starting the next meeting...';
             }
-            await sleep(1000);
         } catch (error) {
             console.error(error);
             state.paused = true;

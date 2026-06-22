@@ -1,8 +1,8 @@
 # Think Tank Setup
 
 This project keeps the browser fully stateless and secret-free. The Think Tank
-frontend calls only relative `/api/*` paths. NVIDIA credentials, Vercel KV, PDF
-parsing, and Google archive logging all run server-side.
+frontend calls only relative `/api/thinktank/*` paths. NVIDIA credentials,
+Redis/KV, PDF parsing, and Google archive logging all run server-side.
 
 ## Required Vercel Storage
 
@@ -41,8 +41,8 @@ out of Git. `.gitignore` already excludes `api/nvidea_api.txt` and
 
 ## Anonymous Google Archive
 
-When `/api/end-scene.js` creates a manifest, it also attempts to archive the
-original question and manifest output to Google Forms/Sheets.
+When `/api/thinktank/end-scene.js` creates a manifest, it also attempts to
+archive the original question and manifest output to Google Forms/Sheets.
 
 Default behavior uses the existing Firepit Google Form endpoint with synthetic
 anonymous fields:
@@ -80,20 +80,42 @@ types it into the problem field.
 
 ## Files
 
-- `thinktank.html`
-- `css/pages/thinktank.css`
-- `js/thinktank.js`
-- `api/create-session.js`
-- `api/orchestrate-turn.js`
-- `api/generate-message.js`
-- `api/insert-comment.js`
-- `api/end-scene.js`
-- `api/generate-private-scene.js`
-- `api/extract-pdf.js`
-- `api/get-session.js`
-- `api/start-next-session.js`
-- `api/_thinktank-shared.js`
-- `api/_thinktank-google-log.js`
+Frontend:
+
+- `thinktank/index.html`
+- `thinktank/styles.css`
+- `thinktank/app.js`
+- `thinktank/modules/`
+
+The frontend currently remains in `app.js` for a behavior-preserving first pass.
+`thinktank/modules/` is reserved for the next split into API client, state,
+rendering, flow controller, advisor input, and between-meetings modules.
+
+API handlers:
+
+- `api/thinktank/create-session.js`
+- `api/thinktank/orchestrate-turn.js`
+- `api/thinktank/generate-message.js`
+- `api/thinktank/insert-comment.js`
+- `api/thinktank/end-scene.js`
+- `api/thinktank/generate-between-meeting-scene.js`
+- `api/thinktank/extract-pdf.js`
+- `api/thinktank/get-session.js`
+- `api/thinktank/start-next-session.js`
+- `api/thinktank/health.js`
+
+API internals:
+
+- `api/thinktank/lib/shared.js`
+- `api/thinktank/lib/constants.js`
+- `api/thinktank/lib/kv.js`
+- `api/thinktank/lib/nvidia.js`
+- `api/thinktank/lib/session-store.js`
+- `api/thinktank/lib/google-log.js`
+- `api/thinktank/lib/prompts/`
+
+Root-level Think Tank API files remain as compatibility wrappers only. They
+re-export the new handlers and contain no duplicate implementation logic.
 
 ## Local Development
 
@@ -104,25 +126,26 @@ npm install
 npm run dev
 ```
 
-The static page is available at `/thinktank.html`.
+The static page is available at `/thinktank/`.
 
 ## Health Check
 
 After deploying, open:
 
 ```text
-/api/thinktank-health
+/api/thinktank/health
 ```
 
 This checks whether Redis/KV credentials are present and writable without
 exposing secret values. For a deeper check that also calls NVIDIA, open:
 
 ```text
-/api/thinktank-health?deep=1
+/api/thinktank/health?deep=1
 ```
 
-If `/api/create-session` fails, its JSON response includes a safe `details.stage`
-field such as `nvidia_persona_generation`, `parse_personas`, or `kv_write`.
+If `/api/thinktank/create-session` fails, its JSON response includes a safe
+`details.stage` field such as `nvidia_persona_generation`, `parse_personas`, or
+`kv_write`.
 
 ## Meeting Cadence
 
@@ -131,6 +154,18 @@ fixed hard cap of 8 public persona messages. The orchestrator can still end a
 meeting earlier whenever the discussion has reached a natural manifest point.
 After the user starts the simulation from the problem form, the browser drives
 the full sequence automatically while the tab remains open.
+
+## Goal And Framework State
+
+Session creation stores a compact `goalBrief` on the session:
+
+```text
+actualQuestion, desiredOutput, decision, constraints, successCriteria, unknowns, problemType
+```
+
+Each persona also stores `optionalFrameworks`, a deterministic 1-3 item shortlist
+from the local framework library. Frameworks are passed in user prompts only and
+are explicitly optional thinking aids, not system instructions.
 
 Between meetings, the browser automatically generates one internal scene per
 persona, then starts the next meeting. On the final meeting, the session ends
