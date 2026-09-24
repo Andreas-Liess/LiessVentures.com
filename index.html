@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liess Ventures | Building Foundations for Makers</title>
-    <meta name="description" content="We support those who build what matters. Capital, community, and infrastructure for long-term builders.">
-    
+    <meta name="description" content="A private circle for entrepreneurs and thinkers: philosophy, philanthropy, and building what matters.">
+    <link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
+
     <!-- Styles -->
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/pages/home.css">
@@ -30,120 +32,160 @@
         </svg>
     </div>
 
-    <!-- NAVIGATION -->
-    <nav class="nav-home pr-5 md:pr-20">
-        <div class="nav-container flex flex-col items-center justify-center relative">
+    <!-- ═══════════════════════════════════════════════════════════
+         THE RAIL - Editorial Sidebar
+         ═══════════════════════════════════════════════════════════ -->
+    <nav class="nav-home" id="siteRail">
+        <a href="index.html" class="logo-box logo-entrance">
+            <img src="assets/fox.svg" alt="Liess Ventures Fox" class="logo-fox">
+        </a>
 
-            <!-- Mobile Toggle -->
-            <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle Navigation">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
+        <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle Navigation">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
 
-            <div class="logo-container logo-entrance mb-8">
-                <a href="index.html" class="logo-box">
-                    <img src="assets/fox.svg" alt="Liess Ventures Fox" class="logo-fox">
-                </a>
-            </div>
-
-            <div class="nav-links" id="navLinks">
-                <a href="vision.html" class="nav-link hover-link" data-i18n="nav.vision">Vision</a>
-                <a href="index.html" class="nav-link hover-link" data-i18n="nav.home">Home</a>
-                <a href="thinktank/" class="nav-link hover-link">Think Tank</a>
-                <a href="connect.html" class="nav-link hover-link" data-i18n="nav.connect">Connect</a>
-                
-                <button class="lang-trigger" id="languageTrigger">[ EN ]</button>
-            </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="nav-link hover-link is-current">Home</a>
+            <a href="https://wiki.liessventures.com/" target="_blank" rel="noopener noreferrer" class="nav-link hover-link">LifeWiki</a>
+            <a href="connect.html" class="nav-link hover-link">Sign Up</a>
         </div>
+
+        <span class="rail-wordmark">Liess <em>Ventures</em></span>
+        <span class="rail-meta">Est. 2024</span>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero-section grid-align pr-5 md:pr-20">
-        <div class="max-w-4xl">
-            <h1 class="hero-headline reveal delay-200" data-reveal>
-                <span class="hero-text" data-i18n="hero.prefix">We support those who</span><br>
-                <span class="italic text-forest reveal delay-400" data-reveal data-i18n="hero.suffix">build what matters</span>
+    <!-- ═══════════════════════════════════════════════════════════
+         PAGE SHELL
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="page-shell">
+
+        <!-- MASTHEAD -->
+        <header class="masthead">
+            <h1 class="masthead-word reveal" data-reveal>
+                Liess<br><span class="masthead-italic">Ventures</span><span class="masthead-dot">.</span>
             </h1>
-            
-            <p class="hero-tagline reveal delay-600" data-reveal>
-                <span class="tracking-animate" data-i18n="hero.tagline.knowledge">Knowledge</span> // 
-                <span class="tracking-animate" data-i18n="hero.tagline.capital">Capital</span> // 
-                <span class="tracking-animate" data-i18n="hero.tagline.network">Network</span> // 
-                <span class="tracking-animate" data-i18n="hero.tagline.community">Community</span>
+
+            <p class="masthead-lede reveal delay-300" data-reveal>
+                We support those who <em class="text-forest">build what&nbsp;matters</em> — with ideas, community, and conversation for the long&nbsp;term.
             </p>
-        </div>
-    </section>
 
-    <!-- ASSOCIATED VENTURES -->
-    <section class="ventures-section grid-align pr-5 md:pr-20">
-        
-        <div class="ventures-label reveal" data-reveal>
-            <span data-i18n="ventures.label">Associated Ventures</span>
+            <div class="masthead-meta reveal delay-500" data-reveal>
+                <span>Private Community</span>
+                <span>Long-Term Thinking</span>
+                <span>Builders' Circle</span>
+            </div>
+        </header>
+
+        <!-- TICKER -->
+        <div class="ticker reveal delay-700" data-reveal aria-hidden="true">
+            <div class="ticker-track">
+                <span>Knowledge</span><i>//</i>
+                <span>Philosophy</span><i>//</i>
+                <span>Network</span><i>//</i>
+                <span>Community</span><i>//</i>
+                <span>Knowledge</span><i>//</i>
+                <span>Philosophy</span><i>//</i>
+                <span>Network</span><i>//</i>
+                <span>Community</span><i>//</i>
+            </div>
         </div>
 
-        <!-- SeeingStone -->
-        <article class="venture-card entry-item">
-            <div class="divider-animated reveal" data-reveal></div>
-            
-            <div class="venture-header">
-                <img src="assets/seeingstone.svg" alt="SeeingStone Logo" class="venture-logo reveal-left delay-100" data-reveal>
-                <h2 class="venture-name text-highlight reveal-left delay-200" data-reveal>SeeingStone</h2>
+        <!-- THE BOARD -->
+        <section class="board-section" id="board">
+            <header class="board-header reveal" data-reveal>
+                <h2 class="board-title">The <em>Board</em></h2>
+                <div class="board-sub">
+                    <span class="board-label">Associated Ventures</span>
+                    <span class="board-count">03 Listed · 01 Incubating</span>
+                </div>
+            </header>
+
+            <div class="board-ledger">
+
+                <!-- 01 · LifeWiki -->
+                <article class="ledger-row reveal-left" data-reveal>
+                    <a href="https://wiki.liessventures.com/" target="_blank" rel="noopener noreferrer" class="ledger-link">
+                        <span class="ledger-index">01</span>
+                        <span class="ledger-brand">
+                            <img src="assets/fox.svg" alt="LifeWiki white fox logo" class="ledger-logo ledger-logo-white">
+                            <span class="ledger-name">LifeWiki</span>
+                        </span>
+                        <span class="ledger-brief">A shared, evolving knowledge base connecting practical ideas on health, performance, and living well.</span>
+                        <span class="ledger-tag">Living Knowledge</span>
+                    </a>
+                </article>
+
+                <!-- 02 · Schwerkraft -->
+                <article class="ledger-row reveal-left delay-100" data-reveal>
+                    <a href="https://schwerkraft.tech" target="_blank" rel="noopener noreferrer" class="ledger-link">
+                        <span class="ledger-index">02</span>
+                        <span class="ledger-brand">
+                            <img src="assets/seeingstone.svg" alt="Schwerkraft" class="ledger-logo">
+                            <span class="ledger-name">Schwerkraft</span>
+                        </span>
+                        <span class="ledger-brief">The most expensive thing in business is trust. Schwerkraft extracts hidden relationships from your dark data while keeping 100% of it on your own servers.</span>
+                        <span class="ledger-tag">Relationship Intelligence</span>
+                    </a>
+                </article>
+
+                <!-- 03 · Velro -->
+                <article class="ledger-row reveal-left delay-200" data-reveal>
+                    <a href="https://velro.net" target="_blank" rel="noopener noreferrer" class="ledger-link">
+                        <span class="ledger-index">03</span>
+                        <span class="ledger-brand">
+                            <img src="assets/velro.png" alt="Velro" class="ledger-logo">
+                            <span class="ledger-name">Velro</span>
+                        </span>
+                        <span class="ledger-brief">Matching travelers with senders — unused luggage space becomes a fast, trusted delivery channel. Logistics built on journeys already happening.</span>
+                        <span class="ledger-tag">Decentralized Logistics</span>
+                    </a>
+                </article>
+
+                <!-- Open Slot -->
+                <article class="ledger-row ledger-open reveal-left delay-300" data-reveal>
+                    <a href="connect.html" class="ledger-link">
+                        <span class="ledger-index">04</span>
+                        <span class="ledger-brand">
+                            <span class="ledger-name ledger-name-text ledger-name-open">Your Project</span>
+                        </span>
+                        <span class="ledger-brief">The board has room to grow. If you're building something that matters, take a seat.</span>
+                        <span class="ledger-tag ledger-tag-open">Open Slot</span>
+                    </a>
+                </article>
+
             </div>
-            
-            <div class="venture-description reveal-fade delay-300" data-reveal>
-                <p data-i18n="ventures.seeingstone.desc1">You write an email. A new contact is created automatically. SeeingStone gathers context, remembers dates, and keeps relationships alive, while you shape the message yourself.</p>
-                <p data-i18n="ventures.seeingstone.desc2">SeeingStone uses algorithmic AI to map every connection across your emails, messages, and documents, revealing hidden connections, patterns, and opportunities.</p>
-                <p data-i18n="ventures.seeingstone.desc3">Need a collaborator, investor, or domain expert? Query your entire network and surface the right person—fully contextualized and already warm.</p>
-                <p data-i18n="ventures.seeingstone.desc4">Operate with the clarity of institutions. Never lose touch with people, context, or history, even across years.</p>
-            </div>
-            
-            <a href="https://seeingstone.org" target="_blank" rel="noopener noreferrer" class="venture-link hover-link reveal-right delay-400" data-reveal data-i18n="ventures.seeingstone.link">
-                Visit SeeingStone &nearr;
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <a href="connect.html" class="cta-giant reveal" data-reveal>
+                <span class="cta-giant-text">Apply for <em>Invitation</em></span>
+                <span class="cta-giant-arrow">&longrightarrow;</span>
             </a>
-        </article>
+        </section>
 
-        <!-- Velro -->
-        <article class="venture-card entry-item">
-            <div class="divider-animated reveal" data-reveal></div>
-            
-            <div class="venture-header">
-                <img src="assets/velro.png" alt="Velro Logo" class="venture-logo reveal-left delay-100" data-reveal>
-                <h2 class="venture-name text-highlight reveal-left delay-200" data-reveal>Velro</h2>
+        <!-- FOOTER -->
+        <footer class="footer-ledger">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/fox.svg" alt="Liess Ventures Fox">
+                    <span class="footer-wordmark">Liess Ventures</span>
+                </div>
+                <div class="footer-nav">
+                    <a href="index.html" class="hover-link">Home</a>
+                    <a href="connect.html" class="hover-link">Sign Up</a>
+                </div>
+                <div class="footer-note">
+                    <span>&copy; 2024 Liess Ventures</span>
+                    <span>All that matters, built to last.</span>
+                </div>
             </div>
-            
-            <div class="venture-description reveal-fade delay-300" data-reveal>
-                <p data-i18n="ventures.velro.desc1">You're flying anyway. Someone else needs to send a package along the same route.</p>
-                <p data-i18n="ventures.velro.desc2">Velro matches travelers with senders, turning unused luggage space into a fast, trusted delivery channel.</p>
-                <p data-i18n="ventures.velro.desc3">Velro turns existing travel into a decentralized logistics network, already used by 500 people and growing.</p>
-            </div>
-            
-            <a href="https://velro.net" target="_blank" rel="noopener noreferrer" class="venture-link hover-link reveal-right delay-400" data-reveal data-i18n="ventures.velro.link">
-                Visit Velro &nearr;
-            </a>
-            
-            <div class="divider-animated reveal delay-500" data-reveal></div>
-        </article>
+        </footer>
 
-    </section>
-
-    <!-- CTA -->
-    <section class="cta-section pr-5 md:pr-20">
-        <div class="reveal delay-200" data-reveal>
-            <a href="connect.html" class="btn-signature" data-i18n="cta.apply">
-                Apply for Invitation
-            </a>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer-home grid-align pr-5 md:pr-20">
-        <div class="footer-content reveal delay-300" data-reveal>
-            <span data-i18n="footer.copyright">&copy; 2024 Liess Ventures</span>
-        </div>
-    </footer>
+    </div>
 
     <!-- JS -->
-    <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
 
 </body>

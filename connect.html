@@ -3,137 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect | Liess Ventures</title>
-    <meta name="description" content="Join the circle. A curated community for obsessive builders.">
-    
+    <title>Sign Up | Liess Ventures</title>
+    <meta name="description" content="Take a seat at the board. Tell us what you're building.">
+    <link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
+
     <!-- Styles -->
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/pages/home.css">
     <link rel="stylesheet" href="css/pages/connect.css">
 </head>
 <body class="antialiased">
 
-    <!-- ═══════════════════════════════════════════════════════════
-         THE FIREPIT PAGE
-         ═══════════════════════════════════════════════════════════ -->
-    <div class="firepit-page">
+    <!-- Reading Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
 
-        <!-- Back Link -->
-        <a href="index.html" class="back-link" data-i18n="connect.back">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
-            Back
+    <!-- Cursor Glow Effect -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         THE RAIL
+         ═══════════════════════════════════════════════════════════ -->
+    <nav class="nav-home" id="siteRail">
+        <a href="index.html" class="logo-box logo-entrance">
+            <img src="assets/fox.svg" alt="Liess Ventures Fox" class="logo-fox">
         </a>
 
-        <!-- Ambient Firepit Glow -->
-        <div class="firepit-glow"></div>
+        <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle Navigation">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
 
-        <!-- Floating Embers -->
-        <div class="embers-container">
-            <div class="ember"></div>
-            <div class="ember"></div>
-            <div class="ember"></div>
-            <div class="ember"></div>
-            <div class="ember"></div>
-            <div class="ember"></div>
-            <div class="ember"></div>
-            <div class="ember"></div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="nav-link hover-link">Home</a>
+            <a href="connect.html" class="nav-link hover-link is-current">Sign Up</a>
         </div>
 
-        <!-- Main Content -->
-        <main class="firepit-content">
-            <div class="firepit-inner">
+        <span class="rail-wordmark">Liess <em>Ventures</em></span>
+        <span class="rail-meta">Est. 2024</span>
+    </nav>
 
-                <!-- Logo -->
-                <div class="firepit-logo">
-                    <a href="index.html" class="firepit-logo-mark">
-                        <img src="assets/fox.svg" alt="Liess Ventures Fox">
-                    </a>
-                </div>
+    <!-- ═══════════════════════════════════════════════════════════
+         PAGE SHELL
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="page-shell petition-page">
 
-                <!-- Headline -->
-                <h1 class="firepit-headline" data-i18n="connect.headline">Leave a Thought</h1>
-                <p class="firepit-subheadline" data-i18n="connect.subheadline">
-                    What occupies your mind these days?<br>
-                    What are you building? Share your vision...
-                </p>
+        <!-- Petition Intro -->
+        <header class="petition-intro">
+            <h1 class="petition-title reveal" data-reveal>
+                Take a <em>Seat</em>.
+            </h1>
+            <p class="petition-lede reveal delay-200" data-reveal data-i18n="connect.subheadline">
+                What occupies your mind these days? What are you building?
+                Make your entry below — the board has room.
+            </p>
+        </header>
 
-                <!-- Form -->
-                <form class="firepit-form" id="firepitForm">
-                    
-                    <!-- Thought/Message -->
-                    <div class="form-group">
-                        <label for="thought" class="form-label" data-i18n="connect.form.thought_label">Your Thought</label>
-                        <textarea 
-                            id="thought" 
-                            name="thought" 
-                            class="form-textarea" 
+        <!-- The Entry Form -->
+        <main class="petition-main">
+
+            <form class="petition-form reveal delay-400" data-reveal id="petitionForm">
+
+                <!-- 01 · Thought -->
+                <div class="entry-row">
+                    <span class="entry-index">01</span>
+                    <div class="entry-field">
+                        <label for="thought" class="entry-label" data-i18n="connect.form.thought_label">Your Thought</label>
+                        <textarea
+                            id="thought"
+                            name="thought"
+                            class="entry-textarea"
                             placeholder="A vision, an idea, something you're building..."
                             data-i18n="connect.form.thought_placeholder"
+                            rows="3"
                             required
                         ></textarea>
                     </div>
-
-                    <!-- Name & Email Row -->
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name" class="form-label" data-i18n="connect.form.name_label">Your Name</label>
-                            <input 
-                                type="text" 
-                                id="name" 
-                                name="name" 
-                                class="form-input" 
-                                placeholder="How should we call you?"
-                                data-i18n="connect.form.name_placeholder"
-                                required
-                            >
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email" class="form-label" data-i18n="connect.form.email_label">Your Email</label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                class="form-input" 
-                                placeholder="Where can we reach you?"
-                                data-i18n="connect.form.email_placeholder"
-                                required
-                            >
-                        </div>
-                    </div>
-
-                    <!-- Submit -->
-                    <div class="form-submit-wrapper">
-                        <button type="submit" class="firepit-submit" id="submitBtn" data-i18n="connect.form.submit">
-                            Send Signal
-                        </button>
-                    </div>
-
-                </form>
-
-                <!-- Footer Promise -->
-                <footer class="firepit-footer">
-                    <p class="firepit-promise" data-i18n="connect.footer_promise">We'll be in touch.</p>
-                </footer>
-
-                <!-- Success Message (Hidden by default) -->
-                <div class="success-message" id="successMessage">
-                    <div class="success-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20 6L9 17l-5-5"/>
-                        </svg>
-                    </div>
-                    <h2 class="success-title" data-i18n="connect.success.title">Signal Sent</h2>
-                    <p class="success-text" data-i18n="connect.success.text">The fire carries your words. We'll be in touch soon.</p>
                 </div>
 
+                <!-- 02 · Name -->
+                <div class="entry-row">
+                    <span class="entry-index">02</span>
+                    <div class="entry-field">
+                        <label for="name" class="entry-label" data-i18n="connect.form.name_label">Your Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            class="entry-input"
+                            placeholder="How should we call you?"
+                            data-i18n="connect.form.name_placeholder"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- 03 · Email -->
+                <div class="entry-row">
+                    <span class="entry-index">03</span>
+                    <div class="entry-field">
+                        <label for="email" class="entry-label" data-i18n="connect.form.email_label">Your Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="entry-input"
+                            placeholder="Where can we reach you?"
+                            data-i18n="connect.form.email_placeholder"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="petition-submit" id="submitBtn">
+                    <span class="petition-submit-text" data-i18n="connect.form.submit">Send Signal</span>
+                    <span class="petition-submit-arrow">&nearr;</span>
+                </button>
+
+            </form>
+
+            <p class="petition-promise" data-i18n="connect.footer_promise">We'll be in touch.</p>
+
+            <!-- Receipt (hidden until success) -->
+            <div class="receipt" id="receipt">
+                <div class="receipt-stamp">
+                    <span class="receipt-no">No. 004</span>
+                    <h2 class="receipt-title" data-i18n="connect.success.title">Entry Recorded</h2>
+                    <p class="receipt-text" data-i18n="connect.success.text">Your words are in the ledger. We'll be in touch soon.</p>
+                </div>
             </div>
+
         </main>
 
     </div>
@@ -141,105 +146,64 @@
     <!-- ═══════════════════════════════════════════════════════════
          JAVASCRIPT
          ═══════════════════════════════════════════════════════════ -->
-    <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/analytics/analytics.js" type="module"></script>
     <script>
-        // ═══════════════════════════════════════════════════════════
-        // FORM HANDLING
-        // ═══════════════════════════════════════════════════════════
-
-        const form = document.getElementById('firepitForm');
+        const form = document.getElementById('petitionForm');
         const submitBtn = document.getElementById('submitBtn');
-        const successMessage = document.getElementById('successMessage');
+        const receipt = document.getElementById('receipt');
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            // Wait a moment for analytics to process (if loaded)
-            await new Promise(resolve => setTimeout(resolve, 100));
-
-            // Get form data
             const formData = {
                 thought: document.getElementById('thought').value.trim(),
                 name: document.getElementById('name').value.trim(),
                 email: document.getElementById('email').value.trim(),
-                timestamp: new Date().toISOString(),
-                analyticsData: window.lvAnalyticsData || null
+                timestamp: new Date().toISOString()
             };
 
-            // Log for debugging
-            console.log('📊 Analytics data:', window.lvAnalyticsData ? 'Available' : 'Not available');
-
-            // Validate
             if (!formData.thought || !formData.name || !formData.email) {
                 shakeButton();
                 return;
             }
 
-            // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(formData.email)) {
                 shakeButton();
                 return;
             }
 
-            // Show loading state
             submitBtn.classList.add('loading');
-            submitBtn.textContent = '';
 
             try {
-                // Submit to API endpoint
                 const response = await fetch('/api/submit-form', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
 
-                if (!response.ok) {
-                    throw new Error('Submission failed');
-                }
+                if (!response.ok) throw new Error('Submission failed');
 
-                // Success
-                showSuccess();
+                showReceipt();
 
             } catch (error) {
-                console.error('Submission error:', error);
                 submitBtn.classList.remove('loading');
-                submitBtn.textContent = 'Try Again';
-
-                // Reset button after delay
-                setTimeout(() => {
-                    submitBtn.textContent = 'Send Signal';
-                }, 2000);
+                shakeButton();
             }
         });
 
         function shakeButton() {
             submitBtn.style.animation = 'shake 0.5s ease';
-            setTimeout(() => {
-                submitBtn.style.animation = '';
-            }, 500);
+            setTimeout(() => { submitBtn.style.animation = ''; }, 500);
         }
 
-        function showSuccess() {
-            // Hide form
-            form.style.opacity = '0';
-            form.style.transform = 'translateY(-20px)';
-            form.style.transition = 'all 0.5s ease';
-            
-            document.querySelector('.firepit-footer').style.opacity = '0';
-
-            setTimeout(() => {
-                form.style.display = 'none';
-                document.querySelector('.firepit-footer').style.display = 'none';
-                
-                // Show success message
-                successMessage.classList.add('visible');
-            }, 500);
+        function showReceipt() {
+            form.style.display = 'none';
+            document.querySelector('.petition-promise').style.display = 'none';
+            receipt.classList.add('visible');
         }
 
-        // Add shake animation dynamically
+        // Shake animation
         const style = document.createElement('style');
         style.textContent = `
             @keyframes shake {
@@ -252,71 +216,12 @@
         `;
         document.head.appendChild(style);
 
-
-        // ═══════════════════════════════════════════════════════════
-        // EMBER RANDOMIZATION
-        // ═══════════════════════════════════════════════════════════
-
-        const embers = document.querySelectorAll('.ember');
-        
-        embers.forEach(ember => {
-            // Randomize size
-            const size = 2 + Math.random() * 3;
-            ember.style.width = size + 'px';
-            ember.style.height = size + 'px';
-            
-            // Randomize animation duration
-            const duration = 6 + Math.random() * 6;
-            ember.style.animationDuration = duration + 's';
-            
-            // Add slight horizontal drift variation
-            const drift = -30 + Math.random() * 60;
-            ember.style.setProperty('--drift', drift + 'px');
-        });
-
-
-        // ═══════════════════════════════════════════════════════════
-        // TEXTAREA AUTO-RESIZE
-        // ═══════════════════════════════════════════════════════════
-
+        // Textarea auto-resize
         const textarea = document.getElementById('thought');
-        
         textarea.addEventListener('input', function() {
             this.style.height = 'auto';
             this.style.height = Math.min(this.scrollHeight, 400) + 'px';
         });
-
-
-        // ═══════════════════════════════════════════════════════════
-        // SUBTLE PARALLAX ON MOUSE MOVE
-        // ═══════════════════════════════════════════════════════════
-
-        const firepitGlow = document.querySelector('.firepit-glow');
-        
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 20;
-            const y = (e.clientY / window.innerHeight - 0.5) * 20;
-            
-            firepitGlow.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-        });
-
-
-        // ═══════════════════════════════════════════════════════════
-        // FOCUS ANIMATIONS
-        // ═══════════════════════════════════════════════════════════
-
-        const inputs = document.querySelectorAll('.form-input, .form-textarea');
-        
-        inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.classList.add('focused');
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.classList.remove('focused');
-            });
-        });
-
     </script>
 
 </body>

@@ -1,627 +1,335 @@
 /* ═══════════════════════════════════════════════════════════════
-   LIESS VENTURES - FIREPIT PAGE STYLES
+   LIESS VENTURES - SIGN UP (V2 · REDESIGN)
    ═══════════════════════════════════════════════════════════════
-   
-   Version: 1.0
-   Last Updated: December 2024
-   
-   Theme: Warm, intimate, campfire in the woods
-   
-   Requires: global.css
-   
+
+   Concept: The Petition.
+   A formal entry into the ledger - numbered rows, naked serif
+   inputs with copper focus rules, ink-inversion submit, and a
+   stamped receipt on success.
+
+   Requires: global.css, home.css (rail + shell)
+
    ═══════════════════════════════════════════════════════════════ */
 
 
 /* ═══════════════════════════════════════════════════════════════
-   PAGE FOUNDATION - The Night Forest
+   PAGE FOUNDATION
    ═══════════════════════════════════════════════════════════════ */
 
-.firepit-page {
+.petition-page {
     min-height: 100vh;
-    background-color: var(--charcoal);
-    color: var(--light);
-    position: relative;
-    overflow: hidden;
+    padding-top: 3rem;
+    padding-right: 1.5rem;
+    padding-bottom: 5rem;
 }
 
-/* Subtle noise texture overlay for depth */
-.firepit-page::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1;
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   THE FIREPIT GLOW - Central Warmth
-   ═══════════════════════════════════════════════════════════════ */
-
-.firepit-glow {
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 800px;
-    height: 800px;
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* Primary warm glow */
-.firepit-glow::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        ellipse at center,
-        rgba(238, 191, 105, 0.15) 0%,
-        rgba(238, 191, 105, 0.08) 25%,
-        rgba(238, 191, 105, 0.03) 50%,
-        transparent 70%
-    );
-    animation: firePulse 4s ease-in-out infinite;
-}
-
-/* Secondary ember glow */
-.firepit-glow::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60%;
-    height: 60%;
-    background: radial-gradient(
-        ellipse at center,
-        rgba(255, 140, 50, 0.08) 0%,
-        rgba(238, 191, 105, 0.04) 40%,
-        transparent 70%
-    );
-    animation: emberPulse 3s ease-in-out infinite;
-    animation-delay: 0.5s;
-}
-
-@keyframes firePulse {
-    0%, 100% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
+@media (max-width: 767px) {
+    .petition-page {
+        padding-left: 1.5rem;
     }
-    50% {
-        opacity: 0.8;
-        transform: translate(-50%, -50%) scale(1.05);
-    }
-}
-
-@keyframes emberPulse {
-    0%, 100% {
-        opacity: 0.8;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(0.95);
-    }
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   FLOATING EMBERS - Ambient Particles
-   ═══════════════════════════════════════════════════════════════ */
-
-.embers-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 2;
-    overflow: hidden;
-}
-
-.ember {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: var(--copper);
-    border-radius: 50%;
-    opacity: 0;
-    filter: blur(0.5px);
-    animation: floatUp 8s ease-out infinite;
-}
-
-.ember:nth-child(1) { left: 20%; animation-delay: 0s; }
-.ember:nth-child(2) { left: 35%; animation-delay: 1.5s; }
-.ember:nth-child(3) { left: 50%; animation-delay: 0.8s; }
-.ember:nth-child(4) { left: 65%; animation-delay: 2.2s; }
-.ember:nth-child(5) { left: 80%; animation-delay: 3s; }
-.ember:nth-child(6) { left: 25%; animation-delay: 4s; }
-.ember:nth-child(7) { left: 55%; animation-delay: 2.8s; }
-.ember:nth-child(8) { left: 75%; animation-delay: 1.2s; }
-
-@keyframes floatUp {
-    0% {
-        bottom: 30%;
-        opacity: 0;
-        transform: translateX(0) scale(1);
-    }
-    10% {
-        opacity: 0.8;
-    }
-    50% {
-        opacity: 0.4;
-    }
-    100% {
-        bottom: 90%;
-        opacity: 0;
-        transform: translateX(20px) scale(0.3);
-    }
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   MAIN CONTENT CONTAINER
-   ═══════════════════════════════════════════════════════════════ */
-
-.firepit-content {
-    position: relative;
-    z-index: 10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem 1.5rem;
 }
 
 @media (min-width: 768px) {
-    .firepit-content {
-        padding: 6rem 2rem;
+    .petition-page {
+        padding-top: 5rem;
+        padding-left: calc(var(--rail-width) + 4rem);
+        padding-right: 4rem;
+        padding-bottom: 6rem;
     }
 }
 
-.firepit-inner {
-    width: 100%;
-    max-width: 520px;
-    text-align: center;
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   LOGO - The Fox by Firelight
-   ═══════════════════════════════════════════════════════════════ */
-
-.firepit-logo {
-    margin-bottom: 3rem;
-    display: flex;
-    justify-content: center;
-}
-
-.firepit-logo-mark {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.firepit-logo-mark img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-    filter: brightness(1.1);
-}
-
-/* Fallback text logo */
-.firepit-logo-text {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.5rem;
-    color: var(--copper);
-}
-
-@keyframes logoGlow {
-    0%, 100% {
-        box-shadow: 0 0 20px rgba(238, 191, 105, 0.3);
-    }
-    50% {
-        box-shadow: 0 0 40px rgba(238, 191, 105, 0.5);
-    }
-}
-
-@keyframes logoAura {
-    0%, 100% {
-        opacity: 0.5;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.8;
-        transform: scale(1.1);
+@media (min-width: 1280px) {
+    .petition-page {
+        padding-left: calc(var(--rail-width) + 6rem);
+        padding-right: 6rem;
     }
 }
 
 
 /* ═══════════════════════════════════════════════════════════════
-   HEADLINE - Warm Invitation
+   INTRO
    ═══════════════════════════════════════════════════════════════ */
 
-.firepit-headline {
-    font-family: var(--font-serif);
-    font-size: 2rem;
-    font-weight: 400;
-    color: var(--light);
-    margin-bottom: 1rem;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
+.petition-intro {
+    max-width: 34rem;
+    margin-bottom: 4rem;
 }
 
-@media (min-width: 768px) {
-    .firepit-headline {
-        font-size: 2.5rem;
-    }
-}
-
-.firepit-subheadline {
-    font-family: var(--font-serif);
-    font-size: 1.125rem;
-    font-style: italic;
-    color: rgba(232, 230, 225, 0.6);
-    margin-bottom: 3rem;
-    line-height: 1.6;
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   FORM - The Conversation
-   ═══════════════════════════════════════════════════════════════ */
-
-.firepit-form {
-    text-align: left;
-}
-
-.form-group {
+.petition-title {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+    color: var(--ink);
     margin-bottom: 2rem;
 }
 
-.form-label {
+.petition-title em {
+    font-style: italic;
+    color: var(--forest);
+}
+
+.petition-lede {
+    font-family: var(--font-serif);
+    font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 2.5rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THE ENTRY - Ledger Rows
+   ═══════════════════════════════════════════════════════════════ */
+
+.petition-main {
+    width: 100%;
+}
+
+.petition-form {
+    border-top: 1px solid rgba(5, 15, 11, 0.15);
+}
+
+.entry-row {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(5, 15, 11, 0.15);
+}
+
+@media (min-width: 768px) {
+    .entry-row {
+        grid-template-columns: 4rem 1fr;
+        gap: 2rem;
+    }
+}
+
+.entry-index {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--ink-subtle);
+    padding-top: 0.25rem;
+    transition: color 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .entry-index { font-size: 2rem; }
+}
+
+.entry-row:focus-within .entry-index {
+    color: var(--copper);
+}
+
+.entry-field {
+    min-width: 0;
+}
+
+.entry-label {
     display: block;
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--copper);
+    letter-spacing: 0.15em;
+    color: var(--ink-muted);
     margin-bottom: 0.75rem;
-    opacity: 0.9;
 }
 
-/* Text Area - The Main Thought */
-.form-textarea {
-    width: 100%;
-    min-height: 160px;
-    background: rgba(232, 230, 225, 0.03);
-    border: 1px solid rgba(238, 191, 105, 0.2);
-    border-radius: 4px;
-    padding: 1rem;
-    font-family: var(--font-serif);
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: var(--light);
-    resize: vertical;
-    transition: all 0.4s var(--ease-smooth);
-}
-
-.form-textarea:focus {
-    outline: none;
-    border-color: var(--copper);
-    background: rgba(232, 230, 225, 0.05);
-    box-shadow: 0 0 30px rgba(238, 191, 105, 0.1);
-}
-
-.form-textarea::placeholder {
-    color: rgba(232, 230, 225, 0.3);
-    font-style: italic;
-}
-
-/* Text Inputs */
-.form-input {
+/* Naked serif inputs on paper */
+.entry-input,
+.entry-textarea {
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid rgba(238, 191, 105, 0.3);
-    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(5, 15, 11, 0.2);
+    color: var(--ink);
     font-family: var(--font-serif);
-    font-size: 1.125rem;
-    color: var(--light);
+    font-size: 1.375rem;
+    line-height: 1.5;
+    padding: 0.25rem 0 0.75rem;
+    outline: none;
     transition: border-color 0.4s var(--ease-smooth);
 }
 
-.form-input:focus {
-    outline: none;
-    border-bottom-color: var(--copper);
+.entry-textarea {
+    min-height: 7rem;
+    resize: vertical;
 }
 
-.form-input::placeholder {
-    color: rgba(232, 230, 225, 0.3);
+.entry-input:focus,
+.entry-textarea:focus {
+    border-bottom: 2px solid var(--copper);
+}
+
+.entry-input::placeholder,
+.entry-textarea::placeholder {
+    color: var(--ink-subtle);
     font-style: italic;
+    transition: opacity 0.3s ease;
 }
 
-/* Input row for name and email side by side on desktop */
-.form-row {
-    display: grid;
-    gap: 2rem;
-}
-
-@media (min-width: 640px) {
-    .form-row {
-        grid-template-columns: 1fr 1fr;
-    }
+.entry-input:focus::placeholder,
+.entry-textarea:focus::placeholder {
+    opacity: 0.4;
 }
 
 
 /* ═══════════════════════════════════════════════════════════════
-   SUBMIT BUTTON - Send Signal
+   SUBMIT - Ink Inversion Band
    ═══════════════════════════════════════════════════════════════ */
 
-.form-submit-wrapper {
+.petition-submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     margin-top: 3rem;
-    text-align: center;
-}
-
-.firepit-submit {
+    padding: 1.75rem 2rem;
+    border: 1px solid rgba(5, 15, 11, 0.25);
+    background: transparent;
+    color: var(--ink);
     font-family: var(--font-mono);
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--copper);
-    background: transparent;
-    border: 1px solid var(--copper);
-    padding: 1rem 2.5rem;
+    letter-spacing: 0.2em;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    transition: color 0.4s var(--ease-smooth), 
-                letter-spacing 0.4s var(--ease-smooth);
+    transition: color 0.5s var(--ease-smooth);
 }
 
-.firepit-submit::before {
+.petition-submit::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: var(--copper);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s var(--ease-smooth), 
-                height 0.6s var(--ease-smooth);
-    z-index: -1;
+    inset: 0;
+    background: var(--ink);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 0;
 }
 
-.firepit-submit:hover {
-    color: var(--charcoal);
-    letter-spacing: 0.2em;
+.petition-submit:hover {
+    color: var(--paper);
 }
 
-.firepit-submit:hover::before {
-    width: 300px;
-    height: 300px;
+.petition-submit:hover::before {
+    transform: scaleY(1);
 }
 
-.firepit-submit:active {
-    transform: scale(0.98);
+.petition-submit:active {
+    transform: scale(0.99);
 }
 
-/* Loading state */
-.firepit-submit.loading {
+.petition-submit-text,
+.petition-submit-arrow {
+    position: relative;
+    z-index: 1;
+}
+
+.petition-submit-arrow {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--copper);
+    transition: transform 0.35s var(--ease-smooth);
+}
+
+.petition-submit:hover .petition-submit-arrow {
+    transform: translate(4px, -2px);
+}
+
+/* Loading state - spinner keeps the text visible */
+.petition-submit.loading {
     pointer-events: none;
-    opacity: 0.7;
 }
 
-.firepit-submit.loading::after {
+.petition-submit.loading .petition-submit-text::after {
     content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 16px;
-    height: 16px;
-    margin: -8px 0 0 -8px;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-left: 0.75rem;
     border: 2px solid transparent;
-    border-top-color: var(--copper);
+    border-top-color: currentColor;
     border-radius: 50%;
     animation: buttonSpin 0.8s linear infinite;
+    vertical-align: middle;
 }
 
 @keyframes buttonSpin {
     to { transform: rotate(360deg); }
 }
 
-/* Success state */
-.firepit-submit.success {
-    border-color: #4a9f6e;
-    color: #4a9f6e;
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   FOOTER MESSAGE - Warmth Closing
-   ═══════════════════════════════════════════════════════════════ */
-
-.firepit-footer {
-    margin-top: 3rem;
-    text-align: center;
-}
-
-.firepit-promise {
+.petition-promise {
+    margin-top: 2rem;
     font-family: var(--font-serif);
     font-style: italic;
     font-size: 0.9375rem;
-    color: rgba(232, 230, 225, 0.5);
+    color: var(--ink-muted);
 }
 
 
 /* ═══════════════════════════════════════════════════════════════
-   SUCCESS STATE - Signal Sent
+   RECEIPT - Stamped Confirmation
    ═══════════════════════════════════════════════════════════════ */
 
-.success-message {
+.receipt {
     display: none;
-    text-align: center;
-    padding: 2rem 0;
+    margin-top: 2rem;
 }
 
-.success-message.visible {
+.receipt.visible {
     display: block;
-    animation: fadeInUp 0.8s var(--ease-smooth) forwards;
+    animation: stampIn 0.7s var(--ease-smooth) forwards;
 }
 
-@keyframes fadeInUp {
-    from {
+@keyframes stampIn {
+    0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: scale(1.08) rotate(-2deg);
     }
-    to {
+    100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1) rotate(0deg);
     }
 }
 
-.success-icon {
-    width: 48px;
-    height: 48px;
-    margin: 0 auto 1.5rem;
-    border: 1px solid var(--copper);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: successPulse 2s ease-in-out infinite;
+.receipt-stamp {
+    border: 2px solid var(--copper);
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
 }
 
-.success-icon svg {
-    width: 24px;
-    height: 24px;
-    stroke: var(--copper);
-}
-
-@keyframes successPulse {
-    0%, 100% {
-        box-shadow: 0 0 0 0 rgba(238, 191, 105, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 0 15px rgba(238, 191, 105, 0);
-    }
-}
-
-.success-title {
-    font-family: var(--font-serif);
-    font-size: 1.5rem;
-    color: var(--light);
-    margin-bottom: 0.75rem;
-}
-
-.success-text {
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    color: rgba(232, 230, 225, 0.6);
-    font-style: italic;
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   BACK LINK - Return Home
-   ═══════════════════════════════════════════════════════════════ */
-
-.back-link {
-    position: fixed;
-    top: 2rem;
-    left: 2rem;
+.receipt-no {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: rgba(232, 230, 225, 0.4);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color 0.3s ease;
-    z-index: 100;
-}
-
-.back-link:hover {
+    letter-spacing: 0.25em;
     color: var(--copper);
+    display: block;
+    margin-bottom: 1.5rem;
 }
 
-.back-link svg {
-    width: 14px;
-    height: 14px;
-    transition: transform 0.3s ease;
+.receipt-title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
 }
 
-.back-link:hover svg {
-    transform: translateX(-3px);
+.receipt-title em {
+    font-style: italic;
 }
 
-
-/* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE ADJUSTMENTS
-   ═══════════════════════════════════════════════════════════════ */
-
-@media (max-width: 480px) {
-    .firepit-headline {
-        font-size: 1.75rem;
-    }
-    
-    .firepit-subheadline {
-        font-size: 1rem;
-    }
-    
-    .form-textarea {
-        font-size: 1rem;
-    }
-    
-    .form-input {
-        font-size: 1rem;
-    }
-    
-    .firepit-glow {
-        width: 400px;
-        height: 400px;
-    }
-    
-    .back-link {
-        top: 1rem;
-        left: 1rem;
-    }
+.receipt-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-muted);
 }
-
-
-/* ═══════════════════════════════════════════════════════════════
-   REDUCED MOTION
-   ═══════════════════════════════════════════════════════════════ */
 
 @media (prefers-reduced-motion: reduce) {
-    .firepit-glow::before,
-    .firepit-glow::after,
-    .firepit-logo-mark,
-    .firepit-logo-mark::before,
-    .ember,
-    .success-icon {
-        animation: none;
-    }
-    
-    .firepit-submit::before {
-        transition: none;
-    }
+    .receipt.visible { animation: none; }
+    .petition-submit::before { transition: none; }
 }
